@@ -1,11 +1,14 @@
 /* Tax declaration report — visual style modeled on impots.gouv.fr forms.
  * Designed to mirror form layouts so values can be transcribed 1:1.
  *
- * Color coding:
- *   --c-source:   manual / source values (dates, raw amounts from MS)
- *   --c-computed: values our pipeline computes (cost in EUR, gain EUR, etc.)
- *   --c-formula:  values the impots.gouv.fr form computes itself (F205, F207, F208 totals)
- *   --c-empty:    empty form slots
+ * Cell types (see :root for tints):
+ *   --c-source:   white. Raw inputs (dates, broker amounts).
+ *   --c-computed: subtle blue. Values our pipeline derived for the user
+ *                 to type into the online form — the action cells.
+ *   --c-formula:  white + italic. Values the online form auto-computes;
+ *                 user verifies but doesn't type. Deliberately quiet so
+ *                 they don't compete with --c-computed for attention.
+ *   --c-empty:    light gray. Non-applicable cells.
  */
 
 :root {
@@ -24,10 +27,16 @@
   --c-form-header: #831843;    /* refined burgundy */
   --c-form-accent: #b4a394;
 
-  /* Cell type tints */
+  /* Cell type tints.
+   * - source: white, same as the real form.
+   * - computed: subtle blue tint — these are the action cells the user
+   *   copies into the online form, so they should attract attention.
+   * - formula: white, italic styling — the form auto-computes these;
+   *   user only verifies. No background tint so they don't pull focus.
+   * - empty: light gray — non-applicable cells. */
   --c-source: #ffffff;
   --c-computed: #eff6ff;
-  --c-formula: #fef9c3;
+  --c-formula: #ffffff;
   --c-empty: #f4f4f5;
 
   /* Accent palette */
@@ -467,6 +476,7 @@ h4 {
 .form-cell.formula {
   background: var(--c-formula);
   font-style: italic;
+  color: var(--c-text-soft);
 }
 
 .form-cell.empty {
@@ -1259,16 +1269,16 @@ h4 {
 }
 
 .phase-group.active {
-  background: var(--c-accent-soft);
+  background: var(--c-bg-subtle);
 }
 
-.phase-group.active::after { background: var(--c-accent); opacity: 0.3; }
+.phase-group.active::after { background: var(--c-border-strong); opacity: 0.5; }
 
 .phase-group.done {
-  background: var(--c-success-soft);
+  background: transparent;
 }
 
-.phase-group.done::after { background: var(--c-success); opacity: 0.3; }
+.phase-group.done::after { background: var(--c-border); }
 
 .phase-label {
   font-size: 0.68rem;
@@ -1280,8 +1290,8 @@ h4 {
   padding-bottom: 0.15rem;
 }
 
-.phase-group.active .phase-label { color: var(--c-accent); }
-.phase-group.done .phase-label { color: var(--c-success); }
+.phase-group.active .phase-label { color: var(--c-text); }
+.phase-group.done .phase-label { color: var(--c-muted); }
 
 .phase-steps {
   display: flex;
@@ -1347,15 +1357,16 @@ h4 {
 
 .progress-step.done {
   background: white;
-  color: var(--c-success);
+  color: var(--c-muted);
 }
 
 .progress-step.done .step-num::before {
   content: "✓ ";
   font-size: 0.85em;
+  color: var(--c-muted);
 }
 
-.progress-step.done .step-label { color: var(--c-success); opacity: 0.7; }
+.progress-step.done .step-label { color: var(--c-muted); }
 
 /* Legend toggle — "?" button at top right that opens an overlay */
 .legend-toggle-wrapper {
