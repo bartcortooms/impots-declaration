@@ -12,6 +12,14 @@
         Utilisez les onglets "Titre N" ci-dessous pour parcourir les valeurs
         à reporter dans chaque page du formulaire en ligne.
       </p>
+      <p class="page-summary">
+        <strong>{{ sales | length }} cession{{ 's' if sales | length > 1 else '' }}</strong>
+        ·
+        <strong>{{ sales | sum(attribute='quantity') }}</strong> titres
+        ·
+        plus-value brute totale
+        <strong>{{ sales_total_gain_eur | fmt_int }}&nbsp;EUR</strong>
+      </p>
     </div>
   </div>
 

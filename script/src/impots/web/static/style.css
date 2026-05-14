@@ -1277,6 +1277,30 @@ span.line-num {
   padding: 0.65rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-md);
+  transition: padding 160ms ease, box-shadow 160ms ease;
+}
+
+/* Compact mode: tighter padding + smaller labels once the user has
+ * scrolled past the header. Buys back ~30% of the bar's vertical
+ * footprint without losing the step numbers / labels. */
+.progress-bar.compact {
+  padding: 0.3rem;
+  box-shadow: var(--shadow-sm);
+}
+.progress-bar.compact .phase-label {
+  display: none;
+}
+.progress-bar.compact .phase-group::after {
+  display: none;
+}
+.progress-bar.compact .progress-step {
+  padding: 0.35rem 0.3rem;
+}
+.progress-bar.compact .progress-step .step-label {
+  font-size: 0.62rem;
+}
+.progress-bar.compact .progress-step .step-num {
+  font-size: 0.85rem;
 }
 
 .phase-group {
@@ -1627,6 +1651,17 @@ span.line-num {
   font-weight: 700;
 }
 
+/* Compact at-a-glance summary appended to help banners on form pages.
+ * Visually separated by a top border so the user sees totals before
+ * diving into per-sale detail. */
+.help-banner .page-summary {
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--c-border);
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+
 /* Audit dashboard: modern metric cards with soft elevation */
 .audit-dashboard {
   display: grid;
@@ -1900,9 +1935,10 @@ span.line-num {
   border: 1px solid var(--c-border);
   border-radius: 4px;
   /* Stick right below the main progress bar so the user always knows which
-   * Titre / Slot they're on as they scroll through a long form. */
+   * Titre / Slot they're on as they scroll through a long form.
+   * top value chosen to clear the compact-mode progress bar. */
   position: sticky;
-  top: 5.5rem;
+  top: 4.5rem;
   z-index: 90;
   box-shadow: var(--shadow-sm);
 }

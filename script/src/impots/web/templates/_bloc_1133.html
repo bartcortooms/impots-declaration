@@ -93,9 +93,18 @@
   </div>
 
   <div class="app-aside" data-tag="📊 Imposable">
-    <strong>Plus-value imposable (col. H)</strong> :
-    {{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }} EUR
-    — taxée au barème progressif + 17,2% prélèvements sociaux sur le montant brut (col. E).
+    <p>
+      <strong>Impôt sur le revenu</strong> — base&nbsp;: la plus-value
+      <em>après abattement</em> (col. H) =
+      <strong>{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}&nbsp;EUR</strong>,
+      soumise au barème progressif (case 2OP).
+    </p>
+    <p>
+      <strong>Prélèvements sociaux (17,2&nbsp;%)</strong> — base&nbsp;: la
+      plus-value <em>brute avant abattement</em> (col. E) =
+      <strong>{{ bloc1133.total_gain_eur | fmt_int }}&nbsp;EUR</strong>.
+      L'abattement ne s'applique pas aux contributions sociales.
+    </p>
   </div>
 
   {% for slot in bloc1133.slots %}

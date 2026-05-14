@@ -287,11 +287,27 @@
     }
   }
 
+  function attachCompactProgressBar() {
+    const bar = $(".progress-bar");
+    if (!bar) return;
+    let compact = false;
+    const update = () => {
+      const shouldCompact = window.scrollY > 80;
+      if (shouldCompact !== compact) {
+        compact = shouldCompact;
+        bar.classList.toggle("compact", compact);
+      }
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
   function init() {
     const main = $("main");
     if (!main) return;
 
     main.prepend(buildProgressBar());
+    attachCompactProgressBar();
 
     stepConfig.forEach((s) => {
       const el = document.getElementById(s.id);

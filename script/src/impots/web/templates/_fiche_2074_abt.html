@@ -14,6 +14,13 @@
         la colonne correspondant à la durée de détention du lot (≥ 8 ans,
         2–8 ans, ou < 2 ans).
       </p>
+      <p class="page-summary">
+        <strong>{{ sales | length }} fiche{{ 's' if sales | length > 1 else '' }}</strong>
+        ·
+        abattement total
+        <strong>{{ sales_total_abattement_eur | fmt_int }}&nbsp;EUR</strong>
+        (à reporter dans le bloc 1133 col. F)
+      </p>
     </div>
   </div>
 
