@@ -11,11 +11,19 @@ exports — see `docs/USER_GUIDE.md` for the report-picking steps.
 
 These are easy to miss and have real consequences:
 
-1. **Tick case 2OP on form 2042.** Required for BOTH the 40 % dividend
-   abattement (case 2DC) AND the durée-de-détention abattement on plus-values
-   (case 3SG). Without 2OP everything is taxed at the PFU 12,8 % flat rate
-   with no abattement at all. See notice 2042 page 14 and notice 2074-ABT
-   page 1.
+1. **Case 2OP is a trade-off, not a forced "yes".** It's the lever between
+   two regimes:
+   - **Off (default)**: PFU 12,8 % flat on dividends + plus-values, no
+     abattement.
+   - **On**: barème progressif on the entire "revenus + gains mobiliers"
+     bucket, with the 40 % dividend abattement (case 2DC) AND the
+     durée-de-détention abattement (case 3SG).
+
+   Which one wins depends on your marginal rate and household parts. For
+   high TMI (41–45 %), PFU often wins even with the abattement forfeit.
+   The impots.gouv.fr online flow has a comparator before validation —
+   use it. The tool's pre-filled 3VG / 3SG values are only meaningful if
+   you end up ticking 2OP.
 2. **Declare foreign accounts via 3916 / 3916 bis.** If your broker is
    foreign (Morgan Stanley etc.), the brokerage account is a "compte
    ouvert à l'étranger". Tick case **8UU** on form 2042 (section DIVERS).

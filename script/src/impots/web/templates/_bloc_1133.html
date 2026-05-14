@@ -130,16 +130,23 @@
 
   <div class="app-aside" data-tag="📊 Imposable">
     <p>
-      <strong>Impôt sur le revenu</strong> — base&nbsp;: la plus-value
-      <em>après abattement</em> (col. H) =
-      <strong>{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}&nbsp;EUR</strong>,
-      soumise au barème progressif (case 2OP).
+      <strong>Si vous cochez 2OP</strong> (barème progressif)&nbsp;:
+      l'impôt sur le revenu s'applique à la plus-value <em>après</em>
+      abattement (col. H) =
+      <strong>{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}&nbsp;EUR</strong>.
     </p>
     <p>
-      <strong>Prélèvements sociaux (17,2&nbsp;%)</strong> — base&nbsp;: la
-      plus-value <em>brute avant abattement</em> (col. E) =
+      <strong>Si vous laissez 2OP décoché</strong> (PFU 12,8 % par
+      défaut)&nbsp;: l'abattement est ignoré, l'impôt s'applique à la
+      plus-value <em>brute</em> (col. E) =
+      <strong>{{ bloc1133.total_gain_eur | fmt_int }}&nbsp;EUR</strong> ·
+      12,8 %.
+    </p>
+    <p>
+      <strong>Prélèvements sociaux (17,2&nbsp;%)</strong> — base dans les
+      deux cas&nbsp;: la plus-value brute (col. E) =
       <strong>{{ bloc1133.total_gain_eur | fmt_int }}&nbsp;EUR</strong>.
-      L'abattement ne s'applique pas aux contributions sociales.
+      L'abattement ne s'applique jamais aux prélèvements sociaux.
     </p>
   </div>
 
