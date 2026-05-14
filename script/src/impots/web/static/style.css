@@ -722,15 +722,21 @@ span.line-num {
   border-radius: 4px;
 }
 
-/* De-emphasize non-applicable rubriques/annexes rows so the action rows
- * pop out, while keeping every row visible (the user needs position
- * parity with the real form: "the 4th, 5th, and 7th item"). */
+/* De-emphasize non-applicable rows / options across the report so the
+ * action rows pop out, while keeping every row visible (the user needs
+ * position parity with the real form: "the 4th, 5th, and 7th item"). */
 .rubriques-list .cas-row.state-unchecked,
-.cas-list .cas-row.state-unchecked {
+.cas-list .cas-row.state-unchecked,
+.gateway-option:not(.highlighted),
+.opt-sublist > li:not(.state-checked),
+.abt-gateway-row:not(.state-checked) {
   opacity: 0.5;
 }
 .rubriques-list .cas-row.state-unchecked:hover,
-.cas-list .cas-row.state-unchecked:hover {
+.cas-list .cas-row.state-unchecked:hover,
+.gateway-option:not(.highlighted):hover,
+.opt-sublist > li:not(.state-checked):hover,
+.abt-gateway-row:not(.state-checked):hover {
   opacity: 1;
   transition: opacity 120ms;
 }
