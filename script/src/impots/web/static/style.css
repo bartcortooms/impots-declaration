@@ -612,7 +612,10 @@ span.line-num {
   width: auto;
 }
 
-.form-2042-table .line-label em {
+/* Direct-child em inside a 2042 row label = the parenthetical "(cf. notice)"
+ * style sub-label that the form shows under the main label. Scoped with `>`
+ * so em tags inside .case-explainer or other nested blocks aren't affected. */
+.form-2042-table .line-label > em {
   color: var(--c-form-header);
   font-style: italic;
   font-weight: 500;
