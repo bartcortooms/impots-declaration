@@ -1535,10 +1535,12 @@ h4 {
   display: block;
   position: relative;
   margin: 0 0 1.5rem;
-  padding: 1rem 1.25rem 1rem 3.25rem;
-  background: var(--c-accent-soft);
+  padding: 0.9rem 1.25rem 0.9rem 3rem;
+  background: var(--c-bg-subtle);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-border-strong);
   border-radius: var(--r-md);
-  color: #1e3a8a;
+  color: var(--c-text-soft);
   line-height: 1.6;
   font-size: 0.92rem;
 }
@@ -1546,42 +1548,34 @@ h4 {
 .help-banner::before {
   content: "ℹ";
   position: absolute;
-  left: 1rem;
-  top: 1rem;
-  width: 1.7em;
-  height: 1.7em;
+  left: 0.85rem;
+  top: 0.95rem;
+  width: 1.5em;
+  height: 1.5em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--c-accent);
-  color: white;
-  border-radius: 50%;
-  font-weight: 700;
-  font-size: 0.95rem;
-  box-shadow: var(--shadow-sm);
+  color: var(--c-muted);
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .help-banner.warn {
-  background: var(--c-warn-soft);
-  color: #78350f;
+  border-left-color: #d4a657; /* desaturated amber */
 }
 
 .help-banner.warn::before {
   content: "⚠";
-  background: var(--c-warn);
+  color: #8a6420;
 }
 
 .help-banner.tip {
-  background: var(--c-success-soft);
-  color: #14532d;
+  border-left-color: #7ea58a; /* desaturated green */
 }
 
 .help-banner.tip::before {
   content: "💡";
-  background: white;
-  color: inherit;
-  font-size: 1.05rem;
-  box-shadow: var(--shadow-sm);
+  font-size: 1rem;
 }
 
 .help-banner p {
@@ -1659,10 +1653,12 @@ h4 {
   color: var(--c-muted);
 }
 
-.metric-tile.accent-burgundy::after { background: var(--c-form-header); }
-.metric-tile.accent-blue::after { background: var(--c-accent); }
-.metric-tile.accent-green::after { background: var(--c-success); }
-.metric-tile.accent-amber::after { background: var(--c-warn); }
+/* Audit metric tiles share one neutral accent stripe — the labels carry
+ * the meaning, no need to color-code by category. */
+.metric-tile.accent-burgundy::after,
+.metric-tile.accent-blue::after,
+.metric-tile.accent-green::after,
+.metric-tile.accent-amber::after { background: var(--c-border-strong); }
 
 .cross-checks {
   background: white;
