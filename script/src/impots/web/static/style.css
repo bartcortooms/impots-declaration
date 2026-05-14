@@ -620,6 +620,72 @@ span.line-num {
   border-bottom: 1px solid #c0cce0;
 }
 
+/* Form 2042 DIVERS section — same form-mirror feel as cadre-5,
+ * but with the case code on the right (mirroring the actual 2042 layout). */
+.form-2042-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: white;
+  border: 1px solid var(--c-border-strong);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.form-2042-table td {
+  padding: 0.65rem 0.9rem;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #e8edf5;
+}
+
+.form-2042-table tr:last-child td { border-bottom: none; }
+
+.form-2042-table tr.state-checked {
+  background: #fff8db;
+  box-shadow: inset 3px 0 0 #b89a00;
+}
+
+.form-2042-table .line-label {
+  width: auto;
+}
+
+.form-2042-table .line-label em {
+  color: var(--c-form-header);
+  font-style: italic;
+  font-weight: 500;
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+}
+
+.form-2042-table .line-input {
+  width: 4em;
+  text-align: center;
+}
+
+.form-2042-table .line-input .checkbox-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: auto;
+  padding: 0.3rem 0.5rem;
+}
+
+.form-2042-table .line-code {
+  width: 4em;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--c-form-header);
+  white-space: nowrap;
+}
+
+.form-2042-table .line-status {
+  width: 6em;
+  text-align: right;
+}
+
 .cadre-5-table {
   width: 100%;
   border-collapse: collapse;

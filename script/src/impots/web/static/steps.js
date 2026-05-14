@@ -28,11 +28,12 @@
     { id: "fiche-2074-abt-gateway",   short: "ABT prép.",   label: "2074-ABT — Préparation (Nombre d'opérations)",  phase: "ABT" },
     { id: "fiche-2074-abt",           short: "ABT fiche",   label: "2074-ABT — Fiche par titre", subSelector: ".abt-page", phase: "ABT" },
     { id: "bloc-1133",                short: "Bloc 1133",   label: "2074 — Compensation (cadre 11 bloc 1133)",      phase: "2074" },
+    { id: "form-2042-divers",         short: "2042 Divers", label: "2042 — DIVERS (comptes à l'étranger)",          phase: "2042" },
     { id: "audit",                    short: "Audit",       label: "Audit & vérifications",                          phase: "Audit" },
   ];
 
   // Phase order matters for the grouped progress bar.
-  const phaseOrder = ["Préparation", "2047", "2074", "ABT", "Audit"];
+  const phaseOrder = ["Préparation", "2047", "2074", "ABT", "2042", "Audit"];
 
   function $(s, ctx) { return (ctx || document).querySelector(s); }
   function $$(s, ctx) { return Array.from((ctx || document).querySelectorAll(s)); }
