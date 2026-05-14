@@ -59,13 +59,27 @@ declaration you file in spring 2026).
 
 ## 3. Run the tool
 
-From the `script/` directory:
+From the `script/` directory, run the tool with
+`--all-acquired-before YYYY-MM-DD` set to a date you can confidently say
+is *after* your most recent share acquisition (e.g. `2018-01-01` if you
+stopped acquiring shares before 2018):
 
 ```bash
-uv run build-declaration <year>
+uv run build-declaration <year> --all-acquired-before 2018-01-01
 ```
 
-For example, `uv run build-declaration 2025`. This produces:
+This computes the *abattement de durée de détention* per sale from
+`sale_date − cutoff_date`. See [Acquisition dates](#acquisition-dates)
+below for the three modes (default, cutoff flag, per-lot CSV) and how
+to pick the right cutoff.
+
+Concrete example for tax year 2025:
+
+```bash
+uv run build-declaration 2025 --all-acquired-before 2017-01-01
+```
+
+This produces:
 
 ```
 personal-data/<year>/output/
@@ -80,6 +94,11 @@ personal-data/<year>/output/
 Open `declaration.html` in your browser (works over `file://` — no server
 needed). It walks you page by page through the online declaration with
 the correct values pre-filled and a copy button next to each field.
+
+> Omitting `--all-acquired-before` falls back to assuming everything
+> qualifies for 65% — only safe if you've verified every sold share came
+> from a lot vested ≥ 8 years before the sale date. The tool will print
+> a warning when you run without the flag.
 
 ---
 

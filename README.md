@@ -28,10 +28,16 @@ France daily reference rates) and the durée-de-détention abattement
    personal-data/<year>/input/<sales-report>.csv
    personal-data/<year>/input/statement.pdf
    ```
-2. From the `script/` directory:
+2. From the `script/` directory, run the tool with the cutoff date for
+   your acquisitions — i.e. a date you can confidently say is *after*
+   your most recent share acquisition:
    ```bash
-   uv run build-declaration <year>
+   uv run build-declaration <year> --all-acquired-before 2018-01-01
    ```
+   The tool then computes the *abattement de durée de détention* (0% /
+   50% / 65%) per sale, conservatively, from `sale_date − cutoff_date`.
+   See [docs/USER_GUIDE.md](docs/USER_GUIDE.md#acquisition-dates) for the
+   three modes and how to pick the cutoff.
 3. Open the generated declaration in your browser:
    ```
    personal-data/<year>/output/declaration.html

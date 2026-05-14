@@ -1,9 +1,14 @@
 """Command-line entry point.
 
 Usage:
-    uv run build-declaration <year>
-    uv run build-declaration <year> --data-dir /path/to/data
-    uv run build-declaration <year> --all-acquired-before 2018-01-01
+    uv run build-declaration <year> --all-acquired-before YYYY-MM-DD
+    uv run build-declaration <year> --all-acquired-before YYYY-MM-DD --data-dir /path/to/data
+
+The `--all-acquired-before` flag is the recommended path: it makes the
+abattement rate per sale derive from the holding period (sale_date −
+cutoff_date), conservatively. Omitting it falls back to assuming 65 %
+across the board, which is only safe if you've verified every sold share
+qualifies — the tool prints a warning when you do.
 
 Reads from <data-dir>/{year}/input/ and writes to <data-dir>/{year}/output/.
 Default --data-dir is <repo>/personal-data/.
@@ -157,6 +162,14 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  statement PDF: {statement_pdf.name}")
     if args.all_acquired_before:
         print(f"  cutoff date:   {args.all_acquired_before} (per-sale rate computed)")
+    else:
+        print(
+            "  WARNING: --all-acquired-before not set — assuming every sale qualifies\n"
+            "           for the 65 % abattement. Only safe if every sold share came\n"
+            "           from a lot vested ≥ 8 years before the sale date AND before\n"
+            "           2018-01-01. See docs/USER_GUIDE.md → Acquisition dates.",
+            file=sys.stderr,
+        )
     withdrawals = parse_withdrawals(sales_csv)
     statement = parse_statement(statement_pdf)
     fx = FxRates.load(refresh=args.refresh_fx)
