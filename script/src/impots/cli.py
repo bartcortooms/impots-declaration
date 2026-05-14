@@ -118,7 +118,7 @@ def main(argv: list[str] | None = None) -> int:
         help=(
             "Declare that every share lot in your portfolio was acquired strictly "
             "before this date. The tool then computes per-sale abattement rate "
-            "(0% / 50% / 65%) from sale_date − cutoff_date. Conservative: never "
+            "(0%% / 50%% / 65%%) from sale_date − cutoff_date. Conservative: never "
             "over-claims. Default (omitted): assume every sale qualifies for the "
             "65%% rate — only safe if you've verified the lot table yourself."
         ),
