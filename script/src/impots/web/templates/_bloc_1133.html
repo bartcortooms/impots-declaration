@@ -92,6 +92,31 @@
     </div>
   </div>
 
+  {% if bloc1133.loss_imputation.imputed_eur > 0 %}
+  <div class="app-aside" data-tag="↘ Moins-values antérieures imputées">
+    <p>
+      <strong>Plus-value brute</strong> (avant imputation, col. E aurait été)&nbsp;:
+      <strong>{{ bloc1133.gross_gain_eur | fmt_int }}&nbsp;EUR</strong>
+    </p>
+    <p>
+      <strong>Moins-values antérieures déclarées</strong> (case 3VH N-1)&nbsp;:
+      <strong>−{{ bloc1133.loss_imputation.prior_losses_declared_eur | fmt_int }}&nbsp;EUR</strong>
+      {% if bloc1133.loss_imputation.remaining_eur > 0 %}
+      → dont
+      <strong>{{ bloc1133.loss_imputation.imputed_eur | fmt_int }}&nbsp;EUR</strong>
+      imputées cette année,
+      <strong>{{ bloc1133.loss_imputation.remaining_eur | fmt_int }}&nbsp;EUR</strong>
+      reportées à N+1 (case 3VH de l'an prochain).
+      {% endif %}
+    </p>
+    <p>
+      Les valeurs col. E ci-dessus sont déjà nettes d'imputation. Ne pas
+      ré-imputer dans le formulaire&nbsp;: déclarer la PV brute en cadre 9
+      du 2074, puis les moins-values, et reporter les nets dans bloc 1133.
+    </p>
+  </div>
+  {% endif %}
+
   <div class="app-aside" data-tag="📊 Imposable">
     <p>
       <strong>Impôt sur le revenu</strong> — base&nbsp;: la plus-value

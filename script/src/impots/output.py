@@ -255,18 +255,46 @@ def write_audit(
     total_gain_eur = sum((s.gain_eur for s in sales), Decimal(0))
     total_abat_eur = sum((s.abattement_eur for s in sales), Decimal(0))
     lines.append(f"  Total gain USD: ${total_gain_usd:,.2f}")
-    lines.append(f"  Total gain EUR: €{total_gain_eur:,.2f}")
-    lines.append(f"  Total abattement EUR: €{total_abat_eur:,.0f}")
+    lines.append(f"  Total gain EUR (cadre 5 § 510, gross): €{total_gain_eur:,.2f}")
+    imp = grouping.loss_imputation
+    if imp.imputed_eur > 0:
+        lines.append(f"  − Moins-values antérieures imputées:    €{imp.imputed_eur:,.0f}  (see section below)")
+        lines.append(f"  Plus-value nette (bloc 1133 col. E):    €{grouping.total_gain_eur:,.0f}")
+        lines.append(f"  Total abattement EUR:                   €{grouping.total_abattement_eur:,.0f}")
+        net_taxable = grouping.total_gain_eur - grouping.total_abattement_eur
+    else:
+        lines.append(f"  Total abattement EUR: €{total_abat_eur:,.0f}")
+        net_taxable = total_gain_eur - total_abat_eur
     rates = sorted({s.abattement_rate for s in sales})
     rate_str = ", ".join(f"{int(r*100)}%" for r in rates)
     lines.append(f"  Rate(s) applied: {rate_str if rate_str else 'n/a'}")
-    lines.append(f"  Net taxable plus-value EUR: €{total_gain_eur - total_abat_eur:,.2f}")
+    lines.append(f"  Net taxable plus-value EUR (col. H): €{net_taxable:,.2f}")
     lines.append("")
+    if imp.prior_losses_declared_eur > 0:
+        lines.append("## Moins-values imputées avant abattement")
+        lines.append(f"  Plus-value brute (avant imputation): €{grouping.gross_gain_eur:,.0f}")
+        lines.append(f"  Moins-values antérieures déclarées:   €{imp.prior_losses_declared_eur:,.0f}")
+        lines.append(f"  Imputées cette année:                 €{imp.imputed_eur:,.0f}")
+        if imp.remaining_eur > 0:
+            lines.append(
+                f"  Solde reportable à N+1 (case 3VH):    €{imp.remaining_eur:,.0f}"
+            )
+        lines.append(f"  Plus-value nette (base abattement):   €{grouping.total_gain_eur:,.0f}")
+        lines.append("")
     lines.append("## Abattement grouping (Form 2074-ABT line 1133)")
     for slot in grouping.slots:
         n = len(slot.constituent_sales)
         lines.append(f"  {slot.name}: {slot.description} ({n} sale{'s' if n > 1 else ''})")
-        lines.append(f"    gain EUR: €{slot.total_gain_eur:,.2f}  abattement: €{slot.total_abattement_eur:,.0f}")
+        if imp.imputed_eur > 0 and slot.gross_gain_eur != slot.total_gain_eur:
+            lines.append(
+                f"    gross EUR: €{slot.gross_gain_eur:,.2f} → net EUR: "
+                f"€{slot.total_gain_eur:,.2f}  abattement: €{slot.total_abattement_eur:,.0f}"
+            )
+        else:
+            lines.append(
+                f"    gain EUR: €{slot.total_gain_eur:,.2f}  "
+                f"abattement: €{slot.total_abattement_eur:,.0f}"
+            )
     lines.append("")
     # Per-sale FIFO lot attribution (only when prior-year statement reconciliation ran)
     if any(s.lot_breakdown for s in sales):

@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import sys
 from datetime import date, datetime
+from decimal import Decimal
 from pathlib import Path
 
 from .abattement import group_sales
@@ -137,6 +138,19 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        "--prior-losses-eur",
+        type=Decimal,
+        default=Decimal(0),
+        metavar="N",
+        help=(
+            "Carry-forward moins-values from prior years (case 3VH on last "
+            "year's 2042 main). Per notice 2074-ABT, prior losses are imputed "
+            "against this year's gross plus-value BEFORE the abattement is "
+            "applied. Default 0. If omitted and you actually have carry-forward "
+            "losses, the abattement is silently over-claimed."
+        ),
+    )
+    parser.add_argument(
         "--refresh-fx",
         action="store_true",
         help="Force re-fetching FX rates from ECB (ignores local cache).",
@@ -218,7 +232,7 @@ def main(argv: list[str] | None = None) -> int:
         )
     dividend_lines = build_dividend_lines(dividends=statement.dividends, fx=fx)
     form_2047 = build_form_2047(dividend_lines)
-    grouping = group_sales(sales)
+    grouping = group_sales(sales, prior_losses_eur=args.prior_losses_eur)
 
     print(f"Writing outputs to {output_dir} ...")
     write_stock_sales(output_dir / "stock_sales.csv", sales)
