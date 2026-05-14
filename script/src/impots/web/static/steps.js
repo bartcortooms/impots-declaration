@@ -146,6 +146,9 @@
       }
       if (nextBtn) {
         nextBtn.disabled = isLast;
+        // Hide the Suivant button entirely on the terminal step — there's
+        // nothing to advance to, so even a disabled placeholder is confusing.
+        nextBtn.style.visibility = isLast ? "hidden" : "";
         nextBtn.querySelector(".target").textContent = nextTargetLabel(stepIdx, subIdx);
       }
       const counter = nav.querySelector(".counter");
@@ -194,6 +197,10 @@
       }
     }
     bar.innerHTML = "";
+    const label = document.createElement("span");
+    label.className = "sub-progress-label";
+    label.textContent = `Titre ${subIdx + 1} / ${subs.length}`;
+    bar.appendChild(label);
     subs.forEach((subEl, i) => {
       const btn = document.createElement("button");
       btn.type = "button";
@@ -280,11 +287,37 @@
     }
   }
 
+  function collapseNonApplicableRows() {
+    // On rubriques + annexes pages: hide rows where the user has nothing
+    // to do (state-unchecked) behind a small "show non-applicable rows"
+    // toggle. Cuts 70-80% of the visible row count.
+    document.querySelectorAll(".rubriques-list, .cas-list").forEach((list) => {
+      const inactive = list.querySelectorAll(".cas-row.state-unchecked");
+      if (inactive.length < 3) return; // not worth collapsing
+      inactive.forEach((row) => row.classList.add("collapsed-row"));
+      list.classList.add("has-collapsed");
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "collapse-toggle";
+      toggle.innerHTML = `<span class="toggle-arrow">▸</span> Afficher les ${inactive.length} rubriques non applicables`;
+      toggle.addEventListener("click", () => {
+        const expanded = list.classList.toggle("show-collapsed");
+        toggle.querySelector(".toggle-arrow").textContent = expanded ? "▾" : "▸";
+        toggle.firstChild.nextSibling.textContent = expanded
+          ? ` Masquer les ${inactive.length} rubriques non applicables`
+          : ` Afficher les ${inactive.length} rubriques non applicables`;
+      });
+      list.parentNode.insertBefore(toggle, list);
+    });
+  }
+
   function init() {
     const main = $("main");
     if (!main) return;
 
     main.prepend(buildProgressBar());
+    collapseNonApplicableRows();
 
     stepConfig.forEach((s) => {
       const el = document.getElementById(s.id);

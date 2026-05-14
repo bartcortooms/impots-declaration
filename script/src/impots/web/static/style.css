@@ -171,11 +171,11 @@ h1 {
   background: white;
   border-radius: var(--r-md);
   box-shadow: var(--shadow-sm);
-  color: var(--c-muted);
-  font-size: 0.82rem;
+  color: var(--c-text-soft);
+  font-size: 0.85rem;
 }
 
-.app-footer .footer-sep { opacity: 0.5; }
+.app-footer .footer-sep { color: var(--c-border-strong); }
 
 h2 {
   font-size: 1.5rem;
@@ -720,6 +720,43 @@ span.line-num {
   background: white;
   border: 1px solid #d4c8a8;
   border-radius: 4px;
+}
+
+/* Collapse "non-applicable" rubriques/annexes behind a toggle so the user
+ * sees the action rows without scanning 13 empty checkboxes. */
+.rubriques-list.has-collapsed .collapsed-row,
+.cas-list.has-collapsed .collapsed-row {
+  display: none;
+}
+.rubriques-list.has-collapsed.show-collapsed .collapsed-row,
+.cas-list.has-collapsed.show-collapsed .collapsed-row {
+  display: flex;
+}
+
+.collapse-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  padding: 0.35rem 0.7rem;
+  margin: 0 0 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--c-muted);
+  cursor: pointer;
+  transition: background-color 120ms, color 120ms;
+}
+.collapse-toggle:hover {
+  background: var(--c-bg-subtle);
+  color: var(--c-text);
+}
+.collapse-toggle .toggle-arrow {
+  font-size: 0.7rem;
+  width: 0.8em;
+  display: inline-block;
+  text-align: center;
 }
 .cas-row {
   display: flex;
@@ -1872,6 +1909,7 @@ span.line-num {
 /* Sub-step progress bar — for steps that have per-Titre sub-pages */
 .sub-progress {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
   margin: 0 0 1rem;
@@ -1879,6 +1917,21 @@ span.line-num {
   background: var(--c-form-bg);
   border: 1px solid var(--c-border);
   border-radius: 4px;
+  /* Stick right below the main progress bar so the user always knows which
+   * Titre / Slot they're on as they scroll through a long form. */
+  position: sticky;
+  top: 5.5rem;
+  z-index: 90;
+  box-shadow: var(--shadow-sm);
+}
+
+.sub-progress-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--c-muted);
+  font-weight: 600;
+  margin-right: 0.25rem;
 }
 
 .sub-step {
