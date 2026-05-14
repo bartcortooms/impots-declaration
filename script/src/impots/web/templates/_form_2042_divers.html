@@ -3,21 +3,63 @@
   <div class="help-banner">
     <div>
       <p>
-        Une fois toutes les annexes (2047, 2074, 2074-ABT) validées, vous
-        cliquez sur "Suivant" pour revenir au 2042 principal. Les sections
-        Revenus → Capitaux mobiliers → Plus-values → … défilent ; la
-        section <strong>DIVERS</strong> (rubrique 8) arrive vers la fin du
-        formulaire, juste avant les pages de calcul.
+        Dernière section du 2042 principal avant les pages de calcul. Pour
+        un détenteur de compte de titres étranger, deux blocs comptent
+        ici&nbsp;: les cases <strong>8PL / 8VL</strong> qui matérialisent
+        le crédit d'impôt sur les dividendes étrangers, et la case
+        <strong>8UU</strong> qui signale le compte à l'étranger (déclenche
+        3916 / 3916&nbsp;bis).
       </p>
-      <p>
-        Dans DIVERS, cherchez la ligne <em>"Comptes ouverts, détenus,
-        utilisés ou clos à l'étranger"</em> (case <strong>8UU</strong>).
-        Elle se trouve dans le bloc qui regroupe les déclarations relatives
-        aux comptes / contrats / placements détenus hors de France.
+      <p class="page-summary">
+        <strong>8PL</strong> = {{ form_2047.field_208 | fmt_int }}&nbsp;EUR
+        ·
+        <strong>8VL</strong> = {{ form_2047.field_207 | fmt_int }}&nbsp;EUR
+        ·
+        <strong>8UU</strong> à cocher
       </p>
     </div>
   </div>
 
+  <p class="form-subsection-banner">Revenus ouvrant droit à un crédit d'impôt égal à l'impôt étranger</p>
+  <table class="form-2042-table">
+    <tr>
+      <td class="line-label">- revenus de capitaux mobiliers exonérés ouvrant droit à un crédit d'impôt égal à l'impôt français</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">8TK</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr class="state-checked">
+      <td class="line-label">
+        - revenus de capitaux mobiliers et autres revenus imposables
+        <em>après abattement éventuel mais sans déduction de l'impôt étranger</em>
+      </td>
+      <td class="line-input"><span class="form-cell computed">{{ form_2047.field_208 | fmt_int }}</span></td>
+      <td class="line-code">8PL</td>
+      <td class="line-status"><span class="status-badge todo">À saisir</span></td>
+    </tr>
+    <tr class="state-checked">
+      <td class="line-label">
+        &nbsp;&nbsp;<em>impôt payé à l'étranger sur ces revenus</em>
+      </td>
+      <td class="line-input"><span class="form-cell computed">{{ form_2047.field_207 | fmt_int }}</span></td>
+      <td class="line-code">8VL</td>
+      <td class="line-status"><span class="status-badge todo">À saisir</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">- autres revenus imposables étrangers <em>après déduction forfaitaire ou frais réels mais sans déduction de l'impôt étranger</em></td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">8PM</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">&nbsp;&nbsp;<em>impôt payé à l'étranger sur ces revenus</em></td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">8VM</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+  </table>
+
+  <p class="form-subsection-banner" style="margin-top: 1.5rem;">Comptes, contrats ou placements à l'étranger</p>
   <table class="form-2042-table">
     <tr class="state-checked">
       <td class="line-label">
@@ -32,6 +74,22 @@
       <td class="line-status"><span class="status-badge todo">À cocher</span></td>
     </tr>
   </table>
+
+  <div class="app-aside" data-tag="↳ Source des cases 8PL / 8VL">
+    <ul style="margin: 0; padding-left: 1.2rem;">
+      <li>
+        <strong>8PL</strong> = <strong>F208</strong> du 2047
+        ({{ form_2047.field_208 | fmt_int }}&nbsp;EUR) — revenu mobilier étranger
+        ouvrant droit au crédit d'impôt = base sur laquelle l'impôt français
+        applique la convention.
+      </li>
+      <li>
+        <strong>8VL</strong> = <strong>F207</strong> du 2047
+        ({{ form_2047.field_207 | fmt_int }}&nbsp;EUR) — montant du crédit
+        d'impôt (= impôt étranger payé retenu dans la limite du taux conventionnel).
+      </li>
+    </ul>
+  </div>
 
   <div class="help-banner warn">
     <div>
@@ -57,10 +115,4 @@
       </p>
     </div>
   </div>
-
-  <p class="form-note" style="margin-top: 1rem;">
-    Autres cases de cette section (8TI, 8TK, 8PL, 8VL, …) : voir les pages
-    suivantes — ou rapport d'audit pour le récapitulatif des valeurs à
-    reporter.
-  </p>
 </section>

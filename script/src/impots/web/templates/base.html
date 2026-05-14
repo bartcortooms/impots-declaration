@@ -8,45 +8,18 @@
 </head>
 <body>
 <main>
-  <header class="app-header">
-    <div class="app-brand">
-      <span class="app-logo" aria-hidden="true">📑</span>
-      <div class="app-title-block">
-        <h1>Déclaration {{ year }}</h1>
-        <p class="subtitle">
-          Outil d'aide à la déclaration — copiez les valeurs ci-dessous
-          dans les formulaires en ligne sur impots.gouv.fr
-        </p>
-      </div>
+  <div class="app-topbar">
+    <span class="app-title">📑 Déclaration&nbsp;{{ year }}</span>
+    <div class="legend" aria-label="Légende des couleurs">
+      <span class="legend-item"><span class="legend-swatch computed"></span> à reporter</span>
+      <span class="legend-item"><span class="legend-swatch formula"></span> calculé par le formulaire</span>
+      <span class="legend-item"><span class="legend-swatch empty"></span> non applicable</span>
     </div>
-    <div class="app-meta">
-      <div class="legend">
-        <span class="legend-item"><span class="legend-swatch computed"></span> à reporter dans le formulaire</span>
-        <span class="legend-item"><span class="legend-swatch formula"></span> calculé par le formulaire (vérifier)</span>
-        <span class="legend-item"><span class="legend-swatch empty"></span> non applicable</span>
-      </div>
-      <span class="kbd-hint" title="Raccourcis clavier — utilisables partout sauf dans un champ de saisie">
-        <kbd>←</kbd> <kbd>→</kbd> précédent / suivant
-        &nbsp;·&nbsp;
-        <kbd>1</kbd>…<kbd>0</kbd> aller à l'étape <em>N</em>
-      </span>
-    </div>
-  </header>
-
-  <div class="toc">
-    <strong>Sections</strong>
-    <ul>
-      <li><a href="#rubriques">1 — Sélection des rubriques (Plus-values et gains divers)</a></li>
-      <li><a href="#annexes">2 — Sélection des annexes (2047, 2074, 2074-ABT)</a></li>
-      <li><a href="#form-2047-gateway">3 — 2047 préparation</a></li>
-      <li><a href="#form-2047">4 — 2047 Dividendes (§ 200)</a></li>
-      <li><a href="#form-2074-gateway">5 — 2074 préparation</a></li>
-      <li><a href="#form-2074">6 — 2074 Cessions (cadre 5 § 510)</a></li>
-      <li><a href="#fiche-2074-abt-gateway">7 — 2074-ABT préparation</a></li>
-      <li><a href="#fiche-2074-abt">8 — 2074-ABT Fiche par titre</a></li>
-      <li><a href="#bloc-1133">9 — 2074 Bloc 1133 (Compensation)</a></li>
-      <li><a href="#audit">10 — Audit &amp; vérifications</a></li>
-    </ul>
+    <span class="kbd-hint" title="Raccourcis clavier — utilisables partout sauf dans un champ de saisie">
+      <span class="kbd-icon" aria-hidden="true">⌨</span>
+      <span class="kbd-label">Raccourcis</span>
+      <kbd>←</kbd> <kbd>→</kbd> &nbsp;·&nbsp; <kbd>1</kbd>…<kbd>0</kbd>
+    </span>
   </div>
 
   {% block content %}{% endblock %}

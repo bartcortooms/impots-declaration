@@ -1,0 +1,122 @@
+<section class="form-section form-2042-rcm" id="form-2042-rcm">
+  <h2 class="form-banner">REVENUS DES VALEURS ET CAPITAUX MOBILIERS</h2>
+  <p class="form-subsection-banner">20 REVENUS DES VALEURS MOBILIÈRES ÉTRANGÈRES ET REVENUS ASSIMILÉS</p>
+  <div class="help-banner">
+    <div>
+      <p>
+        Après l'enchaînement des annexes (2047 → 2074 → 2074-ABT) puis la
+        page Plus-values, vous revenez au 2042 principal pour le récapitulatif
+        des cases. Cette page collecte les revenus de capitaux mobiliers
+        (dividendes notamment) — pour vos dividendes étrangers, deux cases
+        sont en jeu&nbsp;: <strong>2DC</strong> et <strong>2OP</strong>.
+      </p>
+      <p class="page-summary">
+        Dividendes étrangers (États-Unis) à reporter ici&nbsp;:
+        <strong>{{ form_2047.field_208 | fmt_int }}&nbsp;EUR</strong>
+        (= F208 du 2047).
+      </p>
+    </div>
+  </div>
+
+  <table class="form-2042-table">
+    <tr>
+      <td class="line-label">Produits des bons ou contrats de capitalisation et d'assurance-vie de 8 ans et plus — versements effectués avant le 27.9.2017</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2DH</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">- autres produits</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2CH</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr class="state-checked">
+      <td class="line-label">
+        <strong>Revenus des actions et parts</strong>
+        <em>ouvrant droit à abattement de 40&nbsp;% (si option barème)</em>
+      </td>
+      <td class="line-input"><span class="form-cell computed">{{ form_2047.field_208 | fmt_int }}</span></td>
+      <td class="line-code">2DC</td>
+      <td class="line-status"><span class="status-badge todo">À saisir</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Produits des contrats d'assurance-vie afférents à des primes versées du 27.9.2017 et imposables à 7,5&nbsp;%</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2VV</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Produits ouvrant droit à l'abattement de 40&nbsp;% imposables à 12,5&nbsp;% (PFU prélevé)</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2WW</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Produits ouvrant droit à l'abattement (PFL préalable / dispense)</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2FU</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Autres revenus distribués et revenus mobiliers imposables connus</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2TS</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Intérêts et produits assimilés ordinaires</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2TR</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Intérêts des placements à revenu fixe (livret bancaire, dépôts à terme…)</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2TT</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Intérêts d'origine européenne soumis à CSG déductible</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2TQ</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr class="state-checked">
+      <td class="line-label">
+        <strong>Option pour l'imposition au barème progressif</strong>
+        <em>de l'ensemble de vos revenus et gains mobiliers</em>
+        <div class="case-explainer">
+          <strong>Cocher 2OP est obligatoire</strong> pour bénéficier de
+          l'abattement de 40&nbsp;% sur 2DC <em>et</em> de l'abattement de
+          durée de détention sur la plus-value en 3SG. Sans 2OP, vos
+          dividendes et plus-values sont imposés au PFU 12,8&nbsp;% à plat,
+          sans abattement.
+        </div>
+      </td>
+      <td class="line-input"><span class="form-cell checkbox-cell"><input type="checkbox" checked disabled></span></td>
+      <td class="line-code">2OP</td>
+      <td class="line-status"><span class="status-badge todo">À cocher</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Frais et charges déductibles</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2CA</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Crédits d'impôt non restituables sur revenus mobiliers étrangers</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">2AB</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+  </table>
+
+  <div class="app-aside" data-tag="↳ Source">
+    <strong>2DC</strong> reprend le total <strong>F208</strong> du 2047
+    (Revenus crédit d'impôt inclus) =
+    <strong>{{ form_2047.field_208 | fmt_int }}&nbsp;EUR</strong>.
+    Avec 2OP coché, le formulaire applique automatiquement l'abattement de
+    40&nbsp;% pour calculer la base imposable au barème.
+  </div>
+</section>

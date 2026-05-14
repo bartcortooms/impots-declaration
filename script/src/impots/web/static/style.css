@@ -71,7 +71,7 @@ body {
   color: var(--c-text);
   background: var(--c-bg);
   margin: 0;
-  padding: 2rem 1rem;
+  padding: 0.75rem 1rem 2rem;
   font-size: 14px;
   line-height: 1.6;
   font-feature-settings: "cv11", "ss01";
@@ -93,53 +93,25 @@ h1 {
 }
 
 /* App header — clearly mark this as a tool, not the actual declaration */
-.app-header {
+/* Thin one-line strip above the progress bar — replaces the old
+ * bulky app-header. Title, legend, kbd hint in a row. */
+.app-topbar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding: 1.5rem 1.75rem;
-  background: white;
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-md);
-}
-
-.app-brand {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-}
-
-.app-logo {
-  font-size: 2.25rem;
-  line-height: 1;
-  display: inline-flex;
-  width: 3rem;
-  height: 3rem;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--c-form-header), #a21462);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-sm);
-}
-
-.app-title-block .subtitle {
-  margin: 0.35rem 0 0;
-  font-size: 0.95rem;
-  color: var(--c-muted);
-  max-width: 56ch;
-}
-
-.app-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.4rem;
+  gap: 0.8rem 1.5rem;
+  padding: 0.3rem 0.5rem;
+  margin-bottom: 0.6rem;
   font-size: 0.78rem;
   color: var(--c-muted);
-  line-height: 1.5;
+}
+
+.app-title {
+  font-weight: 700;
+  color: var(--c-text);
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
 }
 
 .kbd-hint {
@@ -148,6 +120,20 @@ h1 {
   gap: 0.3rem;
   font-size: 0.72rem;
   color: var(--c-muted);
+}
+
+.kbd-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--c-text-soft);
+}
+
+.kbd-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  margin-right: 0.15rem;
 }
 
 .kbd-hint kbd {
@@ -204,32 +190,8 @@ h4 {
   margin: 0 0 2rem;
 }
 
-.toc {
-  background: var(--c-form-bg);
-  border: 1px solid var(--c-border);
-  padding: 1rem 1.5rem;
-  border-radius: 4px;
-  margin-bottom: 2rem;
-}
-
-.toc ul {
-  margin: 0.5rem 0 0;
-  padding-left: 1.5rem;
-  list-style: none;
-}
-
-.toc li {
-  margin: 0.25rem 0;
-}
-
-.toc a {
-  color: var(--c-form-header);
-  text-decoration: none;
-}
-
-.toc a:hover {
-  text-decoration: underline;
-}
+/* (.toc removed — the progress bar at the top of every page covers the
+ * same wayfinding need without the redundancy.) */
 
 /* Each form section is wrapped in a card. The inner background stays close
  * to the actual impots form (cream/lavender), the wrapper is modernized with
@@ -587,7 +549,7 @@ span.line-num {
   border-top: none;
 }
 
-.cadre-5 .form-subsection-banner {
+.form-subsection-banner {
   background: white;
   color: #2d3f5f;
   font-size: 0.95rem;
@@ -684,6 +646,20 @@ span.line-num {
 .form-2042-table .line-status {
   width: 6em;
   text-align: right;
+}
+
+/* Inline explainer text inside a form-2042 row label — used to surface
+ * gotchas (e.g. 2OP must be ticked). */
+.form-2042-table .case-explainer {
+  display: block;
+  margin-top: 0.4rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--c-bg-subtle);
+  border-left: 3px solid var(--c-warn);
+  font-size: 0.82rem;
+  color: var(--c-text-soft);
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .cadre-5-table {
@@ -1334,14 +1310,14 @@ span.line-num {
 /* Multi-step navigation — grouped into phases, modern stepper feel */
 .progress-bar {
   position: sticky;
-  top: 1rem;
+  top: 0.5rem;
   z-index: 100;
   display: flex;
   gap: 0.5rem;
   background: white;
   border-radius: var(--r-lg);
-  padding: 0.65rem;
-  margin-bottom: 1.5rem;
+  padding: 0.55rem;
+  margin-bottom: 1rem;
   box-shadow: var(--shadow-md);
   transition: padding 160ms ease, box-shadow 160ms ease;
 }
@@ -2004,7 +1980,7 @@ span.line-num {
    * Titre / Slot they're on as they scroll through a long form.
    * top value chosen to clear the compact-mode progress bar. */
   position: sticky;
-  top: 4.5rem;
+  top: 4rem;
   z-index: 90;
   box-shadow: var(--shadow-sm);
 }

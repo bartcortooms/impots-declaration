@@ -1,0 +1,125 @@
+<section class="form-section form-2042-pv" id="form-2042-pv">
+  <h2 class="form-banner">PLUS-VALUES ET GAINS DIVERS</h2>
+  <p class="form-subsection-banner">Gains de cession de valeurs mobilières et assimilés</p>
+  <div class="help-banner">
+    <div>
+      <p>
+        Cette page collecte le résultat des annexes 2074 / 2074-ABT
+        (bloc&nbsp;1133). Trois cases nous concernent&nbsp;:
+        <strong>3VG</strong> (plus-value brute après imputation des moins-values
+        et avant abattement), <strong>3SG</strong> (abattement de durée de
+        détention de droit commun), et <strong>3VH</strong> (moins-value
+        résiduelle de l'année, si applicable).
+      </p>
+      <p class="page-summary">
+        <strong>3VG</strong> = {{ bloc1133.total_gain_eur | fmt_int }}&nbsp;EUR
+        ·
+        <strong>3SG</strong> = {{ bloc1133.total_abattement_eur | fmt_int }}&nbsp;EUR
+        ·
+        Imposable au barème (avec 2OP)&nbsp;:
+        <strong>{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}&nbsp;EUR</strong>
+      </p>
+    </div>
+  </div>
+
+  <table class="form-2042-table">
+    <tr class="header-row">
+      <td class="line-label" colspan="4">
+        <strong>Gains de cession de valeurs mobilières et assimilés</strong>
+      </td>
+    </tr>
+    <tr class="state-checked">
+      <td class="line-label">
+        - plus-values avant abattement
+        <em>(montant après imputation des moins-values, avant abattement
+        de durée de détention)</em>
+      </td>
+      <td class="line-input"><span class="form-cell computed">{{ bloc1133.total_gain_eur | fmt_int }}</span></td>
+      <td class="line-code">3VG</td>
+      <td class="line-status"><span class="status-badge todo">À saisir</span></td>
+    </tr>
+    <tr class="state-checked">
+      <td class="line-label">
+        - abattement pour durée de détention de droit commun
+        <em>(somme des N08 de la fiche 2074-ABT)</em>
+      </td>
+      <td class="line-input"><span class="form-cell computed">{{ bloc1133.total_abattement_eur | fmt_int }}</span></td>
+      <td class="line-code">3SG</td>
+      <td class="line-status"><span class="status-badge todo">À saisir</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">
+        - Moins-values {{ year }}
+        <em>(résiduel après compensation intra-année — laisser vide si pas
+        de moins-value de l'année)</em>
+      </td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">3VH</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Gain levée d'options sur titres (PME, &lt; 5 ans, taux 18&nbsp;%)</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">3UA</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Abattement pour durée de détention renforcé (PME éligibles)</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">3SL</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Moins-values avant abattement (pour cessions avec abattement renforcé)</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">3VA</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+    <tr>
+      <td class="line-label">Gain net réalisé en sortie de plan PEA ou PEA-PME avant expiration de la 5<sup>e</sup> année</td>
+      <td class="line-input"><span class="form-cell empty"></span></td>
+      <td class="line-code">3VT</td>
+      <td class="line-status"><span class="status-badge na">—</span></td>
+    </tr>
+  </table>
+
+  {% if bloc1133.loss_imputation.imputed_eur > 0 %}
+  <div class="app-aside" data-tag="↳ Moins-values antérieures (3WN-3WT)">
+    <p>
+      Vous avez imputé
+      <strong>{{ bloc1133.loss_imputation.imputed_eur | fmt_int }}&nbsp;EUR</strong>
+      de moins-values antérieures pour calculer 3VG.
+    </p>
+    <p>
+      Le formulaire en ligne demandera ce montant <em>par année d'origine</em>
+      dans les cases <strong>3WN</strong> (2013) à <strong>3WT</strong> ({{ year - 1 }}).
+      Renseignez les montants tels qu'ils figuraient sur votre déclaration de
+      l'an dernier, en décrémentant chaque case par la part imputée cette année.
+    </p>
+    {% if bloc1133.loss_imputation.remaining_eur > 0 %}
+    <p>
+      <strong>{{ bloc1133.loss_imputation.remaining_eur | fmt_int }}&nbsp;EUR</strong>
+      n'ont pas pu être imputés cette année et restent reportables (dans
+      leurs cases d'origine, limite&nbsp;10&nbsp;ans).
+    </p>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="app-aside" data-tag="↳ Sources">
+    <ul style="margin: 0; padding-left: 1.2rem;">
+      <li>
+        <strong>3VG</strong> = "Totaux col. E" du bloc&nbsp;1133 du 2074
+        ({{ bloc1133.total_gain_eur | fmt_int }}&nbsp;EUR).
+      </li>
+      <li>
+        <strong>3SG</strong> = "Totaux col. F" du bloc&nbsp;1133 du 2074
+        ({{ bloc1133.total_abattement_eur | fmt_int }}&nbsp;EUR).
+      </li>
+      <li>
+        Prélèvements sociaux (17,2&nbsp;%) calculés séparément sur la PV brute
+        col.&nbsp;E ; l'abattement ne s'y applique pas.
+      </li>
+    </ul>
+  </div>
+</section>

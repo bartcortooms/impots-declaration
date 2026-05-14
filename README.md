@@ -5,6 +5,9 @@ foreign-broker stock — turns your broker's annual statement + sales report
 into the exact values to type into the online forms 2047, 2074, and
 2074-ABT on impots.gouv.fr.
 
+**Live demo** (anonymised fictional data):
+<https://bartcortooms.github.io/impots-declaration/>
+
 ## What it does
 
 Given a broker's annual statement (PDF) and a sales report (CSV) for a
