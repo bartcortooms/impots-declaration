@@ -722,41 +722,17 @@ span.line-num {
   border-radius: 4px;
 }
 
-/* Collapse "non-applicable" rubriques/annexes behind a toggle so the user
- * sees the action rows without scanning 13 empty checkboxes. */
-.rubriques-list.has-collapsed .collapsed-row,
-.cas-list.has-collapsed .collapsed-row {
-  display: none;
+/* De-emphasize non-applicable rubriques/annexes rows so the action rows
+ * pop out, while keeping every row visible (the user needs position
+ * parity with the real form: "the 4th, 5th, and 7th item"). */
+.rubriques-list .cas-row.state-unchecked,
+.cas-list .cas-row.state-unchecked {
+  opacity: 0.5;
 }
-.rubriques-list.has-collapsed.show-collapsed .collapsed-row,
-.cas-list.has-collapsed.show-collapsed .collapsed-row {
-  display: flex;
-}
-
-.collapse-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: transparent;
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-sm);
-  padding: 0.35rem 0.7rem;
-  margin: 0 0 0.6rem;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  color: var(--c-muted);
-  cursor: pointer;
-  transition: background-color 120ms, color 120ms;
-}
-.collapse-toggle:hover {
-  background: var(--c-bg-subtle);
-  color: var(--c-text);
-}
-.collapse-toggle .toggle-arrow {
-  font-size: 0.7rem;
-  width: 0.8em;
-  display: inline-block;
-  text-align: center;
+.rubriques-list .cas-row.state-unchecked:hover,
+.cas-list .cas-row.state-unchecked:hover {
+  opacity: 1;
+  transition: opacity 120ms;
 }
 .cas-row {
   display: flex;
