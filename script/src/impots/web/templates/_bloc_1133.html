@@ -1,0 +1,140 @@
+<section class="form-section bloc-1133" id="bloc-1133">
+  <h2 class="form-banner">11 DÉCLARATION</h2>
+  <p class="form-intro">
+    <em>Si vous avez réalisé uniquement des plus-values ou des plus-values et moins-values,
+    vous devez remplir ce tableau.</em><br>
+    <em>Dans le cas où vous avez opté pour le régime progressif, vous devez aussi remplir la
+    colonne F en fonction de la durée de détention et du type de gain réalisé.</em>
+  </p>
+
+  <h3 class="form-subsection">
+    1133 Valeurs mobilières, droits sociaux, titres assimilés
+    <em>sans abattement et éligibles à l'abattement de droit commun</em>
+  </h3>
+
+  <div class="bloc-1133-table">
+    <!-- Étape group header row: spans col groups -->
+    <div class="etape-row">
+      <div class="etape-label"></div>
+      <div class="etape-group etape-1">
+        <strong>Étape 1</strong>
+        <span class="etape-desc">Compensez vos plus-values avec vos moins-values (de l'année et antérieures)</span>
+      </div>
+      <div class="etape-group etape-2">
+        <strong>Étape 2</strong>
+        <span class="etape-desc">Indiquez le montant de l'abattement pour durée de détention</span>
+      </div>
+      <div class="etape-group etape-3">
+        <strong>Étape 3</strong>
+        <span class="etape-desc">Plus-value imposable</span>
+      </div>
+    </div>
+
+    <!-- Column letter headers row: 9 cells (label + A-H) -->
+    <div class="bloc-row col-headers">
+      <div class="row-label-strong"></div>
+      <div class="col-header"><strong>A</strong><span class="col-desc">Reportez vos plus-values <em>avant abattement</em></span></div>
+      <div class="col-header"><strong>B</strong><span class="col-desc">Imputez vos moins-values de l'année</span></div>
+      <div class="col-header"><strong>C</strong><span class="col-desc">Calculez <strong>A−B</strong></span></div>
+      <div class="col-header"><strong>D</strong><span class="col-desc">Imputez vos moins-values antérieures</span></div>
+      <div class="col-header"><strong>E</strong><span class="col-desc">Calculez <strong>C−D</strong></span></div>
+      <div class="col-header"><strong>F</strong><span class="col-desc">Abattement de droit commun</span></div>
+      <div class="col-header"><strong>G</strong><span class="col-desc">Abattement renforcé</span></div>
+      <div class="col-header"><strong>H</strong><span class="col-desc">Calculez <strong>E−F−G</strong></span></div>
+    </div>
+
+    <!-- Per-slot rows: 9 cells each -->
+    {% for slot in bloc1133.slots %}
+    <div class="bloc-row slot-row">
+      <div class="row-label">{{ slot.name }}</div>
+      <span class="form-cell computed">{{ slot.total_gain_eur | fmt_int }}</span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell formula">{{ slot.total_gain_eur | fmt_int }}</span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell formula">{{ slot.total_gain_eur | fmt_int }}</span>
+      <span class="form-cell computed">{{ slot.total_abattement_eur | fmt_int }}</span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell formula">{{ (slot.total_gain_eur - slot.total_abattement_eur) | fmt_int }}</span>
+    </div>
+    {% endfor %}
+    {# Empty slot rows if fewer than 3 sales #}
+    {% for _ in range(3 - bloc1133.slots | length) %}
+    <div class="bloc-row slot-row">
+      <div class="row-label">Titres {{ "ABC"[loop.index0 + bloc1133.slots | length] }}</div>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+    </div>
+    {% endfor %}
+
+    <!-- Totaux row -->
+    <div class="bloc-row totaux-row">
+      <div class="row-label-strong">Totaux</div>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <span class="form-cell empty"></span>
+      <div class="totaux-cell">
+        <span class="form-cell total">{{ bloc1133.total_gain_eur | fmt_int }}</span>
+        <span class="report-tag">→ case 3VG</span>
+      </div>
+      <div class="totaux-cell">
+        <span class="form-cell total">{{ bloc1133.total_abattement_eur | fmt_int }}</span>
+        <span class="report-tag">→ case 3SG</span>
+      </div>
+      <span class="form-cell empty"></span>
+      <span class="form-cell total">{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}</span>
+    </div>
+  </div>
+
+  <div class="app-aside" data-tag="📊 Imposable">
+    <strong>Plus-value imposable (col. H)</strong> :
+    {{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }} EUR
+    — taxée au barème progressif + 17,2% prélèvements sociaux sur le montant brut (col. E).
+  </div>
+
+  {% for slot in bloc1133.slots %}
+    {% if slot.constituent_sales | length > 1 %}
+    <div class="app-aside" data-tag="📊 Composition">
+    <div class="composition">
+      <h4>{{ slot.name }} — {{ slot.constituent_sales | length }} cessions regroupées</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Order #</th>
+            <th>Plan</th>
+            <th class="num">Qté</th>
+            <th class="num">Gain EUR</th>
+            <th class="num">Abattement EUR</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sale in slot.constituent_sales %}
+          <tr>
+            <td>{{ sale.execution_date }}</td>
+            <td><code>{{ sale.order_number }}</code></td>
+            <td>{{ sale.plan }}</td>
+            <td class="num">{{ sale.quantity }}</td>
+            <td class="num">{{ sale.gain_eur | fmt_int }}</td>
+            <td class="num">{{ sale.abattement_eur | fmt_int }}</td>
+          </tr>
+          {% endfor %}
+          <tr style="font-weight: 600; background: var(--c-form-bg);">
+            <td colspan="3">Total</td>
+            <td class="num">{{ slot.constituent_sales | sum(attribute='quantity') }}</td>
+            <td class="num">{{ slot.total_gain_eur | fmt_int }}</td>
+            <td class="num">{{ slot.total_abattement_eur | fmt_int }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+</section>

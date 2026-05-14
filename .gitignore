@@ -1,0 +1,31 @@
+# Your real CSV/PDF inputs and generated outputs.
+# Anything personal stays here and never gets committed.
+personal-data/
+
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Virtual envs
+.venv/
+
+# Caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ECB FX rate cache — fetched at runtime
+script/fx_cache.csv
+
+# Demo output is generated; only the build script is canonical.
+demo/output/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

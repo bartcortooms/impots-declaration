@@ -1,0 +1,32 @@
+<section class="form-section gateway-2047" id="form-2047-gateway">
+  <h2 class="form-banner-light">Annexe N° 2047 — Votre déclaration concerne</h2>
+  <div class="help-banner">
+    <div>
+      Première page de l'annexe 2047. Cochez la case
+      <strong>"Des revenus des valeurs et capitaux mobiliers imposables en France"</strong>
+      pour activer la section 200 (Dividendes).
+    </div>
+  </div>
+
+  <div class="cas-list">
+    {% for label, checked, note in [
+      ('SALAIRES SUISSES (imprimé 2047-Suisse)', false, ''),
+      ('Des pensions et rentes imposables en France', false, ''),
+      ('Des revenus des valeurs et capitaux mobiliers imposables en France', true, 'active la section 200 — dividendes étrangers'),
+      ('Des plus-values imposables en France', false, 'plus-values mobilières gérées dans le 2074, pas ici'),
+      ('Des revenus fonciers imposables en France', false, ''),
+      ('Des revenus des professions non salariées imposables en France', false, ''),
+      ('Des revenus ouvrant droit à un crédit d\'impôt égal au montant de l\'impôt français', false, ''),
+      ('Des revenus ouvrant droit à un crédit d\'impôt égal au montant de l\'impôt étranger', false, ''),
+      ('Des revenus exonérés retenus pour le calcul du taux effectif', false, ''),
+      ('Des revenus de source étrangère imposables aux contributions sociales', false, '')
+    ] %}
+    <div class="cas-row state-{{ 'checked' if checked else 'unchecked' }}">
+      <span class="checkbox-vis"><input type="checkbox" {% if checked %}checked{% endif %} disabled></span>
+      <span class="cas-label">{{ label }}</span>
+      {% if checked %}<span class="status-badge todo">À cocher</span>{% endif %}
+      {% if note %}<span class="badge-note">{{ note }}</span>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>

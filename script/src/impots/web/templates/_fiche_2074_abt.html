@@ -1,0 +1,125 @@
+<section class="form-section abt-fiche" id="fiche-2074-abt">
+  <h2 class="form-banner-light">
+    Annexe N° 2074-ABT — Fiche de calcul de l'abattement pour durée de détention :
+    abattement de droit commun
+  </h2>
+  <div class="help-banner">
+    <div>
+      <p>
+        Le formulaire affiche <strong>un Titre par page</strong>, avec 3 sous-colonnes
+        pour la durée de détention (8 ans+, 2–8 ans, &lt; 2 ans).
+      </p>
+      <p>
+        Pour chaque cession, la quantité et la plus-value sont reportées dans
+        la colonne correspondant à la durée de détention du lot (≥ 8 ans,
+        2–8 ans, ou < 2 ans).
+      </p>
+    </div>
+  </div>
+
+  {% set _SLOT_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
+  {% for sale in sales %}
+    {% set letter = _SLOT_LETTERS[loop.index0] %}
+    {% set rate_pct = (sale.abattement_rate | float * 100) | round | int %}
+    {% set is_8yr = rate_pct == 65 %}
+    {% set is_2to8 = rate_pct == 50 %}
+    {% set is_lt2 = rate_pct == 0 %}
+    {% set n07 = (sale.gain_eur | float * (sale.abattement_rate | float)) %}
+    <div class="abt-page" data-summary="{{ sale.description }} · gain {{ sale.gain_eur | fmt_int }} € → abat. {{ sale.abattement_eur | fmt_int }} €">
+      <h3>Titre {{ letter }} <span class="page-num">— Page {{ loop.index + 1 }} / {{ sales | length + 1 }}</span></h3>
+      <table class="abt-table">
+        <tr>
+          <td class="line-num">N01</td>
+          <td class="line-label" colspan="3">
+            Désignation de la société dont les titres sont cédés ou
+            des intermédiaires financiers / personnes interposées
+            ou de l'organisme distributeur
+          </td>
+          <td class="line-input"><span class="form-cell text source wide">{{ sale.description }}</span></td>
+        </tr>
+        <tr>
+          <td class="line-num">N02</td>
+          <td class="line-label" colspan="3">
+            Plus-value brute avant abattement après compensation,
+            le cas échéant, des moins-values <em>cf. notice</em>
+          </td>
+          <td class="line-input"><span class="form-cell computed">{{ sale.gain_eur | fmt_int }}</span></td>
+        </tr>
+        <tr>
+          <td class="line-num">N03</td>
+          <td class="line-label" colspan="3">
+            Nombre de titres cédés ou rachetés ou nombre de titres
+            détenus en cas de distribution
+          </td>
+          <td class="line-input"><span class="form-cell source">{{ sale.quantity }}</span></td>
+        </tr>
+
+        <tr class="header-row">
+          <td class="line-num"></td>
+          <td class="line-label">
+            <strong>Calcul de l'abattement de droit commun</strong>
+          </td>
+          <td class="bracket-header">Durée de détention :<br>8 ans et plus</td>
+          <td class="bracket-header">Au moins 2 ans et moins de 8 ans</td>
+          <td class="bracket-header">Moins de 2 ans</td>
+        </tr>
+
+        <tr>
+          <td class="line-num">N04</td>
+          <td class="line-label">
+            Répartition du nombre de titres de la ligne N03 en fonction
+            de leur durée de détention
+          </td>
+          <td class="line-input"><span class="form-cell {% if is_8yr %}computed{% else %}empty{% endif %}">{% if is_8yr %}{{ sale.quantity }}{% endif %}</span></td>
+          <td class="line-input"><span class="form-cell {% if is_2to8 %}computed{% else %}empty{% endif %}">{% if is_2to8 %}{{ sale.quantity }}{% endif %}</span></td>
+          <td class="line-input"><span class="form-cell {% if is_lt2 %}computed{% else %}empty{% endif %}">{% if is_lt2 %}{{ sale.quantity }}{% endif %}</span></td>
+        </tr>
+        <tr>
+          <td class="line-num">N05</td>
+          <td class="line-label">
+            Répartition de la plus-value ligne N02 par taux d'abattement
+            applicable <em>cf. notice</em>
+          </td>
+          <td class="line-input"><span class="form-cell {% if is_8yr %}computed{% else %}empty{% endif %}">{% if is_8yr %}{{ sale.gain_eur | fmt_int }}{% endif %}</span></td>
+          <td class="line-input"><span class="form-cell {% if is_2to8 %}computed{% else %}empty{% endif %}">{% if is_2to8 %}{{ sale.gain_eur | fmt_int }}{% endif %}</span></td>
+          <td class="line-input"><span class="form-cell {% if is_lt2 %}computed{% else %}empty{% endif %}">{% if is_lt2 %}{{ sale.gain_eur | fmt_int }}{% endif %}</span></td>
+        </tr>
+        <tr>
+          <td class="line-num">N06</td>
+          <td class="line-label">Pourcentage d'abattement</td>
+          <td class="line-input"><span class="form-cell formula">65 %</span></td>
+          <td class="line-input"><span class="form-cell formula">50 %</span></td>
+          <td class="line-input"><span class="form-cell formula">0 %</span></td>
+        </tr>
+        <tr>
+          <td class="line-num">N07</td>
+          <td class="line-label">
+            Montant de l'abattement pour chaque durée de détention :
+            <em>ligne N05 × ligne N06</em>
+          </td>
+          <td class="line-input"><span class="form-cell {% if is_8yr %}formula{% else %}empty{% endif %}">{% if is_8yr %}{{ n07 | fmt_decimal2_strip }}{% endif %}</span></td>
+          <td class="line-input"><span class="form-cell {% if is_2to8 %}formula{% else %}empty{% endif %}">{% if is_2to8 %}{{ n07 | fmt_decimal2_strip }}{% endif %}</span></td>
+          <td class="line-input"><span class="form-cell {% if is_lt2 %}formula{% else %}empty{% endif %}">{% if is_lt2 %}{{ n07 | fmt_decimal2_strip }}{% endif %}</span></td>
+        </tr>
+        <tr>
+          <td class="line-num">N08</td>
+          <td class="line-label" colspan="3">
+            <strong>Montant total de l'abattement</strong> pour durée de
+            détention : <em>total de la ligne N07</em>
+          </td>
+          <td class="line-input"><span class="form-cell formula" style="font-weight: 700;">{{ sale.abattement_eur | fmt_int }}</span></td>
+        </tr>
+      </table>
+      <div class="app-aside" data-tag="↳ Report">
+        Reportez N08 = <strong>{{ sale.abattement_eur | fmt_int }}</strong>
+        dans le bloc 1133 du formulaire 2074, colonne F, regroupé en max 3 slots.
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="app-aside" data-tag="📊 Total">
+    <strong>Total des abattements (N08) sur toutes les pages :</strong>
+    {{ sales_total_abattement_eur | fmt_int }} EUR.
+    Cette somme alimente la colonne F du bloc 1133 (regroupée en 3 slots Titres A/B/C).
+  </div>
+</section>

@@ -1,0 +1,112 @@
+<section class="form-section cadre-5" id="form-2074">
+  <h2 class="form-banner">5 CESSIONS ET RACHATS DE VALEURS MOBILIÈRES, DROITS SOCIAUX ET ASSIMILÉS</h2>
+  <p class="form-subsection-banner">510 Plus-values ou moins-values déterminées par vous-même</p>
+  <div class="help-banner">
+    <div>
+      <p>
+        Le formulaire en ligne affiche <strong>un Titre par page</strong>. Avec
+        {{ sales | length }} cessions, vous verrez "Titre n° 1" → "Titre n° 2" →
+        … et cliquerez "Suivant" entre chaque.
+      </p>
+      <p>
+        Utilisez les onglets "Titre N" ci-dessous pour parcourir les valeurs
+        à reporter dans chaque page du formulaire en ligne.
+      </p>
+    </div>
+  </div>
+
+  {% for sale in sales %}
+  <div class="titre-page" data-summary="{{ sale.execution_date.strftime('%d/%m/%Y') }} · {{ sale.plan }} · {{ sale.quantity }} sh · gain {{ sale.gain_eur | fmt_int }} €">
+    <h3>Titre n° {{ loop.index }}</h3>
+    <table class="cadre-5-table">
+      <tr>
+        <td class="line-num">511</td>
+        <td class="line-label">Désignation des titres et des intermédiaires financiers</td>
+        <td class="line-input"><span class="form-cell text source wide">{{ sale.description }} — Morgan Stanley Smith Barney LLC</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">512</td>
+        <td class="line-label">Date de la cession ou du rachat <em>jj/mm/aaaa</em></td>
+        <td class="line-input"><span class="form-cell text source">{{ sale.execution_date.strftime('%d/%m/%Y') }}</span></td>
+      </tr>
+      <tr class="header-row">
+        <td class="line-num"><strong>513</strong></td>
+        <td colspan="2" class="line-label"><strong>Détermination du prix de cession des titres</strong></td>
+      </tr>
+      <tr>
+        <td class="line-num">514</td>
+        <td class="line-label">Valeur unitaire de cession</td>
+        <td class="line-input"><span class="form-cell computed">{{ sale.sell_price_eur_per_share | fmt_decimal2 }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">515</td>
+        <td class="line-label">Nombre de titres cédés</td>
+        <td class="line-input"><span class="sep">×</span><span class="form-cell source">{{ sale.quantity }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">516</td>
+        <td class="line-label">Montant global <em>lignes (514 × 515)</em></td>
+        <td class="line-input"><span class="form-cell formula">{{ sale.total_sell_eur | fmt_int }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">517</td>
+        <td class="line-label">Frais de cession <em>cf. notice</em></td>
+        <td class="line-input"><span class="form-cell computed">{{ sale.frais_cession_eur | fmt_int }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">518</td>
+        <td class="line-label">Prix de cession net <em>lignes (516 − 517)</em></td>
+        <td class="line-input"><span class="form-cell formula">{{ sale.prix_cession_net_eur | fmt_int }}</span></td>
+      </tr>
+      <tr class="header-row">
+        <td class="line-num"><strong>519</strong></td>
+        <td colspan="2" class="line-label"><strong>Détermination du prix de revient des titres</strong></td>
+      </tr>
+      <tr>
+        <td class="line-num">520</td>
+        <td class="line-label">Prix ou valeur d'acquisition unitaire <em>cf. notice</em></td>
+        <td class="line-input"><span class="form-cell computed">{{ sale.cost_per_share_eur | fmt_decimal2 }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">521</td>
+        <td class="line-label">Prix d'acquisition global <em>cf. notice</em></td>
+        <td class="line-input"><span class="form-cell computed">{{ sale.total_cost_eur | fmt_int }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">522</td>
+        <td class="line-label">Frais d'acquisition</td>
+        <td class="line-input"><span class="form-cell computed">{{ sale.frais_acquisition_eur | fmt_int }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">523</td>
+        <td class="line-label">Prix de revient <em>lignes (521 + 522)</em></td>
+        <td class="line-input"><span class="form-cell formula">{{ sale.prix_revient_eur | fmt_int }}</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">524</td>
+        <td class="line-label"><strong>Résultat</strong> précédé du signe + ou − <em>lignes (518 − 523)</em></td>
+        <td class="line-input">
+          <span class="form-cell formula">{{ sale.gain_eur | fmt_int }}</span>
+          <span class="form-note">Montant reporté <strong>ligne 903</strong>, col. PV ou MV</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="line-num">525</td>
+        <td class="line-label">Je demande expressément à bénéficier de l'imputation des moins-values préalablement à l'annulation des titres</td>
+        <td class="line-input"><span class="checkbox">☐</span> <span class="form-note">non applicable</span></td>
+      </tr>
+      <tr>
+        <td class="line-num">526</td>
+        <td class="line-label">Montant des moins-values imputées pour les titres concernés</td>
+        <td class="line-input"><span class="form-cell empty"></span> <span class="form-note">non applicable</span></td>
+      </tr>
+    </table>
+  </div>
+  {% endfor %}
+
+  <div class="app-aside" data-tag="📊 Récap (cadre 9 ligne 903)">
+    Après avoir saisi chaque Titre, le formulaire calculera automatiquement la
+    somme des Résultats (ligne 524) et l'affichera en cadre 9 ligne 903 col. PV :
+    <strong>{{ sales_total_gain_eur | fmt_int }} EUR</strong>.
+  </div>
+</section>

@@ -1,0 +1,134 @@
+<section class="form-section audit-section" id="audit">
+  <h2>Audit &amp; vérifications</h2>
+  <div class="help-banner tip">
+    Vue d'ensemble des montants. Comparez avec votre 1042-S et la fiche
+    2074-ABT papier pour valider la cohérence avant de soumettre.
+  </div>
+
+  <h3>Totaux de l'année {{ year }}</h3>
+  <div class="audit-dashboard">
+    <div class="metric-tile accent-burgundy">
+      <span class="metric-label">Cessions</span>
+      <span class="metric-value">{{ sales | length }}</span>
+      <span class="metric-sub">cessions déclarées</span>
+    </div>
+    <div class="metric-tile accent-burgundy">
+      <span class="metric-label">Plus-value brute</span>
+      <span class="metric-value">{{ totals.gain_eur | fmt_int }} €</span>
+      <span class="metric-sub">{{ totals.gain_usd | fmt_money }} USD</span>
+    </div>
+    <div class="metric-tile accent-blue">
+      <span class="metric-label">Abattement durée de détention</span>
+      <span class="metric-value">{{ totals.abattement_eur | fmt_int }} €</span>
+      <span class="metric-sub">case 3SG du 2042C</span>
+    </div>
+    <div class="metric-tile accent-green">
+      <span class="metric-label">Plus-value imposable</span>
+      <span class="metric-value">{{ totals.taxable_eur | fmt_int }} €</span>
+      <span class="metric-sub">après abattement</span>
+    </div>
+  </div>
+
+  <div class="audit-dashboard">
+    <div class="metric-tile accent-amber">
+      <span class="metric-label">Dividendes brut</span>
+      <span class="metric-value">{{ form_2047.total_gross_usd | fmt_money }} $</span>
+      <span class="metric-sub">{{ (form_2047.field_203 + form_2047.field_206) | fmt_int }} € env. avant retenue</span>
+    </div>
+    <div class="metric-tile accent-amber">
+      <span class="metric-label">Retenue à la source</span>
+      <span class="metric-value">{{ form_2047.total_withholding_usd | fmt_money }} $</span>
+      <span class="metric-sub">15% × brut (US treaty rate)</span>
+    </div>
+    <div class="metric-tile accent-blue">
+      <span class="metric-label">Crédit d'impôt étranger</span>
+      <span class="metric-value">{{ form_2047.field_207 | fmt_int }} €</span>
+      <span class="metric-sub">case 8VL du 2042C</span>
+    </div>
+    <div class="metric-tile accent-green">
+      <span class="metric-label">Dividendes déclarés (F208)</span>
+      <span class="metric-value">{{ form_2047.field_208 | fmt_int }} €</span>
+      <span class="metric-sub">vers le 2DC du 2042 (abattement 40% si barème)</span>
+    </div>
+  </div>
+
+  <div class="cross-checks">
+    <h4>Vérifications croisées</h4>
+    <div class="check-row ok">
+      <span class="check-icon"></span>
+      <span class="check-label">1042-S Box 2 — Gross income</span>
+      <span class="check-detail">attendu ≈ {{ form_2047.total_gross_usd | fmt_money }} $</span>
+    </div>
+    <div class="check-row ok">
+      <span class="check-icon"></span>
+      <span class="check-label">1042-S Box 7a — Federal tax withheld</span>
+      <span class="check-detail">attendu ≈ {{ form_2047.total_withholding_usd | fmt_money }} $</span>
+    </div>
+    <div class="check-row ok">
+      <span class="check-icon"></span>
+      <span class="check-label">Total fiche 2074-ABT N08</span>
+      <span class="check-detail">{{ totals.abattement_eur | fmt_int }} € (= bloc 1133 col. F)</span>
+    </div>
+    <div class="check-row ok">
+      <span class="check-icon"></span>
+      <span class="check-label">Total cadre 5 ligne 524</span>
+      <span class="check-detail">{{ totals.gain_eur | fmt_int }} € (= cadre 9 ligne 903 col. PV)</span>
+    </div>
+  </div>
+
+  <h3>Détail par cession</h3>
+  <div class="composition">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Plan</th>
+          <th>Order #</th>
+          <th class="num">Qté</th>
+          <th class="num">Prix USD</th>
+          <th class="num">Coût USD</th>
+          <th class="num">Gain USD</th>
+          <th class="num">FX</th>
+          <th class="num">Gain EUR</th>
+          <th class="num">Abat. EUR</th>
+          <th class="num">Net EUR</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for sale in sales %}
+        <tr>
+          <td>{{ sale.execution_date }}</td>
+          <td>{{ sale.plan }}</td>
+          <td><code style="font-size: 0.85em;">{{ sale.order_number }}</code></td>
+          <td class="num">{{ sale.quantity }}</td>
+          <td class="num">{{ sale.sell_price_usd_per_share | fmt_money }}</td>
+          <td class="num">{{ sale.cost_basis_usd | fmt_money }}</td>
+          <td class="num">{{ sale.gain_usd | fmt_money }}</td>
+          <td class="num">{{ sale.fx_rate | fmt_fx }}</td>
+          <td class="num">{{ sale.gain_eur | fmt_int }}</td>
+          <td class="num">{{ sale.abattement_eur | fmt_int }}</td>
+          <td class="num">{{ (sale.gain_eur - sale.abattement_eur) | fmt_int }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="help-banner warn">
+    <div>
+      <p><strong>Caveats à valider</strong></p>
+      <p>
+        <strong>Field 520 (prix d'acquisition unitaire) — moyenne pondérée :</strong>
+        pour les cessions multi-lots, nous utilisons la moyenne pondérée du coût.
+        Le notice 2074 § 510 suggère le coût par lot pour les titres identifiables,
+        mais l'effet pratique est identique tant que tous les lots d'une même
+        cession bénéficient du même taux d'abattement.
+      </p>
+      <p>
+        <strong>Rounding :</strong> F516 / F521 / F524 / Field 1133 utilisent
+        ROUND_HALF_UP au euro entier (convention de la fiche papier officielle).
+        F514 / F520 conservent 2 décimales.
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Déclaration {{ year }} — impots-declaration</title>
+  <style>{{ inline_css | safe }}</style>
+  <script>{{ inline_js | safe }}</script>
+</head>
+<body>
+<main>
+  <header class="app-header">
+    <div class="app-brand">
+      <span class="app-logo" aria-hidden="true">📑</span>
+      <div class="app-title-block">
+        <h1>Déclaration {{ year }}</h1>
+        <p class="subtitle">
+          Outil d'aide à la déclaration — copiez les valeurs ci-dessous
+          dans les formulaires en ligne sur impots.gouv.fr
+        </p>
+      </div>
+    </div>
+    <div class="app-meta">
+      <span class="kbd-hint">
+        Raccourcis : <kbd>←</kbd> <kbd>→</kbd> pour naviguer · <kbd>1</kbd>–<kbd>0</kbd> pour sauter · <kbd>?</kbd> pour la légende
+      </span>
+    </div>
+  </header>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-swatch source"></span> Valeur source</span>
+    <span class="legend-item"><span class="legend-swatch computed"></span> Valeur calculée à reporter</span>
+    <span class="legend-item"><span class="legend-swatch formula"></span> Calculée par le formulaire (vérification)</span>
+    <span class="legend-item"><span class="legend-swatch empty"></span> Slot vide</span>
+  </div>
+
+  <div class="toc">
+    <strong>Sections</strong>
+    <ul>
+      <li><a href="#rubriques">1 — Sélection des rubriques (Plus-values et gains divers)</a></li>
+      <li><a href="#annexes">2 — Sélection des annexes (2047, 2074, 2074-ABT)</a></li>
+      <li><a href="#form-2047-gateway">3 — 2047 préparation</a></li>
+      <li><a href="#form-2047">4 — 2047 Dividendes (§ 200)</a></li>
+      <li><a href="#form-2074-gateway">5 — 2074 préparation</a></li>
+      <li><a href="#form-2074">6 — 2074 Cessions (cadre 5 § 510)</a></li>
+      <li><a href="#fiche-2074-abt-gateway">7 — 2074-ABT préparation</a></li>
+      <li><a href="#fiche-2074-abt">8 — 2074-ABT Fiche par titre</a></li>
+      <li><a href="#bloc-1133">9 — 2074 Bloc 1133 (Compensation)</a></li>
+      <li><a href="#audit">10 — Audit &amp; vérifications</a></li>
+    </ul>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <footer class="app-footer">
+    <span>Généré par <code>impots-declaration</code></span>
+    <span class="footer-sep">·</span>
+    <span>FX rates : {{ fx_source }}</span>
+  </footer>
+</main>
+</body>
+</html>

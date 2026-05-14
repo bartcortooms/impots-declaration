@@ -1,0 +1,57 @@
+<section class="form-section rubriques" id="rubriques">
+  <h2 class="form-banner-light">Sélection des rubriques de la déclaration</h2>
+  <p class="form-intro">
+    <em>Les rubriques à cocher sont celles de la déclaration de revenus principale
+    qui regroupe les déclarations n° 2042 / 2042C / 2042 RICI / 2042 C PRO / 2042 IOM / 3916.</em>
+  </p>
+
+  <h3 class="form-subsection-blue">ANNEXES</h3>
+  <p class="centered">
+    Cliquez ici pour gérer vos annexes :
+    <span class="form-button">Déclarations ANNEXES</span>
+    <span class="form-note">→ voir section "Déclarations annexes" ci-dessous</span>
+  </p>
+
+  <h3 class="form-subsection-blue">REVENUS</h3>
+  <div class="rubriques-list">
+    {% for label, state, note in [
+      ('Traitements, salaires', 'auto', 'si vous avez eu un salaire en ' + year|string),
+      ('Pensions, retraites, rentes, rentes viagères à titre onéreux', 'unchecked', ''),
+      ('Salaires, gains d\'actionnariat salarié', 'unchecked', ''),
+      ('Salaires et pensions exonérés retenus pour le calcul du taux effectif', 'unchecked', ''),
+      ('Revenus de capitaux mobiliers / Précisions sur le calcul de la contribution différentielle sur les hauts revenus (CDHR)', 'auto', 'dividendes US déclarés via le 2047'),
+      ('Plus-values et gains divers', 'checked', 'pour vos cessions de titres'),
+      ('Micro foncier : recettes brutes n\'excédant pas 15 000 euros', 'unchecked', ''),
+      ('Revenus fonciers', 'unchecked', ''),
+      ('Revenus exceptionnels ou différés', 'unchecked', ''),
+      ('Micro-entrepreneur (auto-entrepreneur) ayant opté pour le versement libératoire', 'unchecked', ''),
+      ('Revenus agricoles', 'unchecked', ''),
+      ('Revenus industriels et commerciaux professionnels', 'unchecked', ''),
+      ('Revenus industriels et commerciaux non professionnels', 'unchecked', ''),
+      ('Revenus des locations meublées non professionnelles', 'unchecked', ''),
+      ('Revenus non commerciaux professionnels', 'unchecked', ''),
+      ('Revenus non commerciaux non professionnels', 'unchecked', '')
+    ] %}
+    <div class="cas-row state-{{ state }}">
+      <span class="checkbox-vis">
+        {%- if state == 'checked' -%}<input type="checkbox" checked disabled>
+        {%- elif state == 'auto' -%}<input type="checkbox" checked disabled class="auto">
+        {%- else -%}<input type="checkbox" disabled>
+        {%- endif -%}
+      </span>
+      <span class="cas-label">{{ label }}</span>
+      {% if state == 'checked' %}<span class="status-badge todo">À cocher</span>
+      {% elif state == 'auto' %}<span class="status-badge auto">Auto</span>
+      {% endif %}
+      {% if note %}<span class="badge-note">{{ note }}</span>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="legend-row">
+    <span class="legend-label">Légende :</span>
+    <span class="legend-chip"><span class="status-badge todo">À cocher</span> case à cocher manuellement</span>
+    <span class="legend-chip"><span class="status-badge auto">Auto</span> auto-coché par le formulaire</span>
+    <span class="legend-chip"><span class="status-badge na">—</span> non applicable, laisser vide</span>
+  </div>
+</section>

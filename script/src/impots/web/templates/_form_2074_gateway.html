@@ -1,0 +1,114 @@
+<section class="form-section gateway-2074" id="form-2074-gateway">
+  <h2 class="form-banner">VOS PLUS OU MOINS-VALUES CORRESPONDENT AUX CAS SUIVANTS</h2>
+  <div class="help-banner">
+    <div>
+      Cette page de l'annexe 2074 détermine quelles sections du formulaire vous
+      remplirez ensuite. Cochez l'option ❸ et entrez
+      <strong>{{ sales | length }}</strong>
+      (le nombre de cessions) pour activer la section 5 § 510.
+    </div>
+  </div>
+
+  <div class="gateway-option">
+    <div class="opt-bullet">❶</div>
+    <div class="opt-body">
+      <div class="sub-main">
+        <strong>Distributions de plus-values par un OPC, un FPI, un placement collectif ou une SCR</strong>
+        <span class="status-badge na">Laisser vide</span>
+      </div>
+      <div class="sub-explain muted">
+        OPC = mutual fund (investissement collectif) — non applicable aux cessions de titres directes.
+      </div>
+    </div>
+  </div>
+
+  <div class="gateway-option">
+    <div class="opt-bullet">❷</div>
+    <div class="opt-body">
+      <div class="sub-main">
+        <strong>Compléments de prix perçus</strong>
+        <span class="status-badge na">Laisser vide</span>
+      </div>
+      <div class="sub-explain muted">
+        Earn-out / clause d'indexation sur cessions antérieures — non applicable.
+      </div>
+    </div>
+  </div>
+
+  <div class="gateway-option highlighted">
+    <div class="opt-bullet">❸</div>
+    <div class="opt-body">
+      <strong>Cessions et rachats de valeurs mobilières, droits sociaux et titres assimilés pour lesquels :</strong>
+      <ul class="opt-sublist">
+        <li>
+          <div class="sub-main">
+            <span class="checkbox-vis"><input type="checkbox" disabled></span>
+            <span>des titres ont été acquis avant le 1<sup>er</sup> janvier 1979</span>
+            <span class="status-badge na">—</span>
+          </div>
+        </li>
+        <li class="state-checked">
+          <div class="sub-main">
+            <span class="checkbox-vis"><input type="checkbox" checked disabled></span>
+            <strong>vos intermédiaires financiers ou des personnes interposées n'ont pas calculé vos résultats.</strong>
+            <span class="status-badge todo">À cocher</span>
+          </div>
+          <div class="sub-explain">
+            Le broker donne les chiffres bruts (prix, cost basis en devise) ;
+            vous calculez la plus-value en EUR vous-même.
+          </div>
+          <div class="sub-input">
+            <label>Si oui, indiquez le nombre</label>
+            <span class="form-input-inline computed">{{ sales | length }}</span>
+            <span class="badge-note">{{ sales | length }} cessions en {{ year }} (max 99)</span>
+          </div>
+        </li>
+        <li>
+          <div class="sub-main">
+            <span class="checkbox-vis"><input type="checkbox" disabled></span>
+            <span>vos intermédiaires financiers ou des personnes interposées ont calculé vos résultats</span>
+            <span class="status-badge na">—</span>
+          </div>
+          <div class="sub-explain muted">
+            Le broker fournit la cost basis en devise mais pas la plus-value EUR française.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="gateway-option">
+    <div class="opt-bullet">❸<sup>bis</sup></div>
+    <div class="opt-body">
+      <div class="sub-main">
+        <strong>Cessions Management Packages (art. 163 bis H CGI)</strong>
+        <span class="status-badge na">Laisser vide</span>
+      </div>
+    </div>
+  </div>
+
+  {% for n, label in [
+    ('❹', 'Gains de cession de créances représentatives d\'un complément de prix'),
+    ('❺', 'Clôture, retraits ou rachats de votre PEA ou PEA-PME'),
+    ('❻', 'Soulte reçue dans le cadre d\'une opération d\'échange de titres'),
+    ('❼', 'Vous disposez de pertes antérieures reportables'),
+    ('❽', 'Vous souhaitez simplement effectuer le report de l\'annexe 2074-I / 2074 PEAC')
+  ] %}
+  <div class="gateway-option">
+    <div class="opt-bullet">{{ n }}</div>
+    <div class="opt-body">
+      <div class="sub-main">
+        <strong>{{ label }}</strong>
+        <span class="status-badge na">Laisser vide</span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="note">
+    <strong>Après avoir validé cette page</strong>
+    Le formulaire devrait vous router vers la section 5 § 510 (cessions par
+    vous-même) où vous entrerez les détails par cession des
+    {{ sales | length }} cessions. Voir section suivante de ce rapport.
+  </div>
+</section>

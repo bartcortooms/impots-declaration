@@ -1,0 +1,151 @@
+<section class="form-section form-2047" id="form-2047">
+  <h2>2. REVENUS DES VALEURS ET CAPITAUX MOBILIERS IMPOSABLES EN FRANCE</h2>
+  <p class="form-intro">
+    <strong>20 REVENUS DES VALEURS MOBILIÈRES ÉTRANGÈRES ET REVENUS ASSIMILÉS</strong><br>
+    <em>À reporter sur votre déclaration principale, cadre Revenus de Capitaux Mobiliers, voir notice et colonne de droite.</em>
+  </p>
+
+  <p class="form-prompt">
+    Déclarez-vous plus de trois pays d'origine de vos revenus de valeurs et capitaux mobiliers ?
+    <span class="form-input-inline">Non ⌄</span>
+    <span class="form-note">(par défaut 3 slots — basculer en "Oui" pour 4+)</span>
+  </p>
+
+  <h3 class="form-subsection">200 DIVIDENDES ET JETONS DE PRÉSENCE</h3>
+  <p class="form-subsubsection"><strong>201</strong> Revenus ouvrant droit à un crédit d'impôt égal à l'impôt payé à l'étranger</p>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">202</span> Pays d'encaissement ou d'origine des revenus</div>
+    <div class="line-cells">
+      <span class="form-cell text source dropdown">{{ form_2047.country }}</span>
+      <span class="sep">&nbsp;</span>
+      <span class="form-cell text empty dropdown"></span>
+      <span class="sep">&nbsp;</span>
+      <span class="form-cell text empty dropdown"></span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">203</span> Montant net encaissé</div>
+    <div class="line-cells">
+      <span class="form-cell computed">{{ form_2047.field_203 | fmt_int }}</span>
+      <span class="sep">+</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">+</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">=</span>
+      <span class="form-cell total">{{ form_2047.field_203 | fmt_int }}</span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">204</span> Taux applicable (%)</div>
+    <div class="line-cells">
+      <span class="sep">×</span>
+      <span class="form-cell computed">{{ form_2047.field_204 | fmt_pct }}</span>
+      <span class="sep">×</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">×</span>
+      <span class="form-cell empty"></span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">205</span> Résultat</div>
+    <div class="line-cells">
+      <span class="form-cell formula">{{ form_2047.field_205 | fmt_int }}</span>
+      <span class="sep">&nbsp;</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">&nbsp;</span>
+      <span class="form-cell empty"></span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">206</span> Impôt supporté à l'étranger</div>
+    <div class="line-cells">
+      <span class="form-cell computed">{{ form_2047.field_206 | fmt_int }}</span>
+      <span class="sep">&nbsp;</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">&nbsp;</span>
+      <span class="form-cell empty"></span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">207</span> Crédit d'impôt retenu</div>
+    <div class="line-cells">
+      <span class="form-cell formula">{{ form_2047.field_207 | fmt_int }}</span>
+      <span class="sep">+</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">+</span>
+      <span class="form-cell empty"></span>
+      <span class="sep">=</span>
+      <span class="form-cell total">{{ form_2047.field_207 | fmt_int }}</span>
+    </div>
+  </div>
+
+  <p class="form-rule">
+    <em>Impôt étranger retenu de la ligne 207 : si ligne 205 &lt; ligne 206, retenir la ligne 205 ;
+    si ligne 206 &lt; ligne 205, retenir la ligne 206.</em>
+  </p>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">208</span> Revenus crédit d'impôt inclus <em>lignes 203 + 207</em></div>
+    <div class="line-cells right">
+      <span class="form-cell total">{{ form_2047.field_208 | fmt_int }}</span>
+    </div>
+  </div>
+
+  <div class="app-aside" data-tag="📋 Reports">
+    <h4>Reports vers la 2042 / 2042C</h4>
+    <ul style="margin: 0.4rem 0; padding-left: 1.5rem;">
+      <li>F222 (= F208) → ligne <code>2DC</code> du formulaire 2042 (avec abattement de 40% si option barème): {{ form_2047.field_208 | fmt_int }}</li>
+      <li>F207 total → ligne <code>8VL</code> du formulaire 2042C : {{ form_2047.field_207 | fmt_int }}</li>
+      <li>F208 → ligne <code>8PL</code> du formulaire 2042C : {{ form_2047.field_208 | fmt_int }}</li>
+    </ul>
+  </div>
+
+  <div class="app-aside" data-tag="📊 Détail par paiement">
+    <h4>Audit — détail de chaque dividende</h4>
+    <div class="composition">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Fond</th>
+          <th class="num">Brut USD</th>
+          <th class="num">Retenue USD</th>
+          <th class="num">Net USD</th>
+          <th class="num">FX</th>
+          <th class="num">Net EUR</th>
+          <th class="num">Retenue EUR</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for line in dividend_lines %}
+        <tr>
+          <td>{{ line.payment.date }}</td>
+          <td>{{ line.payment.fund }}</td>
+          <td class="num">{{ line.gross_usd | fmt_money }}</td>
+          <td class="num">{{ line.withholding_usd | fmt_money }}</td>
+          <td class="num">{{ line.net_usd | fmt_money }}</td>
+          <td class="num">{{ line.fx_rate | fmt_fx }}</td>
+          <td class="num">{{ line.net_eur | fmt_money }}</td>
+          <td class="num">{{ line.withholding_eur | fmt_money }}</td>
+        </tr>
+        {% endfor %}
+        <tr style="font-weight: 600; background: var(--c-form-bg);">
+          <td colspan="2">Totaux</td>
+          <td class="num">{{ form_2047.total_gross_usd | fmt_money }}</td>
+          <td class="num">{{ form_2047.total_withholding_usd | fmt_money }}</td>
+          <td class="num">{{ form_2047.total_net_usd | fmt_money }}</td>
+          <td></td>
+          <td class="num">{{ form_2047.field_203 | fmt_int }} → F203</td>
+          <td class="num">{{ form_2047.field_206 | fmt_int }} → F206</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>

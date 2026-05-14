@@ -1,0 +1,1904 @@
+/* Tax declaration report — visual style modeled on impots.gouv.fr forms.
+ * Designed to mirror form layouts so values can be transcribed 1:1.
+ *
+ * Color coding:
+ *   --c-source:   manual / source values (dates, raw amounts from MS)
+ *   --c-computed: values our pipeline computes (cost in EUR, gain EUR, etc.)
+ *   --c-formula:  values the impots.gouv.fr form computes itself (F205, F207, F208 totals)
+ *   --c-empty:    empty form slots
+ */
+
+:root {
+  /* Modern, refined palette */
+  --c-text: #18181b;
+  --c-text-soft: #3f3f46;
+  --c-muted: #71717a;
+  --c-border: #e4e4e7;
+  --c-border-strong: #a1a1aa;
+
+  --c-bg: #fafaf9;             /* warm light gray for body */
+  --c-bg-subtle: #f4f4f1;      /* slightly warmer gray for app sections */
+
+  /* Form-mirror colors — kept close to impots.gouv.fr */
+  --c-form-bg: #f7f5ee;        /* warm off-white, like the impots PDF */
+  --c-form-header: #831843;    /* refined burgundy */
+  --c-form-accent: #b4a394;
+
+  /* Cell type tints */
+  --c-source: #ffffff;
+  --c-computed: #eff6ff;
+  --c-formula: #fef9c3;
+  --c-empty: #f4f4f5;
+
+  /* Accent palette */
+  --c-accent: #1e40af;
+  --c-accent-soft: #dbeafe;
+  --c-success: #15803d;
+  --c-success-soft: #dcfce7;
+  --c-warn: #b45309;
+  --c-warn-soft: #fef3c7;
+  --c-danger: #b91c1c;
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.04), 0 2px 6px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.04);
+
+  /* Radius */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--c-text);
+  background: var(--c-bg);
+  margin: 0;
+  padding: 2rem 1rem;
+  font-size: 14px;
+  line-height: 1.6;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--c-text);
+}
+
+/* App header — clearly mark this as a tool, not the actual declaration */
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  background: white;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.app-logo {
+  font-size: 2.25rem;
+  line-height: 1;
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--c-form-header), #a21462);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-title-block .subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: var(--c-muted);
+  max-width: 56ch;
+}
+
+.app-meta {
+  font-size: 0.78rem;
+  color: var(--c-muted);
+  max-width: 22em;
+  text-align: right;
+  line-height: 1.6;
+}
+
+.kbd-hint kbd {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: var(--c-bg-subtle);
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--c-text-soft);
+}
+
+.app-footer {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  color: var(--c-muted);
+  font-size: 0.82rem;
+}
+
+.app-footer .footer-sep { opacity: 0.5; }
+
+h2 {
+  font-size: 1.5rem;
+  margin: 3rem 0 0.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--c-form-header);
+  color: var(--c-form-header);
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--c-form-header);
+}
+
+h4 {
+  font-size: 0.95rem;
+  margin: 1rem 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--c-muted);
+}
+
+.subtitle {
+  color: var(--c-muted);
+  margin: 0 0 2rem;
+}
+
+.toc {
+  background: var(--c-form-bg);
+  border: 1px solid var(--c-border);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.toc ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.toc li {
+  margin: 0.25rem 0;
+}
+
+.toc a {
+  color: var(--c-form-header);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+/* Each form section is wrapped in a card. The inner background stays close
+ * to the actual impots form (cream/lavender), the wrapper is modernized with
+ * soft elevation and rounded corners. */
+.form-section {
+  background: var(--c-form-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-section .meta {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  margin-bottom: 1rem;
+}
+
+/* Form grid — used for the 3-or-4-column Titres layouts.
+ * The first column is a row-label column; subsequent columns are slot values.
+ */
+.form-grid {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-border);
+  margin: 1rem 0;
+}
+
+.form-grid .cell,
+.form-grid .row-label,
+.form-grid .col-header {
+  padding: 0.5rem 0.75rem;
+  background: white;
+  font-variant-numeric: tabular-nums;
+}
+
+.form-grid .row-label {
+  background: var(--c-form-bg);
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  border-right: 1px solid var(--c-border);
+}
+
+.form-grid .row-label-strong {
+  background: var(--c-form-bg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-right: 1px solid var(--c-border-strong);
+  padding: 0.5rem 0.75rem;
+}
+
+.form-grid .col-header {
+  background: var(--c-form-bg);
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid var(--c-border-strong);
+}
+
+.form-grid .field-number {
+  display: inline-block;
+  min-width: 2.5em;
+  color: var(--c-form-accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+
+.form-grid .field-label {
+  display: inline-block;
+}
+
+.form-grid .cell {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.form-grid .cell.text {
+  text-align: left;
+  font-family: var(--font-sans);
+}
+
+.form-grid .cell.source {
+  background: var(--c-source);
+}
+
+.form-grid .cell.computed {
+  background: var(--c-computed);
+}
+
+.form-grid .cell.formula {
+  background: var(--c-formula);
+  font-style: italic;
+}
+
+.form-grid .cell.empty {
+  background: var(--c-empty);
+  color: var(--c-muted);
+}
+
+.form-grid .cell.empty::before {
+  content: "—";
+}
+
+.form-grid .cell.total {
+  background: var(--c-form-bg);
+  font-weight: 600;
+  border-left: 1px solid var(--c-border-strong);
+}
+
+.form-grid .row-separator {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--c-border-strong);
+}
+
+/* Form-line layout — mirrors the impots.gouv.fr online form visual style
+ * (e.g. form 2047 page 2). Each line: number + label on the left, then a
+ * row of cells separated by + × = symbols on the right.
+ */
+.form-2047 h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--c-text);
+  border-top: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.form-intro {
+  margin: 0 0 1.5rem;
+  line-height: 1.4;
+}
+
+.form-prompt {
+  margin: 1rem 0 1.5rem;
+}
+
+.form-input-inline {
+  display: inline-block;
+  padding: 0.15rem 0.6rem 0.15rem 0.4rem;
+  border: 1px solid var(--c-border-strong);
+  background: white;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  margin: 0 0.25rem;
+}
+
+.form-note {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  font-style: italic;
+}
+
+.form-subsection {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--c-text);
+  border-top: none;
+  padding-top: 0;
+}
+
+.form-subsubsection {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+
+.form-line {
+  display: grid;
+  grid-template-columns: 22em 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid transparent;
+}
+
+/* Dropdown styling — adds a ⌄ indicator like the actual form's <select> */
+.form-cell.dropdown {
+  position: relative;
+  padding-right: 1.6rem;
+}
+
+.form-cell.dropdown::after {
+  content: "⌄";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-65%);
+  color: var(--c-muted);
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.line-label {
+  font-size: 0.95rem;
+}
+
+.line-num {
+  display: inline-block;
+  min-width: 2.5em;
+  font-weight: 600;
+  color: var(--c-text);
+  margin-right: 0.4em;
+}
+
+.line-cells {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+}
+
+.line-cells.right {
+  justify-content: flex-end;
+}
+
+.line-cells .sep {
+  color: var(--c-muted);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  min-width: 0.7em;
+  text-align: center;
+}
+
+.form-cell {
+  display: inline-block;
+  min-width: 7em;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--c-border-strong);
+  background: white;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  border-radius: 2px;
+}
+
+.form-cell.text {
+  text-align: left;
+  font-family: var(--font-sans);
+}
+
+.form-cell.source { background: var(--c-source); }
+
+.form-cell.computed {
+  background: var(--c-computed);
+  font-weight: 600;
+}
+
+.form-cell.formula {
+  background: var(--c-formula);
+  font-style: italic;
+}
+
+.form-cell.empty {
+  background: var(--c-empty);
+  color: transparent;
+}
+
+.form-cell.empty::before {
+  content: "\00a0";
+}
+
+.form-cell.total {
+  background: var(--c-form-bg);
+  font-weight: 600;
+  border-color: var(--c-form-header);
+  border-width: 2px;
+}
+
+/* JS wraps each copy-enabled .form-cell + its ⧉ button in this container so
+ * the pair stays as a single CSS grid item. */
+.cell-with-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cell-with-copy > .form-cell {
+  flex: 1 1 auto;
+}
+
+/* In bloc-1133 grid cells, the wrapper itself is the grid item. */
+.bloc-1133-table .bloc-row > .cell-with-copy {
+  margin: 0 0.2rem;
+  width: calc(100% - 0.4rem);
+  min-width: 0;
+}
+
+.bloc-1133-table .bloc-row > .cell-with-copy > .form-cell {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Copy-to-clipboard button — appended to .form-cell.source / .computed by JS */
+.copy-btn {
+  display: inline-block;
+  margin-left: 0.3rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1;
+  background: white;
+  border: 1px solid var(--c-border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+  color: var(--c-muted);
+  font-family: var(--font-sans);
+  vertical-align: middle;
+  transition: background-color 120ms, color 120ms;
+}
+
+.copy-btn:hover {
+  background: var(--c-form-bg);
+  color: var(--c-text);
+}
+
+.copy-btn:active {
+  background: var(--c-computed);
+}
+
+.copy-btn.copied {
+  background: #d4f1d4;
+  color: #1a6a1a;
+  border-color: #1a6a1a;
+}
+
+.form-rule {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  margin: 0.5rem 0 1rem;
+  font-style: italic;
+}
+
+/* Form 2074 cadre 5 § 510 — one Titre per page, vertical layout
+ * Matches the online declaration's "Titre n° X" layout. */
+.cadre-5 {
+  background: #e0e9f5;
+  border-color: #6b7eaf;
+}
+
+.cadre-5 .form-banner {
+  background: #6b7eaf;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  margin: -1.5rem -1.5rem 0 -1.5rem;
+  border-top: none;
+}
+
+.cadre-5 .form-subsection-banner {
+  background: white;
+  color: #2d3f5f;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  margin: 0 -1.5rem 1rem -1.5rem;
+  border-left: 4px solid #6b7eaf;
+}
+
+.cadre-5 .form-intro {
+  margin: 0 0 1.5rem;
+}
+
+.titre-page {
+  background: white;
+  border: 1px solid #c0cce0;
+  border-radius: 4px;
+  padding: 0;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.titre-page h3 {
+  background: #d7e0ed;
+  color: #2d3f5f;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  text-align: right;
+  border-bottom: 1px solid #c0cce0;
+}
+
+.cadre-5-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cadre-5-table td {
+  padding: 0.5rem 0.75rem;
+  vertical-align: middle;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #e8edf5;
+}
+
+.cadre-5-table .line-num {
+  width: 3em;
+  color: var(--c-muted);
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.cadre-5-table .line-label {
+  width: 50%;
+}
+
+.cadre-5-table .line-label em {
+  color: var(--c-form-header);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.cadre-5-table .line-input {
+  text-align: left;
+  width: 50%;
+}
+
+.cadre-5-table .line-input .sep {
+  margin-right: 0.4rem;
+  color: var(--c-muted);
+  font-family: var(--font-mono);
+}
+
+.cadre-5-table .line-input .form-cell {
+  display: inline-block;
+}
+
+.cadre-5-table .line-input .form-cell.wide {
+  min-width: 22em;
+}
+
+.cadre-5-table .line-input .form-note {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--c-form-header);
+  font-style: italic;
+}
+
+.cadre-5-table .header-row td {
+  background: #f0f4fa;
+  font-weight: 700;
+}
+
+.cadre-5-table .checkbox {
+  display: inline-block;
+  font-size: 1.1rem;
+  margin-right: 0.3rem;
+}
+
+/* "Light" form banner used for "Votre déclaration concerne" type pages */
+.form-banner-light {
+  background: #5a78b8;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  margin: -1.5rem -1.5rem 1rem -1.5rem;
+  border-top: none;
+}
+
+/* 2047 gateway — "Votre déclaration concerne" checkbox list.
+ * Actual form has no banner here — just a heading "Votre déclaration concerne"
+ * over a list of checkboxes. We use a simple bordered box. */
+.gateway-2047 {
+  background: var(--c-form-bg);
+  border-color: var(--c-border);
+}
+.gateway-2047 .form-banner-light {
+  background: transparent;
+  color: var(--c-text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--c-border);
+  padding: 0 0 0.5rem 0;
+  margin: -0.25rem -1.5rem 1rem -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.cas-list {
+  background: white;
+  border: 1px solid #d4c8a8;
+  border-radius: 4px;
+}
+.cas-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #f0e8d8;
+  font-size: 0.9rem;
+}
+.cas-row:last-child { border-bottom: none; }
+.cas-row.checked {
+  background: #fff8db;
+  border-left: 3px solid #b89a00;
+}
+.cas-row .checkbox {
+  font-size: 1.1rem;
+  min-width: 1.5em;
+}
+.cas-row.checked .cas-label { font-weight: 600; }
+.cas-row .cas-label { flex: 1; }
+.cas-row .annexe-ref {
+  font-weight: 700;
+  min-width: 8em;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--c-form-header);
+}
+
+/* "Rubriques" section (Step 0) — selects which sections of 2042 to enable */
+.rubriques {
+  background: #e0e9f5;
+  border-color: #6b7eaf;
+}
+.rubriques .form-banner-light {
+  background: transparent;
+  color: #2d3f5f;
+  border-bottom: 2px solid #6b7eaf;
+  padding: 0 0 0.5rem 0;
+  margin: -0.25rem -1.5rem 1rem -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-weight: 700;
+}
+.form-subsection-blue {
+  color: #2d3f5f;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #6b7eaf;
+}
+.rubriques .centered { text-align: center; }
+.form-button {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: white;
+  border: 1px solid #6b7eaf;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #2d3f5f;
+  font-size: 0.9rem;
+}
+.rubriques-list {
+  background: white;
+  border: 1px solid #c0cce0;
+  border-radius: 4px;
+  padding: 0;
+}
+.rubriques .cas-row {
+  background: white;
+  border-bottom: 1px solid #e8edf5;
+}
+.rubriques .cas-row.auto {
+  background: #f5f5f5;
+  color: var(--c-muted);
+}
+.rubriques .cas-row.auto .checkbox { color: var(--c-muted); }
+.rubriques .cas-row.checked {
+  background: #fff8db;
+  border-left: 3px solid #b89a00;
+}
+
+/* "Annexes" section styled like an impots.gouv.fr list */
+.annexes {
+  background: var(--c-form-bg);
+  border-color: var(--c-border);
+}
+.annexes .form-banner-light {
+  background: transparent;
+  color: var(--c-text);
+  border-bottom: 2px solid var(--c-form-header);
+  padding: 0 0 0.5rem 0;
+  margin: -0.25rem -1.5rem 1rem -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-weight: 700;
+}
+
+/* 2074-ABT gateway — number of operations */
+.gateway-abt {
+  background: #e0e9f5;
+  border-color: #6b7eaf;
+}
+.abt-gateway-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid #c0cce0;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.abt-label {
+  flex: 1;
+  min-width: 20em;
+  font-size: 0.9rem;
+}
+
+/* Fiche 2074-ABT — one-Titre-per-page with 3 holding-period sub-columns */
+.abt-fiche {
+  background: #e0e9f5;
+  border-color: #6b7eaf;
+}
+.abt-page {
+  background: white;
+  border: 1px solid #c0cce0;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.abt-page h3 {
+  background: #d7e0ed;
+  color: #2d3f5f;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #c0cce0;
+}
+.abt-page .page-num {
+  float: right;
+  color: var(--c-muted);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+.abt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.abt-table td {
+  padding: 0.5rem 0.6rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #e8edf5;
+}
+.abt-table .line-num {
+  width: 3em;
+  color: var(--c-muted);
+  text-align: right;
+  font-family: var(--font-mono);
+}
+.abt-table .line-label em {
+  color: var(--c-form-header);
+  font-style: italic;
+}
+.abt-table .header-row td {
+  background: #d7e0ed;
+  font-weight: 700;
+  color: #2d3f5f;
+}
+.abt-table .bracket-header {
+  background: #d7e0ed;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #2d3f5f;
+  border-left: 1px solid #c0cce0;
+  width: 11em;
+}
+.abt-table .line-input {
+  text-align: center;
+  border-left: 1px solid #f0f4fa;
+}
+.abt-report {
+  padding: 0.6rem 0.75rem;
+  background: #f0f4fa;
+  margin: 0;
+  font-size: 0.85rem;
+  border-top: 1px solid #c0cce0;
+}
+
+/* Form 2074 gateway "Cas suivants" — light lavender like cadre 11 */
+.gateway-2074 {
+  background: #e0e9f5;
+  border-color: #6b7eaf;
+}
+
+.gateway-2074 .form-banner {
+  background: #6b7eaf;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.5rem 0.75rem;
+  margin: -1.5rem -1.5rem 1rem -1.5rem;
+  border-top: none;
+}
+
+.gateway-option {
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #c0cce0;
+  align-items: start;
+}
+
+.gateway-option:last-child {
+  border-bottom: none;
+}
+
+.gateway-option .opt-bullet {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--c-text);
+  text-align: center;
+}
+
+.gateway-option .opt-body {
+  font-size: 0.9rem;
+}
+
+.gateway-option.highlighted {
+  background: #fff8db;
+  border-radius: 4px;
+  padding: 0.75rem;
+  border: 2px solid #b89a00;
+}
+
+.gateway-option .opt-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.gateway-option .opt-sublist {
+  margin: 0.5rem 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.gateway-option .opt-sublist li {
+  padding: 0.35rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.gateway-option .opt-sublist li.checked {
+  background: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+  border-left: 3px solid #b89a00;
+}
+
+.gateway-option .checkbox {
+  font-size: 1.1rem;
+  color: var(--c-text);
+}
+
+.gateway-option .form-input-inline.computed {
+  background: var(--c-computed);
+  font-weight: 700;
+}
+
+/* Form 2074 cadre 11 bloc 1133 — light lavender background, étape groupings */
+.bloc-1133 {
+  background: #e0e9f5;
+  border-color: #6b7eaf;
+}
+
+.bloc-1133 .form-banner {
+  background: #6b7eaf;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  margin: -1.5rem -1.5rem 1rem -1.5rem;
+  border-top: none;
+}
+
+.bloc-1133 .form-subsection {
+  font-size: 1rem;
+  color: #6b7eaf;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+}
+
+.bloc-1133 .form-subsection em {
+  font-weight: 400;
+}
+
+.bloc-1133-table {
+  background: white;
+  border: 1px solid #6b7eaf;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+/* All bloc-1133 rows use the same 9-column grid: label + A B C D E F G H */
+.bloc-1133-table .bloc-row,
+.bloc-1133-table .etape-row {
+  display: grid;
+  grid-template-columns: 4em repeat(8, 1fr);
+  align-items: stretch;
+}
+
+.bloc-1133-table .etape-row {
+  background: #d7e0ed;
+  border-bottom: 1px solid #6b7eaf;
+}
+
+.bloc-1133-table .etape-row .etape-label {
+  background: #d7e0ed;
+}
+
+.bloc-1133-table .etape-group {
+  padding: 0.5rem 0.5rem;
+  border-left: 1px solid #6b7eaf;
+  font-size: 0.85rem;
+  color: #2d3f5f;
+  font-weight: 600;
+}
+
+.bloc-1133-table .etape-group.etape-1 { grid-column: span 5; }
+.bloc-1133-table .etape-group.etape-2 { grid-column: span 2; }
+.bloc-1133-table .etape-group.etape-3 { grid-column: span 1; }
+
+.bloc-1133-table .etape-desc {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: var(--c-muted);
+  margin-top: 0.15rem;
+}
+
+.bloc-1133-table .col-headers {
+  background: #d7e0ed;
+  border-bottom: 2px solid #6b7eaf;
+}
+
+.bloc-1133-table .col-header {
+  padding: 0.4rem 0.4rem;
+  border-left: 1px solid #6b7eaf;
+  background: #d7e0ed;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d3f5f;
+}
+
+.bloc-1133-table .col-desc {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-align: left;
+  color: var(--c-muted);
+  line-height: 1.3;
+}
+
+.bloc-1133-table .slot-row,
+.bloc-1133-table .totaux-row {
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.bloc-1133-table .slot-row > .form-cell,
+.bloc-1133-table .totaux-row > .form-cell {
+  min-width: 0;
+  width: calc(100% - 0.4rem);
+  margin: 0 0.2rem;
+  font-size: 0.85rem;
+}
+
+.bloc-1133-table .row-label,
+.bloc-1133-table .row-label-strong {
+  text-align: left;
+  padding: 0 0.5rem;
+  background: transparent;
+  font-size: 0.85rem;
+  border: none;
+  align-self: center;
+}
+
+.bloc-1133-table .row-label-strong {
+  font-weight: 700;
+}
+
+.bloc-1133-table .totaux-row {
+  background: #f0f4fa;
+  border-top: 2px solid #6b7eaf;
+}
+
+.bloc-1133-table .totaux-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+  margin: 0 0.2rem;
+}
+
+.bloc-1133-table .totaux-cell .form-cell {
+  width: 100%;
+  margin: 0;
+}
+
+.report-tag {
+  font-size: 0.7rem;
+  color: #2d3f5f;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Composition tables (which sales feed each grouped slot) */
+.composition {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.composition table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.composition th,
+.composition td {
+  text-align: left;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.composition th {
+  background: var(--c-form-bg);
+  font-weight: 600;
+  color: var(--c-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.composition td.num {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Note boxes */
+.note {
+  padding: 0.75rem 1rem;
+  background: white;
+  border-left: 3px solid var(--c-form-accent);
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.note.warn {
+  border-left-color: var(--c-warn);
+  background: #fff5f0;
+}
+
+.note strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Report-to badges — show where this value ends up (form 2042/2042C lines) */
+.report-to {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  background: var(--c-form-header);
+  color: white;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* Legend at top of report */
+.legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 1px solid var(--c-border);
+  vertical-align: middle;
+}
+
+.legend-swatch.source { background: var(--c-source); }
+.legend-swatch.computed { background: var(--c-computed); }
+.legend-swatch.formula { background: var(--c-formula); }
+.legend-swatch.empty { background: var(--c-empty); }
+
+/* Multi-step navigation — grouped into phases, modern stepper feel */
+.progress-bar {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  display: flex;
+  gap: 0.5rem;
+  background: white;
+  border-radius: var(--r-lg);
+  padding: 0.65rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.phase-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--r-md);
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  transition: background-color 180ms ease;
+}
+
+.phase-group::after {
+  /* Subtle thin line under the phase label */
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  top: 1.6rem;
+  height: 1px;
+  background: var(--c-border);
+}
+
+.phase-group.active {
+  background: var(--c-accent-soft);
+}
+
+.phase-group.active::after { background: var(--c-accent); opacity: 0.3; }
+
+.phase-group.done {
+  background: var(--c-success-soft);
+}
+
+.phase-group.done::after { background: var(--c-success); opacity: 0.3; }
+
+.phase-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--c-muted);
+  text-align: center;
+  padding-bottom: 0.15rem;
+}
+
+.phase-group.active .phase-label { color: var(--c-accent); }
+.phase-group.done .phase-label { color: var(--c-success); }
+
+.phase-steps {
+  display: flex;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.55rem 0.4rem;
+  background: white;
+  color: var(--c-muted);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 160ms ease;
+  min-width: 0;
+  flex: 1;
+}
+
+.progress-step:hover {
+  background: var(--c-bg-subtle);
+  color: var(--c-text);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-step .step-num {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.progress-step .step-label {
+  font-size: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: var(--c-muted);
+}
+
+.progress-step.active {
+  background: var(--c-form-header);
+  color: white;
+  box-shadow: 0 4px 14px rgb(131 24 67 / 0.25);
+}
+
+.progress-step.active .step-label { color: rgb(255 255 255 / 0.85); }
+
+.progress-step.active:hover {
+  background: var(--c-form-header);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.progress-step.done {
+  background: white;
+  color: var(--c-success);
+}
+
+.progress-step.done .step-num::before {
+  content: "✓ ";
+  font-size: 0.85em;
+}
+
+.progress-step.done .step-label { color: var(--c-success); opacity: 0.7; }
+
+/* Legend toggle — "?" button at top right that opens an overlay */
+.legend-toggle-wrapper {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 110;
+}
+
+.legend-toggle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--c-border-strong);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--c-form-header);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-sans);
+  transition: background-color 120ms;
+}
+
+.legend-toggle:hover {
+  background: var(--c-form-bg);
+}
+
+.legend.legend-collapsible {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  z-index: 109;
+  display: none;
+  background: white;
+  border: 1px solid var(--c-border-strong);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  gap: 0.4rem;
+  white-space: nowrap;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.legend.legend-collapsible.open {
+  display: flex;
+}
+
+/* Show only the active step in single-step mode */
+.step {
+  display: none;
+}
+.step.step-active {
+  display: block;
+}
+
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0 0;
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--c-border);
+}
+
+.step-nav button {
+  background: white;
+  color: var(--c-form-header);
+  border: 1px solid var(--c-border-strong);
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 160ms ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.step-nav button:hover:not(:disabled) {
+  background: var(--c-form-header);
+  color: white;
+  border-color: var(--c-form-header);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgb(131 24 67 / 0.2);
+}
+
+.step-nav button.next {
+  background: var(--c-form-header);
+  color: white;
+  border-color: var(--c-form-header);
+}
+
+.step-nav button.next:hover:not(:disabled) {
+  box-shadow: 0 4px 16px rgb(131 24 67 / 0.3);
+}
+
+.step-nav button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.step-nav .target {
+  font-weight: 400;
+  color: rgb(255 255 255 / 0.7);
+}
+
+.step-nav button.prev .target {
+  color: var(--c-muted);
+}
+
+.step-nav button:hover:not(:disabled) .target {
+  color: rgb(255 255 255 / 0.85);
+}
+
+.step-nav .counter {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* Hide the TOC when steps are active — progress bar replaces it */
+.toc { display: none; }
+
+/* App-aside — modern card style for app-added content (not part of the form).
+ * No more dashed borders. Soft elevation + small label distinguish from
+ * the form-mirror content. */
+.app-aside {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: white;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+}
+
+.app-aside::before {
+  content: attr(data-tag);
+  display: inline-block;
+  margin: -0.35rem 0 0.65rem 0;
+  padding: 0.15rem 0.55rem;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.app-aside > h3,
+.app-aside > h4 {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-text);
+  border: none;
+  padding: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.app-aside table {
+  background: white;
+}
+
+/* Help banner — distinct style for our explanatory text (not part of the form).
+ * Use this when we're explaining navigation, gotchas, or tips. Form-content
+ * text continues to use .form-intro. */
+.help-banner {
+  display: block;
+  position: relative;
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.25rem 1rem 3.25rem;
+  background: var(--c-accent-soft);
+  border-radius: var(--r-md);
+  color: #1e3a8a;
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.help-banner::before {
+  content: "ℹ";
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 1.7em;
+  height: 1.7em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-accent);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.help-banner.warn {
+  background: var(--c-warn-soft);
+  color: #78350f;
+}
+
+.help-banner.warn::before {
+  content: "⚠";
+  background: var(--c-warn);
+}
+
+.help-banner.tip {
+  background: var(--c-success-soft);
+  color: #14532d;
+}
+
+.help-banner.tip::before {
+  content: "💡";
+  background: white;
+  color: inherit;
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.help-banner p {
+  margin: 0;
+}
+
+.help-banner p + p {
+  margin-top: 0.4rem;
+}
+
+.help-banner strong {
+  font-weight: 700;
+}
+
+/* Audit dashboard: modern metric cards with soft elevation */
+.audit-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.metric-tile {
+  background: white;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 1.25rem 1.4rem;
+  position: relative;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.metric-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-tile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--c-form-header);
+  border-radius: var(--r-md) 0 0 var(--r-md);
+}
+
+.metric-tile .metric-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.metric-tile .metric-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  line-height: 1.1;
+}
+
+.metric-tile .metric-sub {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--c-muted);
+}
+
+.metric-tile.accent-burgundy::after { background: var(--c-form-header); }
+.metric-tile.accent-blue::after { background: var(--c-accent); }
+.metric-tile.accent-green::after { background: var(--c-success); }
+.metric-tile.accent-amber::after { background: var(--c-warn); }
+
+.cross-checks {
+  background: white;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 1.25rem 1.4rem;
+  margin: 1.5rem 0 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.cross-checks h4 {
+  margin: 0 0 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-text);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.check-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+.check-row .check-icon {
+  flex: 0 0 auto;
+  width: 1.5em;
+  text-align: center;
+}
+
+.check-row.ok .check-icon { color: #2d8a3a; }
+.check-row.ok .check-icon::before { content: "✓"; }
+.check-row.fail .check-icon { color: #c0392b; }
+.check-row.fail .check-icon::before { content: "✗"; }
+.check-row .check-label { flex: 1; }
+.check-row .check-detail { color: var(--c-muted); font-variant-numeric: tabular-nums; }
+
+/* Sub-structure for gateway options with explanations + inputs */
+.sub-main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sub-main strong { flex: 1; min-width: 0; }
+
+.sub-explain {
+  margin: 0.4rem 0 0 0;
+  padding-left: 1.6em;
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  line-height: 1.4;
+}
+
+.sub-explain.muted {
+  font-style: italic;
+}
+
+.sub-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0 1.6em;
+  padding: 0.4rem 0.75rem;
+  background: var(--c-form-bg);
+  border-radius: 3px;
+  flex-wrap: wrap;
+}
+
+.sub-input label {
+  font-weight: 500;
+}
+
+/* When a gateway sub-option is the chosen one */
+.opt-sublist > li.state-checked {
+  background: #fff8db;
+  padding: 0.6rem 0.75rem;
+  border-radius: 4px;
+  border-left: 3px solid #c47a00;
+  margin: 0.4rem 0;
+  list-style: none;
+}
+
+.opt-sublist > li {
+  margin: 0.3rem 0;
+  list-style: none;
+}
+
+/* Status badges for rubriques / annexes / cas lists */
+.status-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.status-badge.todo {
+  background: #fff3c4;
+  color: #8a5a00;
+  border: 1px solid #e6c34a;
+}
+
+.status-badge.auto {
+  background: #e8e8e8;
+  color: #555;
+  border: 1px solid #c0c0c0;
+}
+
+.status-badge.na {
+  background: white;
+  color: var(--c-muted);
+  border: 1px solid var(--c-border);
+}
+
+/* Disabled checkbox styling — looks like the actual form's */
+.checkbox-vis input[type="checkbox"] {
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  cursor: default;
+  accent-color: #4078b8;
+}
+
+.checkbox-vis input[type="checkbox"].auto {
+  opacity: 0.5;
+  accent-color: var(--c-muted);
+}
+
+/* The note that explains WHY a row is in that state */
+.badge-note {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  font-style: italic;
+  margin-left: 0.4rem;
+}
+
+/* Visual legend row at the bottom of a list */
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.8rem;
+  background: var(--c-form-bg);
+  border-radius: 4px;
+  align-items: center;
+}
+
+.legend-label {
+  font-weight: 600;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+}
+
+.legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--c-text);
+}
+
+/* Override cas-row styling when used with the new state structure */
+.cas-row .checkbox-vis {
+  display: inline-flex;
+  min-width: 1.6em;
+  align-items: center;
+}
+
+.cas-row.state-checked {
+  background: #fff8db;
+  border-left: 3px solid #c47a00;
+}
+
+.cas-row.state-auto {
+  background: #f5f5f5;
+  color: var(--c-muted);
+}
+
+.cas-row.state-checked .cas-label { font-weight: 600; color: var(--c-text); }
+
+/* Sub-step progress bar — for steps that have per-Titre sub-pages */
+.sub-progress {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--c-form-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+}
+
+.sub-step {
+  padding: 0.3rem 0.7rem;
+  background: white;
+  border: 1px solid var(--c-border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--c-text);
+  transition: background-color 120ms, color 120ms;
+}
+
+.sub-step:hover {
+  background: var(--c-computed);
+}
+
+.sub-step.active {
+  background: var(--c-form-header);
+  color: white;
+  border-color: var(--c-form-header);
+}
+
+/* Hide non-active titre/abt pages so the user sees one at a time */
+.sub-hidden { display: none; }
+
+/* Print: light enough to print on paper if desired */
+@media print {
+  body { background: white; padding: 0; }
+  .progress-bar { display: none; }
+  .step-nav { display: none; }
+  .form-section { break-inside: avoid; page-break-inside: avoid; }
+  .step { display: block !important; }
+  .toc { display: block; }
+}

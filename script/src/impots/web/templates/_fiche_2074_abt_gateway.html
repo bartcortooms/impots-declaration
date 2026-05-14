@@ -1,0 +1,47 @@
+<section class="form-section gateway-abt" id="fiche-2074-abt-gateway">
+  <h2 class="form-banner-light">
+    Annexe N° 2074-ABT — Fiche de calcul de l'abattement pour durée de détention
+  </h2>
+  <div class="help-banner">
+    <div>
+      Indique combien de cessions vont chacune être détaillées sur une page Titre
+      de la fiche d'abattement.
+    </div>
+  </div>
+
+  <div class="abt-gateway-row state-checked">
+    <div class="sub-main">
+      <span class="abt-label">
+        Nombre d'opérations pour lesquelles vous souhaitez calculer un
+        abattement pour durée de détention de <strong>droit commun</strong>
+      </span>
+      <span class="form-input-inline computed">{{ sales | length }}</span>
+      <span class="status-badge todo">À saisir</span>
+    </div>
+    <div class="sub-explain">
+      {{ sales | length }} cession{{ 's' if sales | length > 1 else '' }} en {{ year }}.
+      Le taux d'abattement par cession (0 % / 50 % / 65 %) est détaillé dans la fiche ci-dessous.
+    </div>
+  </div>
+
+  <div class="abt-gateway-row">
+    <div class="sub-main">
+      <span class="abt-label">
+        Nombre d'opérations pour lesquelles vous souhaitez calculer un
+        abattement pour durée de détention <strong>"renforcé"</strong>
+      </span>
+      <span class="form-input-inline">&nbsp;&nbsp;&nbsp;</span>
+      <span class="status-badge na">Laisser vide</span>
+    </div>
+    <div class="sub-explain muted">
+      L'abattement renforcé est réservé aux PME éligibles (conditions strictes — voir notice 2074-ABT).
+    </div>
+  </div>
+
+  <div class="help-banner warn">
+    <div>
+      Limite : 10 opérations au total. Au-delà, télécharger le formulaire
+      2074-ABT papier sur www.impots.gouv.fr.
+    </div>
+  </div>
+</section>
