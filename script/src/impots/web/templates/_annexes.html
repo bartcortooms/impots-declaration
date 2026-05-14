@@ -9,22 +9,23 @@
   </div>
 
   <div class="cas-list">
+    {% set y = year | string %}
     {% for label, ref, checked, note in [
-      ('Déclaration des revenus fonciers {{ year }}', 'N° 2044', false, ''),
-      ('Déclaration spéciale des revenus fonciers {{ year }}', 'N° 2044 Spéciale', false, ''),
+      ('Déclaration des revenus fonciers ' + y, 'N° 2044', false, ''),
+      ('Déclaration spéciale des revenus fonciers ' + y, 'N° 2044 Spéciale', false, ''),
       ('Déclaration d\'engagement de location - Statut du bailleur privé', 'N° 2044 EB', false, ''),
       ('Déclaration complémentaire spécifique annuelle - Pinel Bretagne', 'N° 2041PB', false, ''),
-      ('Déclaration des revenus {{ year }} encaissés à l\'étranger par un contribuable domicilié en France (y compris la fiche d\'aide au calcul du salaire suisse net imposable n° 2047 suisse)', 'N° 2047', true, 'dividendes étrangers'),
-      ('Déclaration des plus ou moins-values réalisées en {{ year }}', 'N° 2074', true, 'cessions de titres'),
-      ('Déclaration des plus-values en report d\'imposition en {{ year }}', 'N° 2074 I', false, ''),
-      ('Déclaration des plus-values réalisées en {{ year }} : Fiche de calcul de l\'abattement pour durée de détention', 'N° 2074 ABT', true, 'abattement durée de détention'),
-      ('Déclaration des plus ou moins-values de cession de titres réalisées en {{ year }} par des dirigeants de PME européennes en vue de leur départ en retraite', 'N° 2074 DIR', false, ''),
-      ('Déclaration de certaines plus ou moins-values de cession de titres réalisées en {{ year }} par les impatriés', 'N° 2074 IMP', false, ''),
+      ('Déclaration des revenus ' + y + ' encaissés à l\'étranger par un contribuable domicilié en France (y compris la fiche d\'aide au calcul du salaire suisse net imposable n° 2047 suisse)', 'N° 2047', true, 'dividendes étrangers'),
+      ('Déclaration des plus ou moins-values réalisées en ' + y, 'N° 2074', true, 'cessions de titres'),
+      ('Déclaration des plus-values en report d\'imposition en ' + y, 'N° 2074 I', false, ''),
+      ('Déclaration des plus-values réalisées en ' + y + ' : Fiche de calcul de l\'abattement pour durée de détention', 'N° 2074 ABT', true, 'abattement durée de détention'),
+      ('Déclaration des plus ou moins-values de cession de titres réalisées en ' + y + ' par des dirigeants de PME européennes en vue de leur départ en retraite', 'N° 2074 DIR', false, ''),
+      ('Déclaration de certaines plus ou moins-values de cession de titres réalisées en ' + y + ' par les impatriés', 'N° 2074 IMP', false, ''),
       ('Déclaration d\'imputation entre plus-values et moins-values', 'N° 2074 CMV', false, ''),
-      ('Déclaration des gains réalisés en {{ year }} dans le cadre d\'un Plan Épargne Avenir Climat', 'N° 2074 PEAC', false, ''),
-      ('Déclaration des revenus {{ year }} (départ à l\'étranger ou retour en France)', 'N° 2042 NR', false, ''),
-      ('Déclaration de retenue à la source - année {{ year }}', 'N° 2041 E', false, ''),
-      ('Déclaration des investissements réalisés en {{ year }} dans un département ou une collectivité d\'outre-mer', 'N° 2083 PART', false, ''),
+      ('Déclaration des gains réalisés en ' + y + ' dans le cadre d\'un Plan Épargne Avenir Climat', 'N° 2074 PEAC', false, ''),
+      ('Déclaration des revenus ' + y + ' (départ à l\'étranger ou retour en France)', 'N° 2042 NR', false, ''),
+      ('Déclaration de retenue à la source - année ' + y, 'N° 2041 E', false, ''),
+      ('Déclaration des investissements réalisés en ' + y + ' dans un département ou une collectivité d\'outre-mer', 'N° 2083 PART', false, ''),
       ('Déclaration des plus ou moins-values suite à cessions d\'actifs numériques', 'N° 2086', false, ''),
       ('Déclaration de contrat de prêt (intermédiaire, emprunteur ou prêteur)', 'N° 2062', false, '')
     ] %}
