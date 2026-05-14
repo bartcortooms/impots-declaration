@@ -99,20 +99,31 @@
       <strong>{{ bloc1133.gross_gain_eur | fmt_int }}&nbsp;EUR</strong>
     </p>
     <p>
-      <strong>Moins-values antérieures déclarées</strong> (case 3VH N-1)&nbsp;:
+      <strong>Moins-values antérieures déclarées</strong> (issues du report
+      des cases 3WN–3WT)&nbsp;:
       <strong>−{{ bloc1133.loss_imputation.prior_losses_declared_eur | fmt_int }}&nbsp;EUR</strong>
       {% if bloc1133.loss_imputation.remaining_eur > 0 %}
       → dont
       <strong>{{ bloc1133.loss_imputation.imputed_eur | fmt_int }}&nbsp;EUR</strong>
       imputées cette année,
       <strong>{{ bloc1133.loss_imputation.remaining_eur | fmt_int }}&nbsp;EUR</strong>
-      reportées à N+1 (case 3VH de l'an prochain).
+      restent reportables dans leurs cases d'origine (3WN à 3WT, par année
+      d'origine — limite 10 ans).
       {% endif %}
     </p>
     <p>
-      Les valeurs col. E ci-dessus sont déjà nettes d'imputation. Ne pas
-      ré-imputer dans le formulaire&nbsp;: déclarer la PV brute en cadre 9
-      du 2074, puis les moins-values, et reporter les nets dans bloc 1133.
+      <strong>Attention&nbsp;:</strong> les valeurs col. E ci-dessus sont
+      déjà nettes d'imputation. Sur le formulaire en ligne&nbsp;: déclarez
+      la PV brute en cadre 9 du 2074 et les moins-values dans les lignes
+      d'imputation prévues. La case 3VG du 2042 doit recevoir le montant
+      <em>après</em> imputation et <em>avant</em> abattement (cf. notice 2042 p. 14).
+    </p>
+    <p class="muted-note">
+      <strong>Rappel notice&nbsp;:</strong> case 3VH = moins-value
+      <em>de l'année</em> seulement (résiduel après compensation
+      intra-année). Les reports antérieurs gardent leurs cases d'origine
+      3WN (2013) à 3WT (2024), avec une durée de vie de 10 ans —
+      au-delà, ils sont perdus.
     </p>
   </div>
   {% endif %}

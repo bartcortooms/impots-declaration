@@ -277,9 +277,14 @@ def write_audit(
         lines.append(f"  Imputées cette année:                 €{imp.imputed_eur:,.0f}")
         if imp.remaining_eur > 0:
             lines.append(
-                f"  Solde reportable à N+1 (case 3VH):    €{imp.remaining_eur:,.0f}"
+                f"  Solde restant reportable:             €{imp.remaining_eur:,.0f}"
             )
+            lines.append("    → conserve sa case d'origine 3WN-3WT (par année — limite 10 ans).")
         lines.append(f"  Plus-value nette (base abattement):   €{grouping.total_gain_eur:,.0f}")
+        lines.append("")
+        lines.append("  NB: 3VH (form 2042) = moins-value de l'année SEULEMENT, pas le report")
+        lines.append("      antérieur. Les pertes antérieures gardent leurs cases d'origine")
+        lines.append("      (3WN=2013 ... 3WT=2024) avec aging à 10 ans (notice 2042 p. 15).")
         lines.append("")
     lines.append("## Abattement grouping (Form 2074-ABT line 1133)")
     for slot in grouping.slots:

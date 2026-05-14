@@ -143,11 +143,14 @@ def main(argv: list[str] | None = None) -> int:
         default=Decimal(0),
         metavar="N",
         help=(
-            "Carry-forward moins-values from prior years (case 3VH on last "
-            "year's 2042 main). Per notice 2074-ABT, prior losses are imputed "
-            "against this year's gross plus-value BEFORE the abattement is "
-            "applied. Default 0. If omitted and you actually have carry-forward "
-            "losses, the abattement is silently over-claimed."
+            "Total carry-forward moins-values from prior years (sum across "
+            "cases 3WN-3WT on last year's 2042 main, by year of origin). "
+            "Per notice 2074-ABT, prior losses are imputed against this "
+            "year's gross plus-value BEFORE the abattement is applied. "
+            "Note: only the most recent 10 years are imputable — anything "
+            "older is forfeit (notice 2042 p. 15). Default 0. If omitted "
+            "and you actually have carry-forward losses, the abattement is "
+            "silently over-claimed."
         ),
     )
     parser.add_argument(

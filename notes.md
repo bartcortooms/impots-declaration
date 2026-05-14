@@ -7,6 +7,32 @@ the code applies; the code is the source of truth for *how* it applies them.
 The current parsers are written for Morgan Stanley StockPlan Connect
 exports — see `docs/USER_GUIDE.md` for the report-picking steps.
 
+## Mandatory gotchas (don't forget)
+
+These are easy to miss and have real consequences:
+
+1. **Tick case 2OP on form 2042.** Required for BOTH the 40 % dividend
+   abattement (case 2DC) AND the durée-de-détention abattement on plus-values
+   (case 3SG). Without 2OP everything is taxed at the PFU 12,8 % flat rate
+   with no abattement at all. See notice 2042 page 14 and notice 2074-ABT
+   page 1.
+2. **Declare foreign accounts via 3916 / 3916 bis.** If your broker is
+   foreign (Morgan Stanley etc.), the brokerage account is a "compte
+   ouvert à l'étranger". Tick case **8UU** on form 2042 (section DIVERS).
+   Since 2024 the 3916 / 3916 bis is no longer in the annexes list — it's
+   integrated as a sub-flow that opens once you tick 8UU (per the NOUVEAU
+   note on the impots.gouv.fr annexes page). Sanction: **1 500 € per
+   undeclared account** (10 000 € for non-cooperative jurisdictions),
+   art. 1736 IV CGI.
+3. **Moins-values aging.** Carry-forward losses are usable only for the
+   **10 years following** the loss year (notice 2042 p. 15). Losses from
+   before `year - 10` are forfeit. If using `--prior-losses-eur`, exclude
+   the expired bucket.
+4. **3VH vs 3WN-3WT.** Case **3VH** holds the residual moins-value
+   *de l'année* only. Prior-year carry-forwards keep their year-of-origin
+   case **3WN** (2013) … **3WT** (2024). Don't dump prior-year losses into
+   3VH or they collapse into one bucket and the 10-year aging gets lost.
+
 ## Dividends → Form 2047, section 200
 
 Path in the online declaration:
