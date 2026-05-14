@@ -2,12 +2,14 @@
  * Designed to mirror form layouts so values can be transcribed 1:1.
  *
  * Cell types (see :root for tints):
- *   --c-source:   white. Raw inputs (dates, broker amounts).
+ *   --c-source:   subtle blue. Raw inputs (dates, descriptions) the user
+ *                 still has to type into the form. Same look as --c-computed
+ *                 since both are action cells with a copy button.
  *   --c-computed: subtle blue. Values our pipeline derived for the user
  *                 to type into the online form — the action cells.
  *   --c-formula:  white + italic. Values the online form auto-computes;
  *                 user verifies but doesn't type. Deliberately quiet so
- *                 they don't compete with --c-computed for attention.
+ *                 they don't compete with the blue cells for attention.
  *   --c-empty:    light gray. Non-applicable cells.
  */
 
@@ -28,13 +30,10 @@
   --c-form-accent: #b4a394;
 
   /* Cell type tints.
-   * - source: white, same as the real form.
-   * - computed: subtle blue tint — these are the action cells the user
-   *   copies into the online form, so they should attract attention.
-   * - formula: white, italic styling — the form auto-computes these;
-   *   user only verifies. No background tint so they don't pull focus.
-   * - empty: light gray — non-applicable cells. */
-  --c-source: #ffffff;
+   * source + computed share the blue tint — both have copy buttons and
+   * both need to be typed into the online form. formula stays neutral
+   * (just verification). empty is non-applicable. */
+  --c-source: #eff6ff;
   --c-computed: #eff6ff;
   --c-formula: #ffffff;
   --c-empty: #f4f4f5;
@@ -134,11 +133,21 @@ h1 {
 }
 
 .app-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
   font-size: 0.78rem;
   color: var(--c-muted);
-  max-width: 22em;
-  text-align: right;
-  line-height: 1.6;
+  line-height: 1.5;
+}
+
+.kbd-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  color: var(--c-muted);
 }
 
 .kbd-hint kbd {
@@ -1205,33 +1214,36 @@ span.line-num {
   margin-left: 0.5rem;
 }
 
-/* Legend at top of report */
+/* Legend — always visible in the header meta area. */
 .legend {
   display: flex;
-  gap: 1rem;
-  font-size: 0.8rem;
-  color: var(--c-muted);
-  margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem 1rem;
+  font-size: 0.76rem;
+  color: var(--c-text-soft);
+  line-height: 1.4;
 }
 
 .legend-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
+  white-space: nowrap;
 }
 
 .legend-swatch {
   display: inline-block;
-  width: 1em;
-  height: 1em;
-  border: 1px solid var(--c-border);
+  width: 0.8em;
+  height: 0.8em;
+  border: 1px solid var(--c-border-strong);
+  border-radius: 2px;
   vertical-align: middle;
+  flex: 0 0 auto;
 }
 
-.legend-swatch.source { background: var(--c-source); }
 .legend-swatch.computed { background: var(--c-computed); }
-.legend-swatch.formula { background: var(--c-formula); }
+.legend-swatch.formula { background: var(--c-formula); font-style: italic; }
 .legend-swatch.empty { background: var(--c-empty); }
 
 /* Multi-step navigation — grouped into phases, modern stepper feel */
@@ -1371,54 +1383,7 @@ span.line-num {
 
 .progress-step.done .step-label { color: var(--c-muted); }
 
-/* Legend toggle — "?" button at top right that opens an overlay */
-.legend-toggle-wrapper {
-  position: fixed;
-  top: 1.2rem;
-  right: 1.2rem;
-  z-index: 110;
-}
-
-.legend-toggle {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background: white;
-  border: 1px solid var(--c-border-strong);
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--c-form-header);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  font-family: var(--font-sans);
-  transition: background-color 120ms;
-}
-
-.legend-toggle:hover {
-  background: var(--c-form-bg);
-}
-
-.legend.legend-collapsible {
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
-  z-index: 109;
-  display: none;
-  background: white;
-  border: 1px solid var(--c-border-strong);
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex-direction: column;
-  gap: 0.4rem;
-  white-space: nowrap;
-  margin: 0;
-  font-size: 0.8rem;
-}
-
-.legend.legend-collapsible.open {
-  display: flex;
-}
+/* (Legend is now always visible in the header — no toggle.) */
 
 /* Show only the active step in single-step mode */
 .step {
@@ -1513,16 +1478,19 @@ span.line-num {
   color: var(--c-text);
 }
 
+/* App-aside chips are intentionally neutral (gray) so they don't compete
+ * with the blue input cells, which are the user's action target. */
 .app-aside::before {
   content: attr(data-tag);
   display: inline-block;
   margin: -0.35rem 0 0.65rem 0;
   padding: 0.15rem 0.55rem;
-  background: var(--c-accent-soft);
-  color: var(--c-accent);
+  background: var(--c-bg-subtle);
+  color: var(--c-muted);
+  border: 1px solid var(--c-border);
   border-radius: 999px;
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.04em;
 }
 
@@ -1540,6 +1508,42 @@ span.line-num {
 
 .app-aside table {
   background: white;
+}
+
+/* Per-sale lot breakdown table (fiche 2074-ABT verification view).
+ * Compact, monospace-friendly, shows acquisition dates / quantities /
+ * cost basis / holding period / abattement rate from FIFO attribution. */
+.lot-breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.4rem;
+}
+
+.lot-breakdown-table th,
+.lot-breakdown-table td {
+  padding: 0.3rem 0.6rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: left;
+}
+
+.lot-breakdown-table th {
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--c-muted);
+  background: var(--c-bg-subtle);
+}
+
+.lot-breakdown-table .num {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.lot-breakdown-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* Help banner — distinct style for our explanatory text (not part of the form).

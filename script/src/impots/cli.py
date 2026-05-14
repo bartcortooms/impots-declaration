@@ -24,6 +24,7 @@ from pathlib import Path
 from .abattement import group_sales
 from .dividends import build_dividend_lines, build_form_2047
 from .fx import FxRates
+from .lot_attribution import attribute_sales, compute_consumed_lots
 from .output import (
     write_audit,
     write_dividends_raw,
@@ -33,7 +34,7 @@ from .output import (
     write_form_2074_fields,
     write_stock_sales,
 )
-from .sales import build_sales
+from .sales import apply_lot_breakdown, build_sales
 from .statement import parse as parse_statement
 from .web.render import render_declaration
 from .withdrawals import parse as parse_withdrawals
@@ -123,6 +124,19 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        "--prior-statement",
+        type=Path,
+        default=None,
+        help=(
+            "Path to the previous year's statement.pdf. If provided (or if "
+            "auto-discovered at <data-dir>/<year-1>/input/statement.pdf), the "
+            "tool reconciles prior- vs current-year lot tables to determine "
+            "exactly which lots each sale consumed (FIFO), and applies the "
+            "abattement rate per lot. This is the most accurate mode — overrides "
+            "--all-acquired-before."
+        ),
+    )
+    parser.add_argument(
         "--refresh-fx",
         action="store_true",
         help="Force re-fetching FX rates from ECB (ignores local cache).",
@@ -157,17 +171,26 @@ def main(argv: list[str] | None = None) -> int:
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Auto-discover prior-year statement for lot reconciliation.
+    prior_statement_pdf = args.prior_statement
+    if prior_statement_pdf is None:
+        candidate = data_dir / str(args.year - 1) / "input" / "statement.pdf"
+        if candidate.exists():
+            prior_statement_pdf = candidate
+
     print(f"Loading inputs from {input_dir} ...")
     print(f"  sales CSV:     {sales_csv.name}")
     print(f"  statement PDF: {statement_pdf.name}")
-    if args.all_acquired_before:
-        print(f"  cutoff date:   {args.all_acquired_before} (per-sale rate computed)")
+    if prior_statement_pdf:
+        print(f"  prior PDF:     {prior_statement_pdf} (lot FIFO attribution)")
+    elif args.all_acquired_before:
+        print(f"  cutoff date:   {args.all_acquired_before} (per-sale rate)")
     else:
         print(
-            "  WARNING: --all-acquired-before not set — assuming every sale qualifies\n"
-            "           for the 65 % abattement. Only safe if every sold share came\n"
-            "           from a lot vested ≥ 8 years before the sale date AND before\n"
-            "           2018-01-01. See docs/USER_GUIDE.md → Acquisition dates.",
+            "  WARNING: no --prior-statement or --all-acquired-before — assuming\n"
+            "           every sale qualifies for 65 %. Only safe if every sold share\n"
+            "           came from a lot vested ≥ 8 years before the sale date AND\n"
+            "           before 2018-01-01. See docs/USER_GUIDE.md → Acquisition dates.",
             file=sys.stderr,
         )
     withdrawals = parse_withdrawals(sales_csv)
@@ -181,6 +204,18 @@ def main(argv: list[str] | None = None) -> int:
         fx=fx,
         acquired_before=args.all_acquired_before,
     )
+
+    if prior_statement_pdf:
+        prior = parse_statement(prior_statement_pdf)
+        consumed = compute_consumed_lots(prior.lots, statement.lots)
+        attributions = attribute_sales(sales=sales, consumed_lots=consumed)
+        breakdown = {a.order_number: tuple(a.chunks) for a in attributions}
+        sales = apply_lot_breakdown(sales, breakdown)
+        n_chunks = sum(len(a.chunks) for a in attributions)
+        print(
+            f"  lot attribution: {len(consumed)} consumed lots → {n_chunks} chunks "
+            f"across {len(attributions)} sales"
+        )
     dividend_lines = build_dividend_lines(dividends=statement.dividends, fx=fx)
     form_2047 = build_form_2047(dividend_lines)
     grouping = group_sales(sales)

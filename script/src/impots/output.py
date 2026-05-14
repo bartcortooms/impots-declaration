@@ -268,6 +268,28 @@ def write_audit(
         lines.append(f"  {slot.name}: {slot.description} ({n} sale{'s' if n > 1 else ''})")
         lines.append(f"    gain EUR: €{slot.total_gain_eur:,.2f}  abattement: €{slot.total_abattement_eur:,.0f}")
     lines.append("")
+    # Per-sale FIFO lot attribution (only when prior-year statement reconciliation ran)
+    if any(s.lot_breakdown for s in sales):
+        lines.append("## Per-sale lot attribution (FIFO from prior-year statement)")
+        for s in sales:
+            if not s.lot_breakdown:
+                continue
+            lines.append(f"  {s.order_number}  {s.execution_date}  {s.fund}  qty={s.quantity}")
+            for chunk in s.lot_breakdown:
+                days_held = (s.execution_date - chunk.acquisition_date).days
+                years = days_held / 365.25
+                from .sales import (
+                    abattement_rate_for,
+                    years_held_date_to_date,
+                )
+                yrs = years_held_date_to_date(chunk.acquisition_date, s.execution_date)
+                rate = abattement_rate_for(yrs)
+                lines.append(
+                    f"    lot {chunk.acquisition_date} qty={chunk.shares:>4} "
+                    f"cost/share=${chunk.cost_per_share_usd}  "
+                    f"held {years:.2f}y → {int(rate*100)}%"
+                )
+        lines.append("")
     lines.append("## Dividends")
     lines.append(f"  Payments: {len(dividend_lines)}")
     lines.append(f"  Total gross USD: ${form_2047.total_gross_usd:,.2f}")

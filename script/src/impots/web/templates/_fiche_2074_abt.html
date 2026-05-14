@@ -114,6 +114,39 @@
         Reportez N08 = <strong>{{ sale.abattement_eur | fmt_int }}</strong>
         dans le bloc 1133 du formulaire 2074, colonne F, regroupé en max 3 slots.
       </div>
+      {% if sale.lot_breakdown %}
+      <div class="app-aside" data-tag="🔍 Lots consommés (FIFO)">
+        <p style="margin: 0 0 0.5rem;">
+          Attribution déterminée par diff entre l'inventaire de fin d'année
+          précédente et l'inventaire actuel, puis FIFO sur la date d'acquisition.
+        </p>
+        <table class="lot-breakdown-table">
+          <thead>
+            <tr>
+              <th>Date d'acquisition</th>
+              <th class="num">Quantité</th>
+              <th class="num">Coût/titre&nbsp;USD</th>
+              <th class="num">Détention</th>
+              <th class="num">Taux</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for chunk in sale.lot_breakdown %}
+            {% set days = (sale.execution_date - chunk.acquisition_date).days %}
+            {% set years = days / 365.25 %}
+            {% set rate_pct = (years >= 8) and 65 or ((years >= 2) and 50 or 0) %}
+            <tr>
+              <td>{{ chunk.acquisition_date.strftime('%d %b %Y') }}</td>
+              <td class="num">{{ chunk.shares }}</td>
+              <td class="num">${{ chunk.cost_per_share_usd }}</td>
+              <td class="num">{{ '%.2f'|format(years) }} ans</td>
+              <td class="num">{{ rate_pct }} %</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
     </div>
   {% endfor %}
 

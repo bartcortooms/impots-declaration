@@ -14,7 +14,7 @@ giving 0% / 50% / 65% per the holding-period brackets.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 
@@ -60,6 +60,24 @@ def abattement_rate_for(years_held: int) -> Decimal:
 
 
 @dataclass(frozen=True)
+class LotChunk:
+    """One chunk of one acquisition lot attributed to a sale."""
+
+    acquisition_date: date
+    shares: int
+    cost_per_share_usd: Decimal
+
+
+@dataclass(frozen=True)
+class BracketSlice:
+    """A sale's gain in one abattement bracket (after lot-FIFO attribution)."""
+
+    rate: Decimal  # 0.00 / 0.50 / 0.65
+    quantity: int
+    gain_eur: Decimal
+
+
+@dataclass(frozen=True)
 class StockSale:
     """One share sale, with all values needed for form 2074 + 2074-ABT.
 
@@ -79,8 +97,13 @@ class StockSale:
     cost_basis_usd: Decimal
     fx_rate: Decimal
 
-    # Abattement rate for this sale (set by build_sales based on holding period).
+    # Sale-level abattement rate (used when there's no lot-level breakdown).
     abattement_rate: Decimal = ABATTEMENT_RATE_8YR
+
+    # Per-lot breakdown — set when prior-year-statement reconciliation runs.
+    # When present, abattement_eur is computed per-bracket from the chunks
+    # rather than as a flat rate × gain.
+    lot_breakdown: tuple[LotChunk, ...] | None = None
 
     # derived USD totals
     @property
@@ -152,8 +175,46 @@ class StockSale:
         return self.prix_cession_net_eur - self.prix_revient_eur
 
     @property
+    def bracket_split(self) -> list[BracketSlice]:
+        """Per-bracket breakdown for the fiche 2074-ABT N04/N05 lines.
+
+        With lot_breakdown set: each chunk's rate is derived from its
+        date-to-date holding period; chunks are grouped by rate.
+        Without lot_breakdown: a single bracket using `abattement_rate`.
+        """
+        if not self.lot_breakdown:
+            return [
+                BracketSlice(rate=self.abattement_rate, quantity=self.quantity, gain_eur=self.gain_eur)
+            ]
+        groups: dict[Decimal, list[LotChunk]] = {}
+        for chunk in self.lot_breakdown:
+            years = years_held_date_to_date(chunk.acquisition_date, self.execution_date)
+            rate = abattement_rate_for(years)
+            groups.setdefault(rate, []).append(chunk)
+        slices: list[BracketSlice] = []
+        # 65% first, 50% next, 0% last — matches form column order.
+        for rate in (ABATTEMENT_RATE_8YR, ABATTEMENT_RATE_2YR, ABATTEMENT_RATE_NONE):
+            chunks = groups.get(rate)
+            if not chunks:
+                continue
+            qty = sum(c.shares for c in chunks)
+            gain_usd = sum(
+                (self.sell_price_usd_per_share - c.cost_per_share_usd) * c.shares
+                for c in chunks
+            )
+            gain_eur = _round(gain_usd * self.fx_rate, 0)
+            slices.append(BracketSlice(rate=rate, quantity=qty, gain_eur=gain_eur))
+        return slices
+
+    @property
     def abattement_eur(self) -> Decimal:
-        """Field 1133 col F = round-half-up(rate × gain). Matches fiche N08 convention."""
+        """Field 1133 col F. With lot breakdown: sum of per-bracket
+        abattements. Without: rate × total gain."""
+        if self.lot_breakdown:
+            total = sum(
+                (sl.rate * sl.gain_eur for sl in self.bracket_split), Decimal(0)
+            )
+            return _round(total, 0)
         return _round(self.abattement_rate * self.gain_eur, 0)
 
     @property
@@ -161,6 +222,22 @@ class StockSale:
         """Form 2074 Field 511 — user-visible description, derived from fund + plan."""
         ticker = self.fund.split(" - ")[0] if " - " in self.fund else self.fund
         return f"Actions {ticker} ({self.plan})"
+
+
+def apply_lot_breakdown(
+    sales: list[StockSale], breakdown_by_order: dict[str, tuple[LotChunk, ...]]
+) -> list[StockSale]:
+    """Return new sales with `lot_breakdown` set from a per-order mapping.
+
+    Used after lot-attribution reconciliation: pass the consumed-lots/
+    sales attribution result through this to enrich each StockSale.
+    """
+    return [
+        replace(s, lot_breakdown=breakdown_by_order[s.order_number])
+        if s.order_number in breakdown_by_order
+        else s
+        for s in sales
+    ]
 
 
 def build_sales(

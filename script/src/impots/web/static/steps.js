@@ -259,30 +259,6 @@
     return nav;
   }
 
-  function attachLegendToggle() {
-    const legend = $(".legend");
-    if (!legend) return;
-    legend.classList.add("legend-collapsible");
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "legend-toggle-wrapper";
-
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "legend-toggle";
-    btn.textContent = "?";
-    btn.title = "Afficher / masquer la légende des couleurs (touche ?)";
-    btn.setAttribute("aria-label", "Légende");
-
-    btn.addEventListener("click", () => {
-      legend.classList.toggle("open");
-    });
-
-    legend.parentNode.insertBefore(wrapper, legend);
-    wrapper.appendChild(btn);
-    wrapper.appendChild(legend);
-  }
-
   function handleKeyboard(event) {
     // Ignore when typing in an input
     const target = event.target;
@@ -301,11 +277,6 @@
         navigate(idx, 0);
         event.preventDefault();
       }
-    } else if (event.key === "?") {
-      $(".legend")?.classList.toggle("open");
-      event.preventDefault();
-    } else if (event.key === "Escape") {
-      $(".legend")?.classList.remove("open");
     }
   }
 
@@ -314,7 +285,6 @@
     if (!main) return;
 
     main.prepend(buildProgressBar());
-    attachLegendToggle();
 
     stepConfig.forEach((s) => {
       const el = document.getElementById(s.id);
