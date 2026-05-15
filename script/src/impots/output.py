@@ -216,6 +216,11 @@ def write_form_2047(path: Path, form: Form2047Section200) -> None:
             "F206 Impôt supporté à l'étranger (EUR)",
             "F207 Crédit d'impôt retenu (=min(205,206))",
             "F208 Revenus crédit d'impôt inclus (=203+207)",
+            "F220 Revenus sans crédit d'impôt",
+            "F221 Total dividendes imposables (=208+210+220)",
+            "F222 dont éligibles abattement 40% (→2DC)",
+            "F223 dont autres revenus distribués (→2TS)",
+            "F224 dont non côtés PEA/PEA-PME (→2FU)",
         ])
         writer.writerow([
             form.country,
@@ -225,6 +230,11 @@ def write_form_2047(path: Path, form: Form2047Section200) -> None:
             form.field_206,
             form.field_207,
             form.field_208,
+            form.field_220,
+            form.field_221,
+            form.field_222,
+            form.field_223,
+            form.field_224,
         ])
         writer.writerow([])
         writer.writerow(["Audit (USD source totals)"])

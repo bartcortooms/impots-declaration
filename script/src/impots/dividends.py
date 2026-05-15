@@ -77,6 +77,15 @@ class Form2047Section200:
     field_207: int  # Crédit d'impôt retenu = min(205, 206)
     field_208: int  # Revenus crédit d'impôt inclus = 203 + 207
 
+    # Totals section 220–224. The online form rejects "Suivant" until these are
+    # filled. For this user (all dividends US-source from listed ETFs under
+    # treaty credit-A mechanism), 220 = 210 = 223 = 224 = 0 and 222 = 208.
+    field_220: int  # Revenus n'ouvrant pas droit à crédit d'impôt (non-treaty)
+    field_221: int  # Total = 208 + 210 + 220 (form-computed)
+    field_222: int  # dont dividendes éligibles à l'abattement 40% (→ 2DC)
+    field_223: int  # dont autres revenus distribués (→ 2TS)
+    field_224: int  # dont dividendes non côtés en PEA/PEA-PME (→ 2FU)
+
     # Audit totals (USD source values that fed the conversion)
     total_gross_usd: Decimal
     total_withholding_usd: Decimal
@@ -122,6 +131,16 @@ def build_form_2047(lines: list[DividendLine]) -> Form2047Section200:
     # Field 208 = 203 + 207
     field_208 = field_203 + field_207
 
+    # Fields 220–224 — the breakdown the form demands before "Suivant".
+    # We have no non-treaty dividends and no "credit = French tax" income,
+    # so 220 = 0 and 221 = 208. All US ETF dividends are listed-company
+    # distributions eligible for the 40% abattement → all of 221 goes to 222.
+    field_220 = 0
+    field_221 = field_208 + 0 + field_220  # +0 for F210 (n/a here)
+    field_222 = field_221
+    field_223 = 0
+    field_224 = 0
+
     return Form2047Section200(
         country="États-Unis",
         field_203=field_203,
@@ -130,6 +149,11 @@ def build_form_2047(lines: list[DividendLine]) -> Form2047Section200:
         field_206=field_206,
         field_207=field_207,
         field_208=field_208,
+        field_220=field_220,
+        field_221=field_221,
+        field_222=field_222,
+        field_223=field_223,
+        field_224=field_224,
         total_gross_usd=total_gross_usd,
         total_withholding_usd=total_withholding_usd,
         total_net_usd=total_net_usd,

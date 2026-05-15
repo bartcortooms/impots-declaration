@@ -97,12 +97,57 @@
     </div>
   </div>
 
+  <div class="form-line">
+    <div class="line-label"><strong><span class="line-num">220</span> Revenus n'ouvrant pas droit à crédit d'impôt</strong></div>
+    <div class="line-cells right">
+      <span class="form-cell computed">{{ form_2047.field_220 | fmt_int }}</span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><strong><span class="line-num">221</span> Total des dividendes et jetons imposables</strong> <em>lignes 208 + 210 + 220</em></div>
+    <div class="line-cells right">
+      <span class="form-cell formula">{{ form_2047.field_221 | fmt_int }}</span>
+    </div>
+  </div>
+
+  <p class="form-rule">
+    <em>Ventilez le total de la ligne 221 entre les rubriques 222, 223 et 224 ci-dessous
+    (le formulaire en ligne refuse "Suivant" tant que la somme ne correspond pas).</em>
+  </p>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">222</span> – dont dividendes éligibles à l'abattement de 40 % <em>uniquement en cas d'option pour l'imposition au barème</em></div>
+    <div class="line-cells right">
+      <span class="form-cell computed">{{ form_2047.field_222 | fmt_int }}</span>
+      <span class="report-to">2DC</span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">223</span> – dont autres revenus distribués</div>
+    <div class="line-cells right">
+      <span class="form-cell computed">{{ form_2047.field_223 | fmt_int }}</span>
+      <span class="report-to">2TS</span>
+    </div>
+  </div>
+
+  <div class="form-line">
+    <div class="line-label"><span class="line-num">224</span> – dont dividendes imposables des titres non côtés détenus dans le PEA ou le PEA-PME</div>
+    <div class="line-cells right">
+      <span class="form-cell computed">{{ form_2047.field_224 | fmt_int }}</span>
+      <span class="report-to">2FU</span>
+    </div>
+  </div>
+
   <div class="app-aside" data-tag="📋 Reports">
     <h4>Reports vers la 2042 / 2042C</h4>
     <ul style="margin: 0.4rem 0; padding-left: 1.5rem;">
-      <li>F222 (= F208) → ligne <code>2DC</code> du formulaire 2042 (avec abattement de 40% si option barème): {{ form_2047.field_208 | fmt_int }}</li>
-      <li>F207 total → ligne <code>8VL</code> du formulaire 2042C : {{ form_2047.field_207 | fmt_int }}</li>
-      <li>F208 → ligne <code>8PL</code> du formulaire 2042C : {{ form_2047.field_208 | fmt_int }}</li>
+      <li>F222 → case <code>2DC</code> de la 2042 (auto-rempli — abattement 40% si option barème) : {{ form_2047.field_222 | fmt_int }}</li>
+      <li>F223 → case <code>2TS</code> de la 2042 : {{ form_2047.field_223 | fmt_int }}</li>
+      <li>F224 → case <code>2FU</code> de la 2042 : {{ form_2047.field_224 | fmt_int }}</li>
+      <li>F207 → case <code>8VL</code> de la 2042C : {{ form_2047.field_207 | fmt_int }}</li>
+      <li>F208 → case <code>8PL</code> de la 2042C : {{ form_2047.field_208 | fmt_int }}</li>
     </ul>
   </div>
 
