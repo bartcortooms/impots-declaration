@@ -125,21 +125,8 @@
       subs[subIdx].classList.add("sub-active");
     }
 
-    $$(".progress-step").forEach((el) => {
-      const i = parseInt(el.dataset.idx, 10);
-      el.classList.toggle("active", i === stepIdx);
-      el.classList.toggle("done", i < stepIdx);
-    });
-    $$(".phase-group").forEach((el) => {
-      const phase = el.dataset.phase;
-      const indices = stepConfig
-        .map((s, i) => s.phase === phase ? i : -1)
-        .filter(i => i >= 0);
-      const isActive = indices.includes(stepIdx);
-      const allDone = indices.every(i => i < stepIdx);
-      el.classList.toggle("active", isActive);
-      el.classList.toggle("done", allDone);
-    });
+    renderPhaseChips(stepIdx);
+    renderStepsForPhase(stepIdx);
 
     const isFirst = stepIdx === 0 && subIdx === 0;
     const isLast = stepIdx === stepConfig.length - 1 && (!subs.length || subIdx === subs.length - 1);
@@ -223,40 +210,91 @@
   }
 
   function buildProgressBar() {
+    // Two-row layout: phase chips on top (always visible, click to jump
+    // to phase's first step), and below them the steps of the currently
+    // active phase only. With 16 total steps a single flat row is too
+    // cramped; this preserves the mental model of phases while giving
+    // each visible step enough room to show its short label.
     const bar = document.createElement("nav");
     bar.className = "progress-bar";
     bar.setAttribute("aria-label", "Étapes de la déclaration");
 
+    const phasesRow = document.createElement("div");
+    phasesRow.className = "progress-phases";
     phaseOrder.forEach((phaseName) => {
-      const group = document.createElement("div");
-      group.className = "phase-group";
-      group.dataset.phase = phaseName;
-
-      const label = document.createElement("div");
-      label.className = "phase-label";
-      label.textContent = phaseName;
-      group.appendChild(label);
-
-      const stepsRow = document.createElement("div");
-      stepsRow.className = "phase-steps";
-
-      stepConfig.forEach((s, i) => {
-        if (s.phase !== phaseName) return;
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "progress-step";
-        btn.dataset.idx = i;
-        btn.innerHTML = `<span class="step-num">${i + 1}</span><span class="step-label">${s.short}</span>`;
-        btn.title = s.label + " (touche " + ((i + 1) % 10) + ")";
-        btn.addEventListener("click", () => navigate(i, 0));
-        stepsRow.appendChild(btn);
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "phase-chip";
+      chip.dataset.phase = phaseName;
+      chip.innerHTML = `
+        <span class="phase-name">${phaseName}</span>
+        <span class="phase-progress"></span>
+      `;
+      chip.addEventListener("click", () => {
+        const firstIdx = stepConfig.findIndex(s => s.phase === phaseName);
+        if (firstIdx >= 0) navigate(firstIdx, 0);
       });
-
-      group.appendChild(stepsRow);
-      bar.appendChild(group);
+      phasesRow.appendChild(chip);
     });
+    bar.appendChild(phasesRow);
+
+    // Steps row is rebuilt on every render() based on the active phase.
+    const stepsRow = document.createElement("div");
+    stepsRow.className = "progress-steps";
+    bar.appendChild(stepsRow);
 
     return bar;
+  }
+
+  function renderPhaseChips(stepIdx) {
+    const currentPhase = stepConfig[stepIdx].phase;
+    $$(".phase-chip").forEach((chip) => {
+      const phase = chip.dataset.phase;
+      const indices = stepConfig
+        .map((s, i) => s.phase === phase ? i : -1)
+        .filter(i => i >= 0);
+      const isActive = phase === currentPhase;
+      const allDone = indices.every(i => i < stepIdx);
+      const doneCount = indices.filter(i => i < stepIdx).length;
+      const totalCount = indices.length;
+
+      chip.classList.toggle("active", isActive);
+      chip.classList.toggle("done", allDone);
+
+      const progressEl = chip.querySelector(".phase-progress");
+      if (progressEl) {
+        if (allDone) {
+          progressEl.textContent = "✓";
+        } else if (isActive) {
+          const localIdx = indices.indexOf(stepIdx) + 1;
+          progressEl.textContent = `${localIdx} / ${totalCount}`;
+        } else if (doneCount > 0) {
+          progressEl.textContent = `${doneCount} / ${totalCount}`;
+        } else {
+          progressEl.textContent = `${totalCount} étape${totalCount > 1 ? "s" : ""}`;
+        }
+      }
+    });
+  }
+
+  function renderStepsForPhase(stepIdx) {
+    const stepsRow = $(".progress-steps");
+    if (!stepsRow) return;
+    const currentPhase = stepConfig[stepIdx].phase;
+    stepsRow.innerHTML = "";
+    stepConfig.forEach((s, i) => {
+      if (s.phase !== currentPhase) return;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "progress-step";
+      btn.dataset.idx = i;
+      if (i === stepIdx) btn.classList.add("active");
+      if (i < stepIdx) btn.classList.add("done");
+      btn.innerHTML = `<span class="step-label">${s.short}</span>`;
+      btn.title = s.label + " (touche " + ((i + 1) % 10) + ")";
+      btn.addEventListener("click", () => navigate(i, 0));
+      stepsRow.appendChild(btn);
+    });
   }
 
   function buildStepNav() {

@@ -1533,13 +1533,17 @@ span.line-num {
 .legend-swatch.formula { background: var(--c-formula); font-style: italic; }
 .legend-swatch.empty { background: var(--c-empty); }
 
-/* Multi-step navigation — grouped into phases, modern stepper feel */
+/* Multi-step navigation — two-row layout: row 1 = phase chips (always
+ * visible), row 2 = steps of the currently active phase only. With 16
+ * total steps, a single flat row was too cramped; this preserves the
+ * phase mental model while giving each visible step room to breathe. */
 .progress-bar {
   position: sticky;
   top: 0.5rem;
   z-index: 100;
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.4rem;
   background: white;
   border-radius: var(--r-lg);
   padding: 0.55rem;
@@ -1548,101 +1552,97 @@ span.line-num {
   transition: padding 160ms ease, box-shadow 160ms ease;
 }
 
-/* Compact mode: tighter padding + smaller labels once the user has
- * scrolled past the header. Buys back ~30% of the bar's vertical
- * footprint without losing the step numbers / labels. */
-.progress-bar.compact {
-  padding: 0.3rem;
-  box-shadow: var(--shadow-sm);
-}
-.progress-bar.compact .phase-label {
-  display: none;
-}
-.progress-bar.compact .phase-group::after {
-  display: none;
-}
-.progress-bar.compact .progress-step {
-  padding: 0.35rem 0.3rem;
-}
-.progress-bar.compact .progress-step .step-label {
-  font-size: 0.62rem;
-}
-.progress-bar.compact .progress-step .step-num {
-  font-size: 0.85rem;
-}
-
-.phase-group {
+.progress-phases {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0.3rem 0.5rem;
-  border-radius: var(--r-md);
-  flex: 1;
-  min-width: 0;
-  position: relative;
-  transition: background-color 180ms ease;
+  gap: 0.35rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--c-border);
 }
 
-.phase-group::after {
-  /* Subtle thin line under the phase label */
-  content: "";
-  position: absolute;
-  left: 0.5rem;
-  right: 0.5rem;
-  top: 1.6rem;
-  height: 1px;
-  background: var(--c-border);
-}
-
-.phase-group.active {
-  background: var(--c-bg-subtle);
-}
-
-.phase-group.active::after { background: var(--c-border-strong); opacity: 0.5; }
-
-.phase-group.done {
-  background: transparent;
-}
-
-.phase-group.done::after { background: var(--c-border); }
-
-.phase-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--c-muted);
-  text-align: center;
-  padding-bottom: 0.15rem;
-}
-
-.phase-group.active .phase-label { color: var(--c-text); }
-.phase-group.done .phase-label { color: var(--c-muted); }
-
-.phase-steps {
+.progress-steps {
   display: flex;
-  gap: 0.3rem;
-  flex: 1;
+  gap: 0.35rem;
+  min-height: 2.6rem;
 }
 
-.progress-step {
+/* Phase chips (row 1). Click jumps to the phase's first step. */
+.phase-chip {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  padding: 0.55rem 0.4rem;
+  gap: 0.15rem;
+  padding: 0.4rem 0.5rem;
   background: white;
   color: var(--c-muted);
   border: 1px solid transparent;
   border-radius: var(--r-sm);
   cursor: pointer;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  transition: all 160ms ease;
+  min-width: 0;
+}
+
+.phase-chip:hover {
+  background: var(--c-bg-subtle);
+  color: var(--c-text);
+}
+
+.phase-chip .phase-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+.phase-chip .phase-progress {
+  font-size: 0.66rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.phase-chip.active {
+  background: var(--c-form-bg);
+  color: var(--c-form-header);
+  border-color: var(--c-form-header);
+  box-shadow: 0 1px 3px rgb(131 24 67 / 0.12);
+}
+
+.phase-chip.active .phase-progress { color: var(--c-form-header); }
+
+.phase-chip.done .phase-name { color: var(--c-text-soft); }
+.phase-chip.done .phase-progress { color: var(--c-success); font-weight: 700; }
+
+/* Step chips (row 2). Only the active phase's steps are rendered. */
+.progress-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.8rem;
+  background: white;
+  color: var(--c-text-soft);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
   font-weight: 500;
   transition: all 160ms ease;
   min-width: 0;
-  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-step .step-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .progress-step:hover {
@@ -1652,47 +1652,44 @@ span.line-num {
   box-shadow: var(--shadow-sm);
 }
 
-.progress-step .step-num {
-  font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1;
-}
-
-.progress-step .step-label {
-  font-size: 0.7rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  color: var(--c-muted);
-}
-
 .progress-step.active {
   background: var(--c-form-header);
   color: white;
+  border-color: var(--c-form-header);
   box-shadow: 0 4px 14px rgb(131 24 67 / 0.25);
 }
-
-.progress-step.active .step-label { color: rgb(255 255 255 / 0.85); }
 
 .progress-step.active:hover {
   background: var(--c-form-header);
   color: white;
-  transform: translateY(-1px);
 }
 
 .progress-step.done {
+  color: var(--c-muted);
   background: white;
-  color: var(--c-muted);
 }
 
-.progress-step.done .step-num::before {
-  content: "✓ ";
+.progress-step.done::before {
+  content: "✓\00a0";
+  color: var(--c-success);
+  font-weight: 700;
   font-size: 0.85em;
-  color: var(--c-muted);
 }
 
-.progress-step.done .step-label { color: var(--c-muted); }
+/* Compact mode (scrolled past the page header): tighten everything but
+ * keep both rows visible — the user still needs to see where they are
+ * within the phase. */
+.progress-bar.compact {
+  padding: 0.3rem 0.4rem;
+  gap: 0.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.progress-bar.compact .progress-phases { padding-bottom: 0.3rem; }
+.progress-bar.compact .phase-chip { padding: 0.25rem 0.4rem; }
+.progress-bar.compact .phase-chip .phase-name { font-size: 0.68rem; }
+.progress-bar.compact .phase-chip .phase-progress { font-size: 0.62rem; }
+.progress-bar.compact .progress-step { padding: 0.35rem 0.5rem; font-size: 0.78rem; }
+.progress-bar.compact .progress-steps { min-height: 2rem; }
 
 /* (Legend is now always visible in the header — no toggle.) */
 
