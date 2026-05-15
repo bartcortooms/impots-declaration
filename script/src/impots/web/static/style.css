@@ -1079,6 +1079,42 @@ span.line-num {
   border-top: 1px solid #c0cce0;
 }
 
+/* Form 2074 intro — mirrors the first 2074 page (centered blue title +
+ * paper-annex checkboxes). */
+.form-2074-intro-title {
+  text-align: center;
+  color: #5770be;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  padding: 0.5rem 0;
+  border-top: none;
+  letter-spacing: -0.01em;
+}
+
+.form-2074-intro-banner {
+  background: #6b7eaf;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 0.9rem;
+  margin: 1.25rem -1.5rem 0 -1.5rem;
+  border-left: none;
+  line-height: 1.35;
+}
+
+.form-2074-intro-list {
+  background: white;
+  border: 1px solid #6b7eaf;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  margin: 0 -1.5rem 1.25rem -1.5rem;
+}
+
+.form-2074-intro-list .cas-row {
+  padding-left: 22%;  /* mirrors the form's ~22%/78% column split */
+}
+
 /* Form 2074 gateway "Cas suivants" — light lavender like cadre 11 */
 .gateway-2074 {
   background: #e0e9f5;
