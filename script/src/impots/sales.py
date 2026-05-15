@@ -219,9 +219,17 @@ class StockSale:
 
     @property
     def description(self) -> str:
-        """Form 2074 Field 511 — user-visible description, derived from fund + plan."""
+        """Form 2074 Field 511 — securities + broker designation.
+
+        Capped at 40 characters to fit the online form's textarea
+        (`limiteTA(this,40)` — verified against dec2074-3.html). For
+        GOOG/GOOGL with "GSU Class A/C" plans this comes out to 35–36
+        chars; we drop the "Actions" prefix (redundant in cadre 510) and
+        abbreviate the broker (full legal name "Morgan Stanley Smith
+        Barney LLC" alone would already exceed the limit).
+        """
         ticker = self.fund.split(" - ")[0] if " - " in self.fund else self.fund
-        return f"Actions {ticker} ({self.plan})"
+        return f"{ticker} ({self.plan}) — Morgan Stanley"
 
 
 def apply_lot_breakdown(
