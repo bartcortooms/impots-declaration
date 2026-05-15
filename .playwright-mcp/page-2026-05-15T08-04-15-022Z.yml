@@ -1,0 +1,1435 @@
+- generic [ref=e7]:
+  - generic [ref=e10]:
+    - link "Site impots.gouv.fr" [ref=e12] [cursor=pointer]:
+      - /url: javascript:showPopinQuitterTeledeclaration();
+      - img "Site impots.gouv.fr" [ref=e13]
+    - heading "Déclaration de revenus" [level=1] [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]: BART CORTOOMS
+      - generic [ref=e18]: "N° fiscal : 3036719795095"
+      - generic [ref=e19]: "N° d'accès en ligne : 9699509"
+      - link " Quitter" [ref=e21] [cursor=pointer]:
+        - /url: javascript:showPopinDeconnexion();
+        - emphasis [ref=e22]: 
+        - text: Quitter
+  - generic [ref=e23]:
+    - generic [ref=e25]:
+      - link "Accueil" [ref=e26] [cursor=pointer]:
+        - /url: "#"
+      - link "Sélection des rubriques de la déclaration principale" [ref=e27] [cursor=pointer]:
+        - /url: "#"
+      - link "Sélection des annexes" [ref=e28] [cursor=pointer]:
+        - /url: "#"
+      - link "Déclaration de revenus" [ref=e29] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e30]:
+        - link "Annexe nÂ°2047" [ref=e31] [cursor=pointer]:
+          - /url: "#"
+        - link "Annexe nÂ°2074" [ref=e32] [cursor=pointer]:
+          - /url: "#"
+        - link "Annexe nÂ°2074 ABT" [ref=e33] [cursor=pointer]:
+          - /url: "#"
+    - generic [ref=e34]:
+      - link "Consulter l'aide" [ref=e38] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: Étape 1
+          - generic [ref=e42]:
+            - text: Étapes
+            - text: préalables
+        - generic [ref=e43]:
+          - generic [ref=e44]: Étape 2
+          - generic [ref=e45]:
+            - text: Renseignements
+            - text: personnels
+        - generic [ref=e46]:
+          - generic [ref=e47]: Étape 3
+          - generic [ref=e48]:
+            - text: Revenus
+            - text: et charges
+        - generic [ref=e49]:
+          - generic [ref=e50]: Étape 4
+          - generic [ref=e51]:
+            - text: Résumé et
+            - text: signature
+        - generic [ref=e52]:
+          - generic [ref=e53]: Étape 5
+          - generic [ref=e54]:
+            - text: Fin de
+            - text: déclaration
+      - heading "Déclaration annexe NÂ° 2047 - revenus 2025" [level=2] [ref=e55]
+      - table [ref=e56]:
+        - rowgroup [ref=e57]:
+          - row [ref=e58]:
+            - cell [ref=e59]:
+              - generic [ref=e60]:
+                - link "Précédent" [ref=e61] [cursor=pointer]:
+                  - /url: "#"
+                - link "Suivant" [ref=e62] [cursor=pointer]:
+                  - /url: "#"
+              - generic [ref=e63]:
+                - generic [ref=e64]:
+                  - table [ref=e65]:
+                    - rowgroup [ref=e66]:
+                      - row "2. REVENUS DES VALEURS ET CAPITAUX MOBILIERS IMPOSABLES EN FRANCE" [ref=e67]:
+                        - cell "2." [ref=e68]
+                        - cell "REVENUS DES VALEURS ET CAPITAUX MOBILIERS IMPOSABLES EN FRANCE" [ref=e69]
+                        - cell [ref=e70]:
+                          - img [ref=e71]
+                  - table [ref=e72]:
+                    - rowgroup [ref=e73]:
+                      - row [ref=e74]:
+                        - cell [ref=e75]
+                        - cell [ref=e76]
+                        - cell [ref=e77]
+                        - cell [ref=e78]
+                        - cell [ref=e79]
+                        - cell [ref=e80]
+                        - cell [ref=e81]
+                        - cell [ref=e82]
+                        - cell [ref=e83]
+                        - cell [ref=e84]
+                        - cell [ref=e85]
+                        - cell [ref=e86]
+                      - row "20 REVENUS DES VALEURS MOBILIÈRES ÉTRANGÈRES ET REVENUS ASSIMILÉS À reporter sur votre déclaration principale, cadre Revenus de Capitaux Mobiliers, voir notice et colonne de droite :" [ref=e87]:
+                        - cell "20 REVENUS DES VALEURS MOBILIÈRES ÉTRANGÈRES ET REVENUS ASSIMILÉS À reporter sur votre déclaration principale, cadre Revenus de Capitaux Mobiliers, voir notice et colonne de droite :" [ref=e88]:
+                          - text: 20 REVENUS DES VALEURS MOBILIÈRES ÉTRANGÈRES ET REVENUS ASSIMILÉS
+                          - text: "À reporter sur votre déclaration principale, cadre Revenus de Capitaux Mobiliers, voir notice et colonne de droite :"
+                      - row [ref=e89]:
+                        - cell [ref=e90]
+                      - row "Lorsque la convention fiscale prévoit l'élimination de la double imposition par un crédit d'impôt égal à l'impôt étranger, indiquez le montant des revenus perçus (après déduction de l'impôt supporté à l'étranger), le taux applicable indiqué dans la notice et le montant de l'impôt supporté à l'étranger. Le crédit d'impôt à retenir est égal au montant de l'impôt supporté à l'étranger sauf lorsque le produit du montant net du revenu par le taux applicable est inférieur. Dans ce cas, il convient de retenir ce dernier montant (suivre lignes 203 à 208 ou 233 à 238, selon le cas)." [ref=e91]:
+                        - cell "Lorsque la convention fiscale prévoit l'élimination de la double imposition par un crédit d'impôt égal à l'impôt étranger, indiquez le montant des revenus perçus (après déduction de l'impôt supporté à l'étranger), le taux applicable indiqué dans la notice et le montant de l'impôt supporté à l'étranger. Le crédit d'impôt à retenir est égal au montant de l'impôt supporté à l'étranger sauf lorsque le produit du montant net du revenu par le taux applicable est inférieur. Dans ce cas, il convient de retenir ce dernier montant (suivre lignes 203 à 208 ou 233 à 238, selon le cas)." [ref=e92]
+                        - cell [ref=e93]
+                      - row [ref=e94]:
+                        - cell [ref=e95]
+                      - row "Déclarez-vous plus de trois pays d'origine de vos revenus de valeurs et capitaux mobiliers ? Non" [ref=e96]:
+                        - cell "Déclarez-vous plus de trois pays d'origine de vos revenus de valeurs et capitaux mobiliers ? Non" [ref=e97]:
+                          - text: Déclarez-vous plus de trois pays d'origine de vos revenus de valeurs et capitaux mobiliers ?
+                          - combobox [ref=e98]:
+                            - option "Non" [selected]
+                            - option "Oui"
+                      - row [ref=e99]:
+                        - cell [ref=e100]
+                      - row "200 DIVIDENDES ET JETONS DE PRÉSENCE Reportez sur déclaration principale :" [ref=e101]:
+                        - cell "200 DIVIDENDES ET JETONS DE PRÉSENCE" [ref=e102]
+                        - cell "Reportez sur déclaration principale :" [ref=e103]
+                      - row "201 Revenus ouvrant droit à un crédit d'impôt égal à l'impôt payé à l'étranger" [ref=e104]:
+                        - cell "201 Revenus ouvrant droit à un crédit d'impôt égal à l'impôt payé à l'étranger" [ref=e105]
+                      - row [ref=e106]:
+                        - cell [ref=e107]
+                      - row "202 Pays d'encaissement ou d'origine des revenus" [ref=e108]:
+                        - cell "202 Pays d'encaissement ou d'origine des revenus" [ref=e109]
+                        - cell [ref=e110]:
+                          - combobox [ref=e112]:
+                            - option [selected]
+                            - option "Afrique du Sud"
+                            - option "Albanie"
+                            - option "AlgÃ©rie"
+                            - option "Allemagne"
+                            - option "Andorre"
+                            - option "Arabie Saoudite"
+                            - option "Argentine"
+                            - option "ArmÃ©nie"
+                            - option "Australie"
+                            - option "Autre pays"
+                            - option "Autriche"
+                            - option "AzerbaÃ¯djan"
+                            - option "BahreÃ¯n"
+                            - option "Bangladesh"
+                            - option "Belgique"
+                            - option "BÃ©nin"
+                            - option "BiÃ©lorussie"
+                            - option "Bolivie"
+                            - option "Bosnie-HerzÃ©govine"
+                            - option "Botswana"
+                            - option "BrÃ©sil"
+                            - option "Bulgarie"
+                            - option "Burkina Faso"
+                            - option "Cameroun"
+                            - option "Canada (QuÃ©bec compris)"
+                            - option "Centrafricaine (RÃ©publique)"
+                            - option "Chili"
+                            - option "Chine"
+                            - option "Chypre"
+                            - option "Colombie"
+                            - option "Congo"
+                            - option "CorÃ©e du Sud"
+                            - option "CÃ´te d'Ivoire"
+                            - option "Croatie"
+                            - option "Danemark"
+                            - option "Ã‰gypte"
+                            - option "Ã‰mirats Arabes Unis"
+                            - option "Ã‰quateur"
+                            - option "Espagne"
+                            - option "Estonie"
+                            - option "Ã‰tats-Unis"
+                            - option "Ã‰thiopie"
+                            - option "Finlande"
+                            - option "Gabon"
+                            - option "GÃ©orgie"
+                            - option "Ghana"
+                            - option "GrÃ¨ce"
+                            - option "GuinÃ©e"
+                            - option "Hong-Kong"
+                            - option "Hongrie"
+                            - option "Inde"
+                            - option "IndonÃ©sie"
+                            - option "Iran"
+                            - option "Irlande"
+                            - option "Islande"
+                            - option "IsraÃ«l"
+                            - option "Italie"
+                            - option "JamaÃ¯que"
+                            - option "Japon"
+                            - option "Jordanie"
+                            - option "Kazakhstan"
+                            - option "Kenya"
+                            - option "Kirghizistan"
+                            - option "Kosovo"
+                            - option "KoweÃ¯t"
+                            - option "Lettonie"
+                            - option "Liban"
+                            - option "Libye"
+                            - option "Lituanie"
+                            - option "Luxembourg"
+                            - option "MacÃ©doine"
+                            - option "Madagascar"
+                            - option "Malaisie"
+                            - option "Malawi"
+                            - option "Mali"
+                            - option "Malte"
+                            - option "Maroc"
+                            - option "Maurice"
+                            - option "Mauritanie"
+                            - option "Mexique"
+                            - option "Moldavie"
+                            - option "Mongolie"
+                            - option "MontÃ©nÃ©gro"
+                            - option "Namibie"
+                            - option "Niger"
+                            - option "Nigeria"
+                            - option "NorvÃ¨ge"
+                            - option "Nouvelle-CalÃ©donie"
+                            - option "Nouvelle-ZÃ©lande"
+                            - option "Oman"
+                            - option "OuzbÃ©kistan"
+                            - option "Pakistan"
+                            - option "Panama"
+                            - option "Pays-Bas"
+                            - option "Philippines"
+                            - option "Pologne"
+                            - option "PolynÃ©sie FranÃ§aise"
+                            - option "Portugal"
+                            - option "Qatar"
+                            - option "RÃ©publique TchÃ¨que"
+                            - option "Roumanie"
+                            - option "Royaume-Uni"
+                            - option "Russie"
+                            - option "Saint-BarthÃ©lÃ©my"
+                            - option "Saint-Martin"
+                            - option "SÃ©nÃ©gal"
+                            - option "Serbie"
+                            - option "Singapour"
+                            - option "Slovaquie"
+                            - option "SlovÃ©nie"
+                            - option "Sri-Lanka"
+                            - option "St-Pierre-et-Miquelon"
+                            - option "SuÃ¨de"
+                            - option "Suisse"
+                            - option "Syrie"
+                            - option "TaÃ¯wan (Territoire de)"
+                            - option "ThaÃ¯lande"
+                            - option "Togo"
+                            - option "TrinitÃ©-et-Tobago"
+                            - option "Tunisie"
+                            - option "TurkmÃ©nistan"
+                            - option "Turquie"
+                            - option "Ukraine"
+                            - option "Venezuela"
+                            - option "Vietnam"
+                            - option "Zambie"
+                            - option "Zimbabwe"
+                        - cell [ref=e113]:
+                          - combobox [ref=e115]:
+                            - option [selected]
+                            - option "Afrique du Sud"
+                            - option "Albanie"
+                            - option "AlgÃ©rie"
+                            - option "Allemagne"
+                            - option "Andorre"
+                            - option "Arabie Saoudite"
+                            - option "Argentine"
+                            - option "ArmÃ©nie"
+                            - option "Australie"
+                            - option "Autre pays"
+                            - option "Autriche"
+                            - option "AzerbaÃ¯djan"
+                            - option "BahreÃ¯n"
+                            - option "Bangladesh"
+                            - option "Belgique"
+                            - option "BÃ©nin"
+                            - option "BiÃ©lorussie"
+                            - option "Bolivie"
+                            - option "Bosnie-HerzÃ©govine"
+                            - option "Botswana"
+                            - option "BrÃ©sil"
+                            - option "Bulgarie"
+                            - option "Burkina Faso"
+                            - option "Cameroun"
+                            - option "Canada (QuÃ©bec compris)"
+                            - option "Centrafricaine (RÃ©publique)"
+                            - option "Chili"
+                            - option "Chine"
+                            - option "Chypre"
+                            - option "Colombie"
+                            - option "Congo"
+                            - option "CorÃ©e du Sud"
+                            - option "CÃ´te d'Ivoire"
+                            - option "Croatie"
+                            - option "Danemark"
+                            - option "Ã‰gypte"
+                            - option "Ã‰mirats Arabes Unis"
+                            - option "Ã‰quateur"
+                            - option "Espagne"
+                            - option "Estonie"
+                            - option "Ã‰tats-Unis"
+                            - option "Ã‰thiopie"
+                            - option "Finlande"
+                            - option "Gabon"
+                            - option "GÃ©orgie"
+                            - option "Ghana"
+                            - option "GrÃ¨ce"
+                            - option "GuinÃ©e"
+                            - option "Hong-Kong"
+                            - option "Hongrie"
+                            - option "Inde"
+                            - option "IndonÃ©sie"
+                            - option "Iran"
+                            - option "Irlande"
+                            - option "Islande"
+                            - option "IsraÃ«l"
+                            - option "Italie"
+                            - option "JamaÃ¯que"
+                            - option "Japon"
+                            - option "Jordanie"
+                            - option "Kazakhstan"
+                            - option "Kenya"
+                            - option "Kirghizistan"
+                            - option "Kosovo"
+                            - option "KoweÃ¯t"
+                            - option "Lettonie"
+                            - option "Liban"
+                            - option "Libye"
+                            - option "Lituanie"
+                            - option "Luxembourg"
+                            - option "MacÃ©doine"
+                            - option "Madagascar"
+                            - option "Malaisie"
+                            - option "Malawi"
+                            - option "Mali"
+                            - option "Malte"
+                            - option "Maroc"
+                            - option "Maurice"
+                            - option "Mauritanie"
+                            - option "Mexique"
+                            - option "Moldavie"
+                            - option "Mongolie"
+                            - option "MontÃ©nÃ©gro"
+                            - option "Namibie"
+                            - option "Niger"
+                            - option "Nigeria"
+                            - option "NorvÃ¨ge"
+                            - option "Nouvelle-CalÃ©donie"
+                            - option "Nouvelle-ZÃ©lande"
+                            - option "Oman"
+                            - option "OuzbÃ©kistan"
+                            - option "Pakistan"
+                            - option "Panama"
+                            - option "Pays-Bas"
+                            - option "Philippines"
+                            - option "Pologne"
+                            - option "PolynÃ©sie FranÃ§aise"
+                            - option "Portugal"
+                            - option "Qatar"
+                            - option "RÃ©publique TchÃ¨que"
+                            - option "Roumanie"
+                            - option "Royaume-Uni"
+                            - option "Russie"
+                            - option "Saint-BarthÃ©lÃ©my"
+                            - option "Saint-Martin"
+                            - option "SÃ©nÃ©gal"
+                            - option "Serbie"
+                            - option "Singapour"
+                            - option "Slovaquie"
+                            - option "SlovÃ©nie"
+                            - option "Sri-Lanka"
+                            - option "St-Pierre-et-Miquelon"
+                            - option "SuÃ¨de"
+                            - option "Suisse"
+                            - option "Syrie"
+                            - option "TaÃ¯wan (Territoire de)"
+                            - option "ThaÃ¯lande"
+                            - option "Togo"
+                            - option "TrinitÃ©-et-Tobago"
+                            - option "Tunisie"
+                            - option "TurkmÃ©nistan"
+                            - option "Turquie"
+                            - option "Ukraine"
+                            - option "Venezuela"
+                            - option "Vietnam"
+                            - option "Zambie"
+                            - option "Zimbabwe"
+                        - cell [ref=e116]:
+                          - combobox [ref=e118]:
+                            - option [selected]
+                            - option "Afrique du Sud"
+                            - option "Albanie"
+                            - option "AlgÃ©rie"
+                            - option "Allemagne"
+                            - option "Andorre"
+                            - option "Arabie Saoudite"
+                            - option "Argentine"
+                            - option "ArmÃ©nie"
+                            - option "Australie"
+                            - option "Autre pays"
+                            - option "Autriche"
+                            - option "AzerbaÃ¯djan"
+                            - option "BahreÃ¯n"
+                            - option "Bangladesh"
+                            - option "Belgique"
+                            - option "BÃ©nin"
+                            - option "BiÃ©lorussie"
+                            - option "Bolivie"
+                            - option "Bosnie-HerzÃ©govine"
+                            - option "Botswana"
+                            - option "BrÃ©sil"
+                            - option "Bulgarie"
+                            - option "Burkina Faso"
+                            - option "Cameroun"
+                            - option "Canada (QuÃ©bec compris)"
+                            - option "Centrafricaine (RÃ©publique)"
+                            - option "Chili"
+                            - option "Chine"
+                            - option "Chypre"
+                            - option "Colombie"
+                            - option "Congo"
+                            - option "CorÃ©e du Sud"
+                            - option "CÃ´te d'Ivoire"
+                            - option "Croatie"
+                            - option "Danemark"
+                            - option "Ã‰gypte"
+                            - option "Ã‰mirats Arabes Unis"
+                            - option "Ã‰quateur"
+                            - option "Espagne"
+                            - option "Estonie"
+                            - option "Ã‰tats-Unis"
+                            - option "Ã‰thiopie"
+                            - option "Finlande"
+                            - option "Gabon"
+                            - option "GÃ©orgie"
+                            - option "Ghana"
+                            - option "GrÃ¨ce"
+                            - option "GuinÃ©e"
+                            - option "Hong-Kong"
+                            - option "Hongrie"
+                            - option "Inde"
+                            - option "IndonÃ©sie"
+                            - option "Iran"
+                            - option "Irlande"
+                            - option "Islande"
+                            - option "IsraÃ«l"
+                            - option "Italie"
+                            - option "JamaÃ¯que"
+                            - option "Japon"
+                            - option "Jordanie"
+                            - option "Kazakhstan"
+                            - option "Kenya"
+                            - option "Kirghizistan"
+                            - option "Kosovo"
+                            - option "KoweÃ¯t"
+                            - option "Lettonie"
+                            - option "Liban"
+                            - option "Libye"
+                            - option "Lituanie"
+                            - option "Luxembourg"
+                            - option "MacÃ©doine"
+                            - option "Madagascar"
+                            - option "Malaisie"
+                            - option "Malawi"
+                            - option "Mali"
+                            - option "Malte"
+                            - option "Maroc"
+                            - option "Maurice"
+                            - option "Mauritanie"
+                            - option "Mexique"
+                            - option "Moldavie"
+                            - option "Mongolie"
+                            - option "MontÃ©nÃ©gro"
+                            - option "Namibie"
+                            - option "Niger"
+                            - option "Nigeria"
+                            - option "NorvÃ¨ge"
+                            - option "Nouvelle-CalÃ©donie"
+                            - option "Nouvelle-ZÃ©lande"
+                            - option "Oman"
+                            - option "OuzbÃ©kistan"
+                            - option "Pakistan"
+                            - option "Panama"
+                            - option "Pays-Bas"
+                            - option "Philippines"
+                            - option "Pologne"
+                            - option "PolynÃ©sie FranÃ§aise"
+                            - option "Portugal"
+                            - option "Qatar"
+                            - option "RÃ©publique TchÃ¨que"
+                            - option "Roumanie"
+                            - option "Royaume-Uni"
+                            - option "Russie"
+                            - option "Saint-BarthÃ©lÃ©my"
+                            - option "Saint-Martin"
+                            - option "SÃ©nÃ©gal"
+                            - option "Serbie"
+                            - option "Singapour"
+                            - option "Slovaquie"
+                            - option "SlovÃ©nie"
+                            - option "Sri-Lanka"
+                            - option "St-Pierre-et-Miquelon"
+                            - option "SuÃ¨de"
+                            - option "Suisse"
+                            - option "Syrie"
+                            - option "TaÃ¯wan (Territoire de)"
+                            - option "ThaÃ¯lande"
+                            - option "Togo"
+                            - option "TrinitÃ©-et-Tobago"
+                            - option "Tunisie"
+                            - option "TurkmÃ©nistan"
+                            - option "Turquie"
+                            - option "Ukraine"
+                            - option "Venezuela"
+                            - option "Vietnam"
+                            - option "Zambie"
+                            - option "Zimbabwe"
+                        - cell [ref=e119]
+                        - cell [ref=e120]
+                        - cell [ref=e121]
+                        - cell [ref=e122]
+                        - cell [ref=e123]
+                        - cell [ref=e124]
+                        - cell [ref=e125]
+                      - row [ref=e126]:
+                        - cell [ref=e127]
+                      - row "203 Montant net encaissé + + =" [ref=e128]:
+                        - cell "203 Montant net encaissé" [ref=e129]
+                        - cell [ref=e130]:
+                          - textbox [ref=e132]
+                        - cell "+" [ref=e133]:
+                          - generic [ref=e134]:
+                            - text: +
+                            - textbox [ref=e135]
+                        - cell "+" [ref=e136]:
+                          - generic [ref=e137]:
+                            - text: +
+                            - textbox [ref=e138]
+                        - cell [ref=e139]
+                        - cell [ref=e140]
+                        - cell [ref=e141]
+                        - cell [ref=e142]
+                        - cell [ref=e143]
+                        - cell [ref=e144]
+                        - cell "=" [ref=e145]:
+                          - text: =
+                          - textbox [ref=e146]
+                        - cell [ref=e147]
+                      - row [ref=e148]:
+                        - cell [ref=e149]
+                      - row "204 Taux applicable (%) Ã— Ã— Ã—" [ref=e150]:
+                        - cell "204 Taux applicable (%)" [ref=e151]
+                        - cell "Ã—" [ref=e152]:
+                          - generic [ref=e153]:
+                            - text: Ã—
+                            - textbox [ref=e154]
+                        - cell "Ã—" [ref=e155]:
+                          - generic [ref=e156]:
+                            - text: Ã—
+                            - textbox [ref=e157]
+                        - cell "Ã—" [ref=e158]:
+                          - generic [ref=e159]:
+                            - text: Ã—
+                            - textbox [ref=e160]
+                        - cell [ref=e161]
+                        - cell [ref=e162]
+                        - cell [ref=e163]
+                        - cell [ref=e164]
+                        - cell [ref=e165]
+                        - cell [ref=e166]
+                        - cell [ref=e167]
+                      - row [ref=e168]:
+                        - cell [ref=e169]
+                      - row "205 Résultat" [ref=e170]:
+                        - cell "205 Résultat" [ref=e171]
+                        - cell [ref=e172]:
+                          - textbox [ref=e174]
+                        - cell [ref=e175]:
+                          - textbox [ref=e177]
+                        - cell [ref=e178]:
+                          - textbox [ref=e180]
+                        - cell [ref=e181]
+                        - cell [ref=e182]
+                        - cell [ref=e183]
+                        - cell [ref=e184]
+                        - cell [ref=e185]
+                        - cell [ref=e186]
+                        - cell [ref=e187]
+                      - row [ref=e188]:
+                        - cell [ref=e189]
+                      - row "206 Impôt supporté à l'étranger" [ref=e190]:
+                        - cell "206 Impôt supporté à l'étranger" [ref=e191]
+                        - cell [ref=e192]:
+                          - textbox [ref=e194]
+                        - cell [ref=e195]:
+                          - textbox [ref=e197]
+                        - cell [ref=e198]:
+                          - textbox [ref=e200]
+                        - cell [ref=e201]
+                        - cell [ref=e202]
+                        - cell [ref=e203]
+                        - cell [ref=e204]
+                        - cell [ref=e205]
+                        - cell [ref=e206]
+                        - cell [ref=e207]
+                      - row [ref=e208]:
+                        - cell [ref=e209]
+                      - row "207 Crédit d'impôt retenu + + =" [ref=e210]:
+                        - cell "207 Crédit d'impôt retenu" [ref=e211]
+                        - cell [ref=e212]:
+                          - textbox [ref=e214]
+                        - cell "+" [ref=e215]:
+                          - generic [ref=e216]:
+                            - text: +
+                            - textbox [ref=e217]
+                        - cell "+" [ref=e218]:
+                          - generic [ref=e219]:
+                            - text: +
+                            - textbox [ref=e220]
+                        - cell [ref=e221]
+                        - cell [ref=e222]
+                        - cell [ref=e223]
+                        - cell [ref=e224]
+                        - cell [ref=e225]
+                        - cell [ref=e226]
+                        - cell "=" [ref=e227]:
+                          - text: =
+                          - textbox [ref=e228]
+                      - row [ref=e229]:
+                        - cell [ref=e230]
+                      - 'row "ImpÃ´t étranger retenu de la ligne 207 : si ligne 205 < ligne 206, retenir la ligne 205 ; si ligne 206 < ligne 205, retenir la ligne 206." [ref=e231]':
+                        - 'cell "ImpÃ´t étranger retenu de la ligne 207 : si ligne 205 < ligne 206, retenir la ligne 205 ; si ligne 206 < ligne 205, retenir la ligne 206." [ref=e232]'
+                      - row [ref=e233]:
+                        - cell [ref=e234]
+                      - row "208 Revenus crédit d'impôt inclus lignes 203 + 207" [ref=e235]:
+                        - cell "208 Revenus crédit d'impôt inclus lignes 203 + 207" [ref=e236]
+                        - cell [ref=e237]:
+                          - textbox [ref=e238]
+                        - cell [ref=e239]
+                      - row [ref=e240]:
+                        - cell [ref=e241]
+                      - row "210 Revenus ouvrant droit à un crédit d'impôt égal à l'impôt français" [ref=e242]:
+                        - cell "210 Revenus ouvrant droit à un crédit d'impôt égal à l'impôt français" [ref=e243]
+                      - row [ref=e244]:
+                        - cell [ref=e245]
+                      - row "Montant brut sans déduction de l'impôt payé à l'étranger + + =" [ref=e246]:
+                        - cell "Montant brut sans déduction de l'impôt payé à l'étranger" [ref=e247]:
+                          - text: Montant brut
+                          - text: sans déduction de l'impôt payé à l'étranger
+                        - cell [ref=e248]:
+                          - textbox [ref=e250]
+                        - cell "+" [ref=e251]:
+                          - generic [ref=e252]:
+                            - text: +
+                            - textbox [ref=e253]
+                        - cell "+" [ref=e254]:
+                          - generic [ref=e255]:
+                            - text: +
+                            - textbox [ref=e256]
+                        - cell [ref=e257]
+                        - cell [ref=e258]
+                        - cell [ref=e259]
+                        - cell [ref=e260]
+                        - cell [ref=e261]
+                        - cell [ref=e262]
+                        - cell "=" [ref=e263]:
+                          - text: =
+                          - textbox [ref=e264]
+                        - cell [ref=e265]
+                      - row [ref=e266]:
+                        - cell [ref=e267]
+                      - row "220 Revenus n'ouvrant pas droit à crédit d'impôt" [ref=e268]:
+                        - cell "220 Revenus n'ouvrant pas droit à crédit d'impôt" [ref=e269]
+                        - cell [ref=e270]:
+                          - textbox [ref=e271]
+                        - cell [ref=e272]
+                      - row [ref=e273]:
+                        - cell [ref=e274]
+                      - row "221 Total des dividendes et jetons imposables lignes 208 + 210 + 220" [ref=e275]:
+                        - cell "221 Total des dividendes et jetons imposables lignes 208 + 210 + 220" [ref=e276]
+                        - cell [ref=e277]:
+                          - textbox [ref=e278]
+                        - cell [ref=e279]
+                      - row [ref=e280]:
+                        - cell [ref=e281]
+                      - row "222 - dont dividendes éligibles à l'abattement de 40 % uniquement en cas d'option pour l'imposition au barème 2DC" [ref=e282]:
+                        - cell "222 - dont dividendes éligibles à l'abattement de 40 % uniquement en cas d'option pour l'imposition au barème" [ref=e283]
+                        - cell [ref=e284]:
+                          - textbox [ref=e285]
+                        - cell "2DC" [ref=e286]
+                      - row [ref=e287]:
+                        - cell [ref=e288]
+                      - row "223 - dont autres revenus 2TS" [ref=e289]:
+                        - cell "223 - dont autres revenus" [ref=e290]
+                        - cell [ref=e291]:
+                          - textbox [ref=e292]
+                        - cell "2TS" [ref=e293]
+                      - row [ref=e294]:
+                        - cell [ref=e295]
+                      - row "224 - dont dividendes imposables des titres non cÃ´tÃ©s dÃ©tenus dans le PEA ou le PEA-PME 2FU" [ref=e296]:
+                        - cell "224 - dont dividendes imposables des titres non cÃ´tÃ©s dÃ©tenus dans le PEA ou le PEA-PME" [ref=e297]
+                        - cell [ref=e298]:
+                          - textbox [ref=e299]
+                        - cell "2FU" [ref=e300]
+                      - row [ref=e301]:
+                        - cell [ref=e302]
+                      - row [ref=e303]:
+                        - cell [ref=e304]
+                      - row "230 INTÉRÊTS" [ref=e305]:
+                        - cell "230 INTÉRÊTS" [ref=e306]
+                      - row [ref=e307]:
+                        - cell [ref=e308]
+                      - row "231 Intérêts ouvrant droit à un crédit d'impôt égal à l'impôt payé à l'étranger" [ref=e309]:
+                        - cell "231 Intérêts ouvrant droit à un crédit d'impôt égal à l'impôt payé à l'étranger" [ref=e310]
+                      - row [ref=e311]:
+                        - cell [ref=e312]
+                      - row "232 Pays d'encaissement ou d'origine des revenus" [ref=e313]:
+                        - cell "232 Pays d'encaissement ou d'origine des revenus" [ref=e314]
+                        - cell [ref=e315]:
+                          - combobox [ref=e317]:
+                            - option [selected]
+                            - option "Afrique du Sud"
+                            - option "Albanie"
+                            - option "AlgÃ©rie"
+                            - option "Allemagne"
+                            - option "Andorre"
+                            - option "Arabie Saoudite"
+                            - option "Argentine"
+                            - option "ArmÃ©nie"
+                            - option "Australie"
+                            - option "Autre pays"
+                            - option "Autriche"
+                            - option "AzerbaÃ¯djan"
+                            - option "BahreÃ¯n"
+                            - option "Bangladesh"
+                            - option "Belgique"
+                            - option "BÃ©nin"
+                            - option "BiÃ©lorussie"
+                            - option "Bolivie"
+                            - option "Bosnie-HerzÃ©govine"
+                            - option "Botswana"
+                            - option "BrÃ©sil"
+                            - option "Bulgarie"
+                            - option "Burkina Faso"
+                            - option "Cameroun"
+                            - option "Canada (QuÃ©bec compris)"
+                            - option "Centrafricaine (RÃ©publique)"
+                            - option "Chili"
+                            - option "Chine"
+                            - option "Chypre"
+                            - option "Colombie"
+                            - option "Congo"
+                            - option "CorÃ©e du Sud"
+                            - option "CÃ´te d'Ivoire"
+                            - option "Croatie"
+                            - option "Danemark"
+                            - option "Ã‰gypte"
+                            - option "Ã‰mirats Arabes Unis"
+                            - option "Ã‰quateur"
+                            - option "Espagne"
+                            - option "Estonie"
+                            - option "Ã‰tats-Unis"
+                            - option "Ã‰thiopie"
+                            - option "Finlande"
+                            - option "Gabon"
+                            - option "GÃ©orgie"
+                            - option "Ghana"
+                            - option "GrÃ¨ce"
+                            - option "GuinÃ©e"
+                            - option "Hong-Kong"
+                            - option "Hongrie"
+                            - option "Inde"
+                            - option "IndonÃ©sie"
+                            - option "Iran"
+                            - option "Irlande"
+                            - option "Islande"
+                            - option "IsraÃ«l"
+                            - option "Italie"
+                            - option "JamaÃ¯que"
+                            - option "Japon"
+                            - option "Jordanie"
+                            - option "Kazakhstan"
+                            - option "Kenya"
+                            - option "Kirghizistan"
+                            - option "Kosovo"
+                            - option "KoweÃ¯t"
+                            - option "Lettonie"
+                            - option "Liban"
+                            - option "Libye"
+                            - option "Lituanie"
+                            - option "Luxembourg"
+                            - option "MacÃ©doine"
+                            - option "Madagascar"
+                            - option "Malaisie"
+                            - option "Malawi"
+                            - option "Mali"
+                            - option "Malte"
+                            - option "Maroc"
+                            - option "Maurice"
+                            - option "Mauritanie"
+                            - option "Mexique"
+                            - option "Moldavie"
+                            - option "Mongolie"
+                            - option "MontÃ©nÃ©gro"
+                            - option "Namibie"
+                            - option "Niger"
+                            - option "Nigeria"
+                            - option "NorvÃ¨ge"
+                            - option "Nouvelle-CalÃ©donie"
+                            - option "Nouvelle-ZÃ©lande"
+                            - option "Oman"
+                            - option "OuzbÃ©kistan"
+                            - option "Pakistan"
+                            - option "Panama"
+                            - option "Pays-Bas"
+                            - option "Philippines"
+                            - option "Pologne"
+                            - option "PolynÃ©sie FranÃ§aise"
+                            - option "Portugal"
+                            - option "Qatar"
+                            - option "RÃ©publique TchÃ¨que"
+                            - option "Roumanie"
+                            - option "Royaume-Uni"
+                            - option "Russie"
+                            - option "Saint-BarthÃ©lÃ©my"
+                            - option "Saint-Martin"
+                            - option "SÃ©nÃ©gal"
+                            - option "Serbie"
+                            - option "Singapour"
+                            - option "Slovaquie"
+                            - option "SlovÃ©nie"
+                            - option "Sri-Lanka"
+                            - option "St-Pierre-et-Miquelon"
+                            - option "SuÃ¨de"
+                            - option "Suisse"
+                            - option "Syrie"
+                            - option "TaÃ¯wan (Territoire de)"
+                            - option "ThaÃ¯lande"
+                            - option "Togo"
+                            - option "TrinitÃ©-et-Tobago"
+                            - option "Tunisie"
+                            - option "TurkmÃ©nistan"
+                            - option "Turquie"
+                            - option "Ukraine"
+                            - option "Venezuela"
+                            - option "Vietnam"
+                            - option "Zambie"
+                            - option "Zimbabwe"
+                        - cell [ref=e318]:
+                          - combobox [ref=e320]:
+                            - option [selected]
+                            - option "Afrique du Sud"
+                            - option "Albanie"
+                            - option "AlgÃ©rie"
+                            - option "Allemagne"
+                            - option "Andorre"
+                            - option "Arabie Saoudite"
+                            - option "Argentine"
+                            - option "ArmÃ©nie"
+                            - option "Australie"
+                            - option "Autre pays"
+                            - option "Autriche"
+                            - option "AzerbaÃ¯djan"
+                            - option "BahreÃ¯n"
+                            - option "Bangladesh"
+                            - option "Belgique"
+                            - option "BÃ©nin"
+                            - option "BiÃ©lorussie"
+                            - option "Bolivie"
+                            - option "Bosnie-HerzÃ©govine"
+                            - option "Botswana"
+                            - option "BrÃ©sil"
+                            - option "Bulgarie"
+                            - option "Burkina Faso"
+                            - option "Cameroun"
+                            - option "Canada (QuÃ©bec compris)"
+                            - option "Centrafricaine (RÃ©publique)"
+                            - option "Chili"
+                            - option "Chine"
+                            - option "Chypre"
+                            - option "Colombie"
+                            - option "Congo"
+                            - option "CorÃ©e du Sud"
+                            - option "CÃ´te d'Ivoire"
+                            - option "Croatie"
+                            - option "Danemark"
+                            - option "Ã‰gypte"
+                            - option "Ã‰mirats Arabes Unis"
+                            - option "Ã‰quateur"
+                            - option "Espagne"
+                            - option "Estonie"
+                            - option "Ã‰tats-Unis"
+                            - option "Ã‰thiopie"
+                            - option "Finlande"
+                            - option "Gabon"
+                            - option "GÃ©orgie"
+                            - option "Ghana"
+                            - option "GrÃ¨ce"
+                            - option "GuinÃ©e"
+                            - option "Hong-Kong"
+                            - option "Hongrie"
+                            - option "Inde"
+                            - option "IndonÃ©sie"
+                            - option "Iran"
+                            - option "Irlande"
+                            - option "Islande"
+                            - option "IsraÃ«l"
+                            - option "Italie"
+                            - option "JamaÃ¯que"
+                            - option "Japon"
+                            - option "Jordanie"
+                            - option "Kazakhstan"
+                            - option "Kenya"
+                            - option "Kirghizistan"
+                            - option "Kosovo"
+                            - option "KoweÃ¯t"
+                            - option "Lettonie"
+                            - option "Liban"
+                            - option "Libye"
+                            - option "Lituanie"
+                            - option "Luxembourg"
+                            - option "MacÃ©doine"
+                            - option "Madagascar"
+                            - option "Malaisie"
+                            - option "Malawi"
+                            - option "Mali"
+                            - option "Malte"
+                            - option "Maroc"
+                            - option "Maurice"
+                            - option "Mauritanie"
+                            - option "Mexique"
+                            - option "Moldavie"
+                            - option "Mongolie"
+                            - option "MontÃ©nÃ©gro"
+                            - option "Namibie"
+                            - option "Niger"
+                            - option "Nigeria"
+                            - option "NorvÃ¨ge"
+                            - option "Nouvelle-CalÃ©donie"
+                            - option "Nouvelle-ZÃ©lande"
+                            - option "Oman"
+                            - option "OuzbÃ©kistan"
+                            - option "Pakistan"
+                            - option "Panama"
+                            - option "Pays-Bas"
+                            - option "Philippines"
+                            - option "Pologne"
+                            - option "PolynÃ©sie FranÃ§aise"
+                            - option "Portugal"
+                            - option "Qatar"
+                            - option "RÃ©publique TchÃ¨que"
+                            - option "Roumanie"
+                            - option "Royaume-Uni"
+                            - option "Russie"
+                            - option "Saint-BarthÃ©lÃ©my"
+                            - option "Saint-Martin"
+                            - option "SÃ©nÃ©gal"
+                            - option "Serbie"
+                            - option "Singapour"
+                            - option "Slovaquie"
+                            - option "SlovÃ©nie"
+                            - option "Sri-Lanka"
+                            - option "St-Pierre-et-Miquelon"
+                            - option "SuÃ¨de"
+                            - option "Suisse"
+                            - option "Syrie"
+                            - option "TaÃ¯wan (Territoire de)"
+                            - option "ThaÃ¯lande"
+                            - option "Togo"
+                            - option "TrinitÃ©-et-Tobago"
+                            - option "Tunisie"
+                            - option "TurkmÃ©nistan"
+                            - option "Turquie"
+                            - option "Ukraine"
+                            - option "Venezuela"
+                            - option "Vietnam"
+                            - option "Zambie"
+                            - option "Zimbabwe"
+                        - cell [ref=e321]:
+                          - combobox [ref=e323]:
+                            - option [selected]
+                            - option "Afrique du Sud"
+                            - option "Albanie"
+                            - option "AlgÃ©rie"
+                            - option "Allemagne"
+                            - option "Andorre"
+                            - option "Arabie Saoudite"
+                            - option "Argentine"
+                            - option "ArmÃ©nie"
+                            - option "Australie"
+                            - option "Autre pays"
+                            - option "Autriche"
+                            - option "AzerbaÃ¯djan"
+                            - option "BahreÃ¯n"
+                            - option "Bangladesh"
+                            - option "Belgique"
+                            - option "BÃ©nin"
+                            - option "BiÃ©lorussie"
+                            - option "Bolivie"
+                            - option "Bosnie-HerzÃ©govine"
+                            - option "Botswana"
+                            - option "BrÃ©sil"
+                            - option "Bulgarie"
+                            - option "Burkina Faso"
+                            - option "Cameroun"
+                            - option "Canada (QuÃ©bec compris)"
+                            - option "Centrafricaine (RÃ©publique)"
+                            - option "Chili"
+                            - option "Chine"
+                            - option "Chypre"
+                            - option "Colombie"
+                            - option "Congo"
+                            - option "CorÃ©e du Sud"
+                            - option "CÃ´te d'Ivoire"
+                            - option "Croatie"
+                            - option "Danemark"
+                            - option "Ã‰gypte"
+                            - option "Ã‰mirats Arabes Unis"
+                            - option "Ã‰quateur"
+                            - option "Espagne"
+                            - option "Estonie"
+                            - option "Ã‰tats-Unis"
+                            - option "Ã‰thiopie"
+                            - option "Finlande"
+                            - option "Gabon"
+                            - option "GÃ©orgie"
+                            - option "Ghana"
+                            - option "GrÃ¨ce"
+                            - option "GuinÃ©e"
+                            - option "Hong-Kong"
+                            - option "Hongrie"
+                            - option "Inde"
+                            - option "IndonÃ©sie"
+                            - option "Iran"
+                            - option "Irlande"
+                            - option "Islande"
+                            - option "IsraÃ«l"
+                            - option "Italie"
+                            - option "JamaÃ¯que"
+                            - option "Japon"
+                            - option "Jordanie"
+                            - option "Kazakhstan"
+                            - option "Kenya"
+                            - option "Kirghizistan"
+                            - option "Kosovo"
+                            - option "KoweÃ¯t"
+                            - option "Lettonie"
+                            - option "Liban"
+                            - option "Libye"
+                            - option "Lituanie"
+                            - option "Luxembourg"
+                            - option "MacÃ©doine"
+                            - option "Madagascar"
+                            - option "Malaisie"
+                            - option "Malawi"
+                            - option "Mali"
+                            - option "Malte"
+                            - option "Maroc"
+                            - option "Maurice"
+                            - option "Mauritanie"
+                            - option "Mexique"
+                            - option "Moldavie"
+                            - option "Mongolie"
+                            - option "MontÃ©nÃ©gro"
+                            - option "Namibie"
+                            - option "Niger"
+                            - option "Nigeria"
+                            - option "NorvÃ¨ge"
+                            - option "Nouvelle-CalÃ©donie"
+                            - option "Nouvelle-ZÃ©lande"
+                            - option "Oman"
+                            - option "OuzbÃ©kistan"
+                            - option "Pakistan"
+                            - option "Panama"
+                            - option "Pays-Bas"
+                            - option "Philippines"
+                            - option "Pologne"
+                            - option "PolynÃ©sie FranÃ§aise"
+                            - option "Portugal"
+                            - option "Qatar"
+                            - option "RÃ©publique TchÃ¨que"
+                            - option "Roumanie"
+                            - option "Royaume-Uni"
+                            - option "Russie"
+                            - option "Saint-BarthÃ©lÃ©my"
+                            - option "Saint-Martin"
+                            - option "SÃ©nÃ©gal"
+                            - option "Serbie"
+                            - option "Singapour"
+                            - option "Slovaquie"
+                            - option "SlovÃ©nie"
+                            - option "Sri-Lanka"
+                            - option "St-Pierre-et-Miquelon"
+                            - option "SuÃ¨de"
+                            - option "Suisse"
+                            - option "Syrie"
+                            - option "TaÃ¯wan (Territoire de)"
+                            - option "ThaÃ¯lande"
+                            - option "Togo"
+                            - option "TrinitÃ©-et-Tobago"
+                            - option "Tunisie"
+                            - option "TurkmÃ©nistan"
+                            - option "Turquie"
+                            - option "Ukraine"
+                            - option "Venezuela"
+                            - option "Vietnam"
+                            - option "Zambie"
+                            - option "Zimbabwe"
+                        - cell [ref=e324]
+                        - cell [ref=e325]
+                        - cell [ref=e326]
+                        - cell [ref=e327]
+                        - cell [ref=e328]
+                        - cell [ref=e329]
+                        - cell [ref=e330]
+                      - row [ref=e331]:
+                        - cell [ref=e332]
+                      - row "233 Montant net encaissé + + =" [ref=e333]:
+                        - cell "233 Montant net encaissé" [ref=e334]
+                        - cell [ref=e335]:
+                          - textbox [ref=e337]
+                        - cell "+" [ref=e338]:
+                          - generic [ref=e339]:
+                            - text: +
+                            - textbox [ref=e340]
+                        - cell "+" [ref=e341]:
+                          - generic [ref=e342]:
+                            - text: +
+                            - textbox [ref=e343]
+                        - cell [ref=e344]
+                        - cell [ref=e345]
+                        - cell [ref=e346]
+                        - cell [ref=e347]
+                        - cell [ref=e348]
+                        - cell [ref=e349]
+                        - cell "=" [ref=e350]:
+                          - text: =
+                          - textbox [ref=e351]
+                        - cell [ref=e352]
+                      - row [ref=e353]:
+                        - cell [ref=e354]
+                      - row "234 Taux applicable (%) Ã— Ã— Ã—" [ref=e355]:
+                        - cell "234 Taux applicable (%)" [ref=e356]
+                        - cell "Ã—" [ref=e357]:
+                          - generic [ref=e358]:
+                            - text: Ã—
+                            - textbox [ref=e359]
+                        - cell "Ã—" [ref=e360]:
+                          - generic [ref=e361]:
+                            - text: Ã—
+                            - textbox [ref=e362]
+                        - cell "Ã—" [ref=e363]:
+                          - generic [ref=e364]:
+                            - text: Ã—
+                            - textbox [ref=e365]
+                        - cell [ref=e366]
+                        - cell [ref=e367]
+                        - cell [ref=e368]
+                        - cell [ref=e369]
+                        - cell [ref=e370]
+                        - cell [ref=e371]
+                        - cell [ref=e372]
+                      - row [ref=e373]:
+                        - cell [ref=e374]
+                      - row "235 Résultat" [ref=e375]:
+                        - cell "235 Résultat" [ref=e376]
+                        - cell [ref=e377]:
+                          - textbox [ref=e379]
+                        - cell [ref=e380]:
+                          - textbox [ref=e382]
+                        - cell [ref=e383]:
+                          - textbox [ref=e385]
+                        - cell [ref=e386]
+                        - cell [ref=e387]
+                        - cell [ref=e388]
+                        - cell [ref=e389]
+                        - cell [ref=e390]
+                        - cell [ref=e391]
+                        - cell [ref=e392]
+                      - row [ref=e393]:
+                        - cell [ref=e394]
+                      - row "236 Impôt supporté à l'étranger" [ref=e395]:
+                        - cell "236 Impôt supporté à l'étranger" [ref=e396]
+                        - cell [ref=e397]:
+                          - textbox [ref=e399]
+                        - cell [ref=e400]:
+                          - textbox [ref=e402]
+                        - cell [ref=e403]:
+                          - textbox [ref=e405]
+                        - cell [ref=e406]
+                        - cell [ref=e407]
+                        - cell [ref=e408]
+                        - cell [ref=e409]
+                        - cell [ref=e410]
+                        - cell [ref=e411]
+                        - cell [ref=e412]
+                      - row [ref=e413]:
+                        - cell [ref=e414]
+                      - row "237 Crédit d'impôt retenu + + =" [ref=e415]:
+                        - cell "237 Crédit d'impôt retenu" [ref=e416]
+                        - cell [ref=e417]:
+                          - textbox [ref=e419]
+                        - cell "+" [ref=e420]:
+                          - generic [ref=e421]:
+                            - text: +
+                            - textbox [ref=e422]
+                        - cell "+" [ref=e423]:
+                          - generic [ref=e424]:
+                            - text: +
+                            - textbox [ref=e425]
+                        - cell [ref=e426]
+                        - cell [ref=e427]
+                        - cell [ref=e428]
+                        - cell [ref=e429]
+                        - cell [ref=e430]
+                        - cell [ref=e431]
+                        - cell "=" [ref=e432]:
+                          - text: =
+                          - textbox [ref=e433]
+                      - row [ref=e434]:
+                        - cell [ref=e435]
+                      - 'row "ImpÃ´t étranger retenu de la ligne 237 : si ligne 235 < ligne 236, retenir la ligne 235 ; si ligne 236 < ligne 235, retenir la ligne 236." [ref=e436]':
+                        - 'cell "ImpÃ´t étranger retenu de la ligne 237 : si ligne 235 < ligne 236, retenir la ligne 235 ; si ligne 236 < ligne 235, retenir la ligne 236." [ref=e437]'
+                      - row [ref=e438]:
+                        - cell [ref=e439]
+                      - row "238 Intérêts crédit d'impôt inclus lignes 233 + 237" [ref=e440]:
+                        - cell "238 Intérêts crédit d'impôt inclus lignes 233 + 237" [ref=e441]
+                        - cell [ref=e442]:
+                          - textbox [ref=e443]
+                        - cell [ref=e444]
+                      - row [ref=e445]:
+                        - cell [ref=e446]
+                      - row "240 INTÉRÊTS OUVRANT DROIT À UN CRÉDIT D'IMPÔT ÉGAL À L'IMPÔT FRANÇAIS" [ref=e447]:
+                        - cell "240 INTÉRÊTS OUVRANT DROIT À UN CRÉDIT D'IMPÔT ÉGAL À L'IMPÔT FRANÇAIS" [ref=e448]
+                      - row [ref=e449]:
+                        - cell [ref=e450]
+                      - row "Montant brut Sans déduction de l'impôt payé à l'étranger + + =" [ref=e451]:
+                        - cell "Montant brut Sans déduction de l'impôt payé à l'étranger" [ref=e452]:
+                          - text: Montant brut
+                          - text: Sans déduction de l'impôt payé à l'étranger
+                        - cell [ref=e453]:
+                          - textbox [ref=e455]
+                        - cell "+" [ref=e456]:
+                          - generic [ref=e457]:
+                            - text: +
+                            - textbox [ref=e458]
+                        - cell "+" [ref=e459]:
+                          - generic [ref=e460]:
+                            - text: +
+                            - textbox [ref=e461]
+                        - cell [ref=e462]
+                        - cell [ref=e463]
+                        - cell [ref=e464]
+                        - cell [ref=e465]
+                        - cell [ref=e466]
+                        - cell [ref=e467]
+                        - cell "=" [ref=e468]:
+                          - text: =
+                          - textbox [ref=e469]
+                        - cell [ref=e470]
+                      - row [ref=e471]:
+                        - cell [ref=e472]
+                      - row "250 INTÉRÊTS N'OUVRANT PAS DROIT À CRÉDIT D'IMPÔT" [ref=e473]:
+                        - cell "250 INTÉRÊTS N'OUVRANT PAS DROIT À CRÉDIT D'IMPÔT" [ref=e474]
+                        - cell [ref=e475]:
+                          - textbox [ref=e476]
+                        - cell [ref=e477]
+                      - row [ref=e478]:
+                        - cell [ref=e479]
+                      - row "251 Total des intérêts imposables lignes 238 + 240 + 250" [ref=e480]:
+                        - cell "251 Total des intérêts imposables lignes 238 + 240 + 250" [ref=e481]
+                        - cell [ref=e482]:
+                          - textbox [ref=e483]
+                        - cell [ref=e484]
+                      - row [ref=e485]:
+                        - cell [ref=e486]
+                      - row "252 - dont intérêts et autres produits de placement à revenu fixe 2TR" [ref=e487]:
+                        - cell "252 - dont intérêts et autres produits de placement à revenu fixe" [ref=e488]
+                        - cell [ref=e489]:
+                          - textbox [ref=e490]
+                        - cell "2TR" [ref=e491]
+                      - row [ref=e492]:
+                        - cell [ref=e493]
+                      - row "253 - dont intérêts des prêts participatifs et des minibons 2TT" [ref=e494]:
+                        - cell "253 - dont intérêts des prêts participatifs et des minibons" [ref=e495]
+                        - cell [ref=e496]:
+                          - textbox [ref=e497]
+                        - cell "2TT" [ref=e498]
+                      - row [ref=e499]:
+                        - cell [ref=e500]
+                      - row "254 - dont intÃ©rÃªts imposables des obligations remboursables en actions dÃ©tenus dans le PEA-PME 2TQ" [ref=e501]:
+                        - cell "254 - dont intÃ©rÃªts imposables des obligations remboursables en actions dÃ©tenus dans le PEA-PME" [ref=e502]
+                        - cell [ref=e503]:
+                          - textbox [ref=e504]
+                        - cell "2TQ" [ref=e505]
+                      - row [ref=e506]:
+                        - cell [ref=e507]
+                      - row "255 - dont produits et gains des bons et contrats de capitalisation et d'assurance-vie" [ref=e508]:
+                        - cell "255 - dont produits et gains des bons et contrats de capitalisation et d'assurance-vie" [ref=e509]
+                        - cell [ref=e510]:
+                          - textbox [ref=e511]
+                        - cell [ref=e512]
+                      - row [ref=e513]:
+                        - cell [ref=e514]
+                      - row [ref=e515]:
+                        - cell [ref=e516]
+                  - table [ref=e517]:
+                    - rowgroup [ref=e518]:
+                      - row [ref=e519]:
+                        - cell [ref=e520]
+                        - cell [ref=e521]
+                        - cell [ref=e522]
+                        - cell [ref=e523]
+                      - row "260 REVENUS DES VALEURS MOBILIÈRES FRANÇAISES ET REVENUS ASSIMILÉS ENCAISSÉS À L'ÉTRANGER" [ref=e524]:
+                        - cell "260 REVENUS DES VALEURS MOBILIÈRES FRANÇAISES ET REVENUS ASSIMILÉS ENCAISSÉS À L'ÉTRANGER" [ref=e525]
+                      - row "Montant des revenus, sans déduction de l'impôt payé à l'étranger" [ref=e526]:
+                        - cell "Montant des revenus, sans déduction de l'impôt payé à l'étranger" [ref=e527]
+                      - row "PAYS D'ENCAISSEMENT MONTANTS EN € Reportez sur déclaration principale :" [ref=e528]:
+                        - cell [ref=e529]
+                        - cell "PAYS D'ENCAISSEMENT" [ref=e530]
+                        - cell "MONTANTS EN €" [ref=e531]
+                        - cell "Reportez sur déclaration principale :" [ref=e532]
+                      - row [ref=e533]:
+                        - cell [ref=e534]
+                      - row "Revenus des actions et parts Abattement de 40 % si option barème 2DC" [ref=e535]:
+                        - cell "Revenus des actions et parts Abattement de 40 % si option barème" [ref=e536]
+                        - cell [ref=e537]:
+                          - textbox [ref=e538]
+                        - cell [ref=e539]:
+                          - textbox [ref=e540]
+                        - cell "2DC" [ref=e541]
+                      - row [ref=e542]:
+                        - cell [ref=e543]
+                      - row "Autres revenus distribués 2TS" [ref=e544]:
+                        - cell "Autres revenus distribués" [ref=e545]
+                        - cell [ref=e546]:
+                          - textbox [ref=e547]
+                        - cell [ref=e548]:
+                          - textbox [ref=e549]
+                        - cell "2TS" [ref=e550]
+                      - row [ref=e551]:
+                        - cell [ref=e552]
+                      - row "Dividendes imposables des titres non côtés détenus dans le PEA ou le PEA-PME 2FU" [ref=e553]:
+                        - cell "Dividendes imposables des titres non côtés détenus dans le PEA ou le PEA-PME" [ref=e554]
+                        - cell [ref=e555]:
+                          - textbox [ref=e556]
+                        - cell [ref=e557]:
+                          - textbox [ref=e558]
+                        - cell "2FU" [ref=e559]
+                      - row [ref=e560]:
+                        - cell [ref=e561]
+                      - row "IntÃ©rÃªts imposables des obligations remboursables en actions dÃ©tenus dans le PEA-PME 2TQ" [ref=e562]:
+                        - cell "IntÃ©rÃªts imposables des obligations remboursables en actions dÃ©tenus dans le PEA-PME" [ref=e563]
+                        - cell [ref=e564]:
+                          - textbox [ref=e565]
+                        - cell [ref=e566]:
+                          - textbox [ref=e567]
+                        - cell "2TQ" [ref=e568]
+                      - row [ref=e569]:
+                        - cell [ref=e570]
+                      - row "Intérêts et autres produits de placement à revenu fixe 2TR" [ref=e571]:
+                        - cell "Intérêts et autres produits de placement à revenu fixe" [ref=e572]
+                        - cell [ref=e573]:
+                          - textbox [ref=e574]
+                        - cell [ref=e575]:
+                          - textbox [ref=e576]
+                        - cell "2TR" [ref=e577]
+                      - row [ref=e578]:
+                        - cell [ref=e579]
+                      - row "Produits et gains des bons et contrats de capitalisation et d'assurance-vie CADRE 2" [ref=e580]:
+                        - cell "Produits et gains des bons et contrats de capitalisation et d'assurance-vie" [ref=e581]
+                        - cell [ref=e582]:
+                          - textbox [ref=e583]
+                        - cell [ref=e584]:
+                          - textbox [ref=e585]
+                        - cell "CADRE 2" [ref=e586]
+                      - row [ref=e587]:
+                        - cell [ref=e588]
+                      - row "270 DIVERS" [ref=e589]:
+                        - cell "270 DIVERS" [ref=e590]
+                      - row [ref=e591]:
+                        - cell [ref=e592]
+                      - row "271 Revenus déjà soumis aux prélèvements sociaux sans CSG déductible 2CG" [ref=e593]:
+                        - cell "271 Revenus déjà soumis aux prélèvements sociaux sans CSG déductible" [ref=e594]
+                        - cell [ref=e595]:
+                          - textbox [ref=e596]
+                        - cell "2CG" [ref=e597]
+                      - row [ref=e598]:
+                        - cell [ref=e599]
+                      - row "272 Revenus déjà soumis aux prélèvements sociaux avec CSG déductible si option barème 2BH" [ref=e600]:
+                        - cell "272 Revenus déjà soumis aux prélèvements sociaux avec CSG déductible si option barème" [ref=e601]
+                        - cell [ref=e602]:
+                          - textbox [ref=e603]
+                        - cell "2BH" [ref=e604]
+                      - row [ref=e605]:
+                        - cell [ref=e606]
+                      - row "273 Prélèvement forfaitaire non libératoire déjà versé 2CK" [ref=e607]:
+                        - cell "273 Prélèvement forfaitaire non libératoire déjà versé" [ref=e608]
+                        - cell [ref=e609]:
+                          - textbox [ref=e610]
+                        - cell "2CK" [ref=e611]
+                      - row [ref=e612]:
+                        - cell [ref=e613]
+                      - row "274 Frais et charges déductibles si option barème 2CA" [ref=e614]:
+                        - cell "274 Frais et charges déductibles si option barème" [ref=e615]
+                        - cell [ref=e616]:
+                          - textbox [ref=e617]
+                        - cell "2CA" [ref=e618]
+                      - row [ref=e619]:
+                        - cell [ref=e620]
+                      - 'row "275 Impatriés : fraction exonérée (50%) crédit d''impôt conventionnel inclus 2DM" [ref=e621]':
+                        - 'cell "275 Impatriés : fraction exonérée (50%) crédit d''impôt conventionnel inclus" [ref=e622]'
+                        - cell [ref=e623]:
+                          - textbox [ref=e624]
+                        - cell "2DM" [ref=e625]
+                      - row [ref=e626]:
+                        - cell [ref=e627]
+                      - row "276 Crédit d'impôt étranger conventionnel sur fraction exonérée des impatriés" [ref=e628]:
+                        - cell "276 Crédit d'impôt étranger conventionnel sur fraction exonérée des impatriés" [ref=e629]
+                        - cell [ref=e630]:
+                          - textbox [ref=e631]
+                        - cell [ref=e632]
+                      - row [ref=e633]:
+                        - cell [ref=e634]
+                  - table [ref=e635]:
+                    - rowgroup [ref=e636]:
+                      - row [ref=e637]:
+                        - cell [ref=e638]
+                - generic [ref=e639]:
+                  - link "Précédent" [ref=e640] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Suivant" [ref=e641] [cursor=pointer]:
+                    - /url: "#"
+  - generic [ref=e645]:
+    - text: © Direction générale des Finances publiques -
+    - link "Mentions légales" [ref=e646] [cursor=pointer]:
+      - /url: https://www.impots.gouv.fr/portail/mentions-legales
+    - text: "-"
+    - link "AccessibilitÃ©" [ref=e647] [cursor=pointer]:
+      - /url: https://static.impots.gouv.fr/tdir/static/2026-05-04T15:46:49Z/./accessibilite.htm

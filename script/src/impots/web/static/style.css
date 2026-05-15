@@ -24,8 +24,10 @@
   --c-bg: #fafaf9;             /* warm light gray for body */
   --c-bg-subtle: #f4f4f1;      /* slightly warmer gray for app sections */
 
-  /* Form-mirror colors — kept close to impots.gouv.fr */
-  --c-form-bg: #f7f5ee;        /* warm off-white, like the impots PDF */
+  /* Form-mirror colors — kept close to impots.gouv.fr. The bg matches
+   * the real online form's section background (rgb(246, 238, 239) — a
+   * pale pink-cream), measured live against the impots HTML. */
+  --c-form-bg: #f6eeef;
   --c-form-header: #831843;    /* refined burgundy */
   --c-form-accent: #b4a394;
 
@@ -388,7 +390,7 @@ h4 {
   grid-template-columns: 30em 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 0.35rem 0;
+  padding: 0.2rem 0;
   border-bottom: 1px solid transparent;
 }
 
@@ -447,15 +449,19 @@ span.line-num {
 }
 
 .form-cell {
+  /* Dimensions chosen to match the real impots form inputs measured live:
+   * 105px width × 21px height. We keep monospace for tabular alignment
+   * but tighten padding so cells stay compact. */
   display: inline-block;
   min-width: 7em;
-  padding: 0.3rem 0.6rem;
+  padding: 0.1rem 0.5rem;
   border: 1px solid var(--c-border-strong);
   background: white;
   text-align: right;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.3;
   border-radius: 2px;
 }
 
@@ -490,7 +496,6 @@ span.line-num {
   background: var(--c-form-bg);
   font-weight: 600;
   border-color: var(--c-form-header);
-  border-width: 2px;
 }
 
 /* JS wraps each copy-enabled .form-cell + its ⧉ button in this container so

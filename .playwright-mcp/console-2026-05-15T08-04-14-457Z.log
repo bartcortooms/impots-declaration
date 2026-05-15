@@ -1,0 +1,4 @@
+[     369ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8765/personal-data/impots-gouv-forms/font/teleir.ttf?u8e0pw:0
+[     388ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8765/personal-data/impots-gouv-forms/font/teleir.woff?u8e0pw:0
+[     438ms] [LOG] ACL Widget version:1.1.4 @ https://assistance-en-ligne.impots.gouv.fr/static/acl-widget/js/acl.min.js:0
+[     447ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8765/favicon.ico:0
