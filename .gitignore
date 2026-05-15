@@ -29,3 +29,9 @@ demo/output/
 .idea/
 .vscode/
 *.swp
+
+# Playwright / chrome-devtools transient artifacts from the form-resemblance
+# work (screenshots, snapshot dumps, console logs). Do not commit.
+.playwright-mcp/
+real-*.png
+ours-*.png
