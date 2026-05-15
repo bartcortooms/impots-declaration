@@ -213,28 +213,36 @@ class StockSale:
 
     @property
     def abattement_eur(self) -> Decimal:
-        """Field 1133 col F. With lot breakdown: sum of per-bracket
-        abattements. Without: rate × total gain."""
-        if self.lot_breakdown:
-            total = sum(
-                (sl.rate * sl.gain_eur for sl in self.bracket_split), Decimal(0)
-            )
-            return _round(total, 0)
-        return _round(self.abattement_rate * self.gain_eur, 0)
+        """Field N08 / bloc 1133 col F. Matches the online form's auto-calc:
+        N08 = sum of N07 across brackets, where N07 = round(N05 × N06, 0).
+
+        For single-bracket sales (the common case), N05 = sale.gain_eur (= N02),
+        so abattement = round(gain_eur × rate, 0). Using bracket_split's
+        full-precision gain here would produce off-by-one vs the form
+        (e.g. gain_usd × fx = 10800.97 → 10801; × 65% = 7020.65 → 7021,
+        whereas form auto-calcs 10800 × 65% = 7020).
+        """
+        splits = self.bracket_split
+        if len(splits) == 1:
+            return _round(self.gain_eur * splits[0].rate, 0)
+        # Multi-bracket: sum already-rounded N07s per bracket (matches form).
+        return sum((_round(s.gain_eur * s.rate, 0) for s in splits), Decimal(0))
 
     @property
     def description(self) -> str:
-        """Form 2074 Field 511 — securities + broker designation.
+        """Form 2074 Field 511 / 2074-ABT N01 — securities + broker.
 
-        Capped at 40 characters to fit the online form's textarea
-        (`limiteTA(this,40)` — verified against dec2074-3.html). For
-        GOOG/GOOGL with "GSU Class A/C" plans this comes out to 35–36
-        chars; we drop the "Actions" prefix (redundant in cadre 510) and
-        abbreviate the broker (full legal name "Morgan Stanley Smith
-        Barney LLC" alone would already exceed the limit).
+        Capped to 30 characters: the 2074-ABT N01 textarea has
+        `checkLength(this, 30)` (stricter than form 2074's 40-char
+        `limiteTA`). We use the same string for both forms so the
+        designation matches across 2074 cadre 510 and 2074-ABT N01.
+        "Actions" prefix is dropped (redundant — the section already
+        declares we list valeurs mobilières); broker is abbreviated to
+        "MSSB" (Morgan Stanley Smith Barney) since the full name would
+        already overflow on its own.
         """
         ticker = self.fund.split(" - ")[0] if " - " in self.fund else self.fund
-        return f"{ticker} ({self.plan}) - Morgan Stanley"
+        return f"{ticker} ({self.plan}) - MSSB"
 
 
 def apply_lot_breakdown(
