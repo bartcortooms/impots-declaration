@@ -1,0 +1,245 @@
+<section class="form-section gateway-2074" id="form-2074-recap">
+  <h2 class="form-banner">9 RÉCAPITULATION DES PLUS-VALUES ET DES MOINS-VALUES RÉALISÉES EN {{ year }}</h2>
+  <div class="help-banner">
+    <div>
+      <p>
+        Cadre 9 du 2074 : agrégat de toutes les sources de plus / moins-values.
+        Pour vous, seule la ligne <strong>903</strong> est concernée
+        (résultats déterminés vous-même, somme des lignes 524 du cadre 5 §
+        510). Tout le reste reste vide&nbsp;: pas d'OPC, pas de PEA, pas de
+        report d'imposition, pas de PEAC.
+      </p>
+      <p class="page-summary">
+        <strong>903 PV</strong> = <strong>{{ sales_total_gain_eur | fmt_int }}&nbsp;EUR</strong>
+        (somme des {{ sales | length }} lignes 524)
+        · <strong>913 Total</strong> = {{ sales_total_gain_eur | fmt_int }} PV / 0 MV
+      </p>
+    </div>
+  </div>
+
+  <h3 class="form-subsection-banner">900 Report de l'ensemble des résultats de l'année {{ year }}</h3>
+  <table class="recap-2074-table">
+    <colgroup>
+      <col class="col-recap-label">
+      <col class="col-recap-pv">
+      <col class="col-recap-mv">
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Plus-value (PV)</th>
+        <th>Moins-value (MV)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="line-label"><span class="line-num">901</span> Distributions de plus-values par un OPC, FPI ou un placement collectif ou SCR <em>report ligne 303</em></td>
+        <td class="value"><span class="form-cell formula">0</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">902</span> Complément de prix <em>report ligne 405</em></td>
+        <td class="value"><span class="form-cell formula">0</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">903</span> <strong>Valeurs mobilières, droits sociaux, titres assimilés : résultats déterminés par vous-même</strong> <em>report ligne(s) 524 : col. PV si +, col. MV si −</em></td>
+        <td class="value"><span class="form-cell formula">{{ sales_total_gain_eur | fmt_int }}</span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">904</span> Valeurs mobilières, droits sociaux, titres assimilés : calcul de vos intermédiaires <em>report lignes (542 + 545 + 549) en col. PV et ligne 541 en col. MV</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">905</span> Profits sur instruments financiers à terme</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">906</span> Compte PME innovation : clôture ou retrait partiel</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">907</span> Soulte reçue dans le cadre d'une opération d'échange de titres</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">908</span> Gains de cession ou d'apport de créances suite à clause d'indexation</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">909</span> Soulte reçue lors d'une opération d'apport de créances suite à clause d'indexation <em>2074-I &gt; report lignes 415 et 417</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">910</span> Expiration des reports d'imposition <em>2074-I &gt; report lignes 550 et 570</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">911</span> Cessions de titres réalisées par les dirigeants de PME européennes (<em>2074-DIR</em>)</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">912</span> Cessions de titres réalisées par les impatriés (<em>2074-IMP</em>)</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr class="totaux">
+        <td class="line-label"><span class="line-num">913</span> <strong>Total</strong></td>
+        <td class="value"><span class="form-cell formula">{{ sales_total_gain_eur | fmt_int }}</span></td>
+        <td class="value"><span class="form-cell formula">0</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="form-subsection-banner">920 Opérations sur PEA</h3>
+  <table class="recap-2074-table">
+    <colgroup>
+      <col class="col-recap-label">
+      <col class="col-recap-pv">
+      <col class="col-recap-mv">
+    </colgroup>
+    <tbody>
+      <tr>
+        <td class="line-label"><span class="line-num">921</span> PEA : clôture, retraits ou rachats avant 5 ans <em>report lignes 718 et 724</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">922</span> PEA : Plus-values de cessions des ORA non cotées <em>report ligne 745</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">923</span> PEA clôturé après 5 ans (moins-value uniquement) <em>report ligne 731</em></td>
+        <td></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">924</span> <strong>Profits sur instruments financiers taxables à 50 %</strong> <em>(imprimé n°2561 bis)</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="form-subsection-banner">925 Plus-values en report d'imposition (art. 150-0 B ter CGI)</h3>
+  <table class="recap-2074-table">
+    <colgroup>
+      <col class="col-recap-label">
+      <col class="col-recap-pv">
+      <col class="col-recap-mv">
+    </colgroup>
+    <tbody>
+      <tr>
+        <td class="line-label"><span class="line-num">926</span> Soulte reçue dans le cadre d'une opération d'apport de titres</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">927</span> Expiration du report — taxation à 19 % <em>2074-I &gt; report ligne 591</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">928</span> Expiration du report — taxation à 24 % <em>2074-I &gt; report ligne 592</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">929</span> Expiration du report — taxation au taux spécifique <em>2074-I &gt; report ligne 596</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="form-subsection-banner">930 Plus-values en report d'imposition (art. 150-0 D bis CGI)</h3>
+  <table class="recap-2074-table">
+    <colgroup>
+      <col class="col-recap-label">
+      <col class="col-recap-pv">
+      <col class="col-recap-mv">
+    </colgroup>
+    <tbody>
+      <tr>
+        <td class="line-label"><span class="line-num">931</span> Mise en report <em>2074-I &gt; report ligne 204</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">932</span> Expiration du report <em>2074-I &gt; report lignes 514 et 519</em></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="line-label"><span class="line-num">937</span> <strong>PEAC : Gains imposables</strong></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="recap-2074-table recap-grand-totals">
+    <colgroup>
+      <col class="col-recap-label">
+      <col class="col-recap-pv">
+      <col class="col-recap-mv">
+    </colgroup>
+    <tbody>
+      <tr class="totaux">
+        <td class="line-label"><span class="line-num">945</span> <strong>Total des plus-values du cadre 9</strong></td>
+        <td class="value"><span class="form-cell formula">{{ sales_total_gain_eur | fmt_int }}</span></td>
+        <td></td>
+      </tr>
+      <tr class="totaux">
+        <td class="line-label"><span class="line-num">946</span> <strong>Total des moins-values du cadre 9</strong></td>
+        <td></td>
+        <td class="value"><span class="form-cell formula">0</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="form-banner" style="margin-top: 2rem;">10 MONTANT DE VOS MOINS-VALUES ANTÉRIEURES REPORTABLES SUR 10 ANS : SITUATION AU 31/12/{{ year - 1 }}</h3>
+  <table class="recap-2074-table recap-cadre-10">
+    <tbody>
+      <tr class="years-row">
+        {% for y in range(year - 10, year - 5) %}<td>{{ y }}</td>{% endfor %}
+      </tr>
+      <tr class="boxes-row">
+        {% for _ in range(5) %}<td><span class="form-cell empty"></span></td>{% endfor %}
+      </tr>
+      <tr class="years-row">
+        {% for y in range(year - 5, year) %}<td>{{ y }}</td>{% endfor %}
+      </tr>
+      <tr class="boxes-row">
+        {% for _ in range(5) %}<td><span class="form-cell empty"></span></td>{% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="app-aside" data-tag="ℹ️ Note">
+    <p style="margin: 0 0 0.5rem;">
+      <strong>Cadre 9</strong> s'auto-remplit dans le formulaire en ligne&nbsp;:
+      la ligne <strong>903</strong> reprend la somme des lignes 524 de chaque
+      Titre du cadre 5 § 510, et les lignes <strong>913</strong> / <strong>945</strong> /
+      <strong>946</strong> sont calculées automatiquement. Aucune saisie à
+      effectuer — vérifiez juste que <strong>{{ sales_total_gain_eur | fmt_int }}</strong>
+      apparaît bien en 903 PV et 913 PV (et 0 en 913 MV).
+    </p>
+    <p style="margin: 0;">
+      <strong>Cadre 10</strong> n'est à remplir que si vous reportez des
+      moins-values d'années antérieures (cases 3VH des 2042 de {{ year - 10 }} à {{ year - 1 }}).
+      Notre outil ne reçoit pas de moins-values antérieures via
+      <code>--prior-losses-eur</code> — laissez toutes les cases vides.
+    </p>
+  </div>
+</section>

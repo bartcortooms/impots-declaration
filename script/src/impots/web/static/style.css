@@ -1079,6 +1079,89 @@ span.line-num {
   border-top: 1px solid #c0cce0;
 }
 
+/* Form 2074 cadre 9 — récapitulation PV/MV. Two-column (PV/MV) table
+ * with line-numbered rows; mirrors the actual form's 3-column layout. */
+.recap-2074-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.3rem 0.25rem;
+  margin: 0.5rem 0 1rem;
+  table-layout: fixed;
+}
+
+.recap-2074-table col.col-recap-label { width: 65%; }
+.recap-2074-table col.col-recap-pv,
+.recap-2074-table col.col-recap-mv { width: 17.5%; }
+
+.recap-2074-table th {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--c-text-soft);
+  padding: 0.3rem 0.4rem;
+  background: transparent;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.recap-2074-table th:first-child { background: transparent; border-bottom: none; }
+
+.recap-2074-table td {
+  padding: 0.3rem 0.4rem;
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+
+.recap-2074-table td.line-label {
+  line-height: 1.35;
+}
+
+.recap-2074-table td.line-label em {
+  color: var(--c-form-header);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.82rem;
+}
+
+.recap-2074-table td.value {
+  text-align: center;
+}
+
+.recap-2074-table td.value .form-cell {
+  display: inline-block;
+  min-width: 6em;
+}
+
+.recap-2074-table tr.totaux td {
+  border-top: 1px solid var(--c-form-header);
+  padding-top: 0.5rem;
+}
+
+.recap-2074-table.recap-grand-totals {
+  margin-top: 1rem;
+}
+
+/* Cadre 10 — 10-year carry-forward grid (2 rows × 5 columns each). */
+.recap-cadre-10 {
+  table-layout: auto;
+  border-spacing: 0.3rem 0.2rem;
+}
+.recap-cadre-10 tr.years-row td {
+  background: transparent;
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--c-text);
+  padding: 0.4rem 0.3rem 0.15rem;
+}
+.recap-cadre-10 tr.boxes-row td {
+  text-align: center;
+  padding-bottom: 0.6rem;
+}
+.recap-cadre-10 tr.boxes-row .form-cell {
+  display: inline-block;
+  min-width: 6em;
+}
+
 /* Form 2074 intro — mirrors the first 2074 page (centered blue title +
  * paper-annex checkboxes). */
 .form-2074-intro-title {

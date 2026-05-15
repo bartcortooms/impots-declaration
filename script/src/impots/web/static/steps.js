@@ -30,6 +30,7 @@
     { id: "fiche-2074-abt-gateway",   short: "ABT prép.",   label: "2074-ABT — Préparation (Nombre d'opérations)",  phase: "ABT" },
     { id: "fiche-2074-abt",           short: "ABT fiche",   label: "2074-ABT — Fiche par titre", subSelector: ".abt-page", phase: "ABT" },
     { id: "bloc-1133",                short: "Bloc 1133",   label: "2074 — Compensation (cadre 11 bloc 1133)",      phase: "2074" },
+    { id: "form-2074-recap",          short: "2074 §9",     label: "2074 — Récapitulation cadre 9 + cadre 10",      phase: "2074" },
     { id: "form-2042-rcm",            short: "2042 RCM",    label: "2042 — Revenus de capitaux mobiliers (2DC, 2OP)", phase: "2042" },
     { id: "form-2042-pv",             short: "2042 PV",     label: "2042 — Plus-values et gains divers (3VG, 3SG)",  phase: "2042" },
     { id: "form-2042-divers",         short: "2042 Divers", label: "2042 — DIVERS (8PL, 8VL, 8UU)",                  phase: "2042" },
