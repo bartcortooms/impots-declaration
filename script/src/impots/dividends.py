@@ -16,7 +16,7 @@ dividends are US-source we emit a single aggregated row for États-Unis.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 from .fx import FxRates
 from .statement import DividendPayment
@@ -72,7 +72,7 @@ class Form2047Section200:
     country: str  # 'États-Unis'
     field_203: int  # Montant net encaissé (EUR, floored)
     field_204: Decimal  # Taux applicable % (constant 17.6 for US)
-    field_205: int  # Résultat = round(203 × 204%)
+    field_205: int  # Résultat = round-half-up(203 × 204%)
     field_206: int  # Impôt supporté à l'étranger (EUR, floored)
     field_207: int  # Crédit d'impôt retenu = min(205, 206)
     field_208: int  # Revenus crédit d'impôt inclus = 203 + 207
@@ -109,8 +109,12 @@ def build_form_2047(lines: list[DividendLine]) -> Form2047Section200:
     sum_withholding_eur = sum((line.withholding_eur for line in lines), Decimal(0))
     field_206 = _floor_to_euro(sum_withholding_eur)
 
-    # Field 205 = 203 × 17.6% (the form computes this itself; we compute for cross-check)
-    field_205 = int(Decimal(field_203) * TAUX_APPLICABLE_US / 100)
+    # Field 205 = 203 × 17.6%, rounded half-up to the nearest euro to match the
+    # online form (which auto-computes 205 from 203/204). int() truncation here
+    # produced an off-by-one (e.g. 3203 × 17.6% = 563.728 → 563 truncated, 564 rounded).
+    field_205 = int(
+        (Decimal(field_203) * TAUX_APPLICABLE_US / 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+    )
 
     # Field 207 = min(205, 206)
     field_207 = min(field_205, field_206)
