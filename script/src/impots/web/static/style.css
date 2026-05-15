@@ -357,6 +357,27 @@ h4 {
   padding-top: 0;
 }
 
+/* Section header with a right-aligned annotation (e.g. "Reportez sur
+ * déclaration principale :" on form 2047 section 200). */
+.form-subsection-with-hint {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-report-hint {
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--c-text-soft);
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  white-space: normal;
+  max-width: 10em;
+}
+
 .form-subsubsection {
   margin: 0 0 1rem;
   font-size: 0.95rem;
@@ -364,10 +385,10 @@ h4 {
 
 .form-line {
   display: grid;
-  grid-template-columns: 22em 1fr;
+  grid-template-columns: 30em 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 0.6rem 0;
+  padding: 0.35rem 0;
   border-bottom: 1px solid transparent;
 }
 
@@ -418,7 +439,10 @@ span.line-num {
   color: var(--c-muted);
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  min-width: 0.7em;
+  /* Fixed width so the +/×/= operators (and the empty &nbsp; placeholders
+   * on lines 205/206) all consume the same horizontal space. Without
+   * this, slot 2 and slot 3 drift left on operator-less rows. */
+  flex: 0 0 1em;
   text-align: center;
 }
 
@@ -530,6 +554,84 @@ span.line-num {
   color: var(--c-muted);
   margin: 0.5rem 0 1rem;
   font-style: italic;
+}
+
+/* Form 2047 section 7 — "Élimination de la double imposition" recap table.
+ * Mirrors the actual form's 5-column layout (Nature / Pays / Revenu avant /
+ * Impôt étranger / report code), with the "Reportez sur déclaration
+ * principale" hint sitting above the rightmost column. */
+.elimination-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.3rem 0.3rem;
+  margin: 0.5rem 0 1.25rem;
+  table-layout: fixed;
+}
+
+.elimination-table col.col-nature { width: 22%; }
+.elimination-table col.col-pays { width: 22%; }
+.elimination-table col.col-revenu { width: 18%; }
+.elimination-table col.col-impot { width: 18%; }
+.elimination-table col.col-code { width: 8%; }
+
+.elimination-table th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--c-text-soft);
+  text-align: center;
+  padding: 0.4rem 0.3rem;
+  vertical-align: bottom;
+  line-height: 1.25;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.elimination-table th:first-child { text-align: left; }
+.elimination-table th:last-child { border-bottom: none; }
+
+.elimination-table .hint-row td.hint {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--c-text-soft);
+  text-align: center;
+  line-height: 1.3;
+  padding-bottom: 0.2rem;
+}
+
+.elimination-table td {
+  padding: 0.3rem 0.3rem;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.elimination-table td.nature {
+  font-weight: 500;
+}
+
+.elimination-table td.value {
+  text-align: center;
+}
+
+.elimination-table td.value .form-cell {
+  display: inline-block;
+  min-width: 6em;
+}
+
+.elimination-table .totaux .totaux-label,
+.elimination-table tbody tr:last-child .totaux-label {
+  text-align: right;
+  font-size: 0.88rem;
+  color: var(--c-text);
+}
+
+.elimination-table tr.totaux .totaux-label {
+  font-weight: 600;
+}
+
+.elimination-table td.code {
+  text-align: center;
 }
 
 /* Form 2074 cadre 5 § 510 — one Titre per page, vertical layout
@@ -1266,16 +1368,18 @@ span.line-num {
   margin-bottom: 0.25rem;
 }
 
-/* Report-to badges — show where this value ends up (form 2042/2042C lines) */
+/* Report-to code (2DC, 2TS, 2FU…) — mirrors the actual form's
+ * `<td class="textetoutpetitGras">` style: plain bold burgundy text,
+ * not a filled badge. */
 .report-to {
   display: inline-block;
-  padding: 0.1rem 0.5rem;
-  background: var(--c-form-header);
-  color: white;
-  border-radius: 3px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
+  min-width: 2.5em;
+  margin-left: 0.6rem;
+  text-align: center;
+  color: var(--c-form-header);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
 }
 
 /* Legend — always visible in the header meta area. */
