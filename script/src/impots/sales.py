@@ -123,7 +123,7 @@ class StockSale:
     # Per-sale form 2074 cadre 5 § 510 mapping:
     #   Field 514 = ROUND(price_usd × FX, 2)         per-share (decimal)
     #   Field 515 = quantity                          integer
-    #   Field 516 = ROUND(price_usd × FX × qty, 0)   total sell (integer)
+    #   Field 516 = ROUND(Field 514 × Field 515, 0)  total sell (form auto-calc)
     #   Field 517 = 0                                  frais de cession (typically none)
     #   Field 518 = Field 516 − Field 517              prix de cession net
     #   Field 520 = ROUND(cost_usd_per_share × FX, 2) per-share (decimal, display only)
@@ -137,8 +137,13 @@ class StockSale:
 
     @property
     def total_sell_eur(self) -> Decimal:
-        """Field 516. Rounded to whole euros to match form convention."""
-        return _round(self.sell_price_usd_per_share * self.fx_rate * self.quantity, 0)
+        """Field 516. The online form auto-computes this as the rounded
+        per-share value (Field 514) × quantity (Field 515), then rounds
+        the product to whole euros. We must match that double-rounding,
+        otherwise our 516/518/524 drift by ±1 EUR from what the form
+        shows (e.g. 180.00 × 0.853242 × 80 = 12286.68 → 12287 full-precision
+        but 153.58 × 80 = 12286.4 → 12286 form-style)."""
+        return _round(self.sell_price_eur_per_share * self.quantity, 0)
 
     @property
     def cost_per_share_eur(self) -> Decimal:
@@ -229,7 +234,7 @@ class StockSale:
         Barney LLC" alone would already exceed the limit).
         """
         ticker = self.fund.split(" - ")[0] if " - " in self.fund else self.fund
-        return f"{ticker} ({self.plan}) — Morgan Stanley"
+        return f"{ticker} ({self.plan}) - Morgan Stanley"
 
 
 def apply_lot_breakdown(
