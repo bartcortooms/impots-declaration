@@ -43,7 +43,12 @@
       <div class="col-header"><strong>H</strong><span class="col-desc">Calculez <strong>E−F−G</strong></span></div>
     </div>
 
-    <!-- Per-slot rows: 9 cells each -->
+    <!-- Per-slot rows: 9 cells each. Column H is intentionally empty for
+         "sans abattement et éligibles à l'abattement de droit commun" — the
+         real form leaves it unfilled here; the post-abattement calculation
+         happens at the 2042 level (3VG − 3SG), not in this section.
+         Column H exists in the form only for the "abattement renforcé"
+         sub-table (reports to 3UA/3SL), which doesn't apply to us. -->
     {% for slot in bloc1133.slots %}
     <div class="bloc-row slot-row">
       <div class="row-label">{{ slot.name }}</div>
@@ -54,7 +59,7 @@
       <span class="form-cell formula">{{ slot.total_gain_eur | fmt_int }}</span>
       <span class="form-cell computed">{{ slot.total_abattement_eur | fmt_int }}</span>
       <span class="form-cell empty"></span>
-      <span class="form-cell formula">{{ (slot.total_gain_eur - slot.total_abattement_eur) | fmt_int }}</span>
+      <span class="form-cell empty"></span>
     </div>
     {% endfor %}
     {# Empty slot rows if fewer than 3 sales #}
@@ -72,7 +77,7 @@
     </div>
     {% endfor %}
 
-    <!-- Totaux row -->
+    <!-- Totaux row. H column intentionally empty (see comment above). -->
     <div class="bloc-row totaux-row">
       <div class="row-label-strong">Totaux</div>
       <span class="form-cell empty"></span>
@@ -88,7 +93,7 @@
         <span class="report-tag">→ case 3SG</span>
       </div>
       <span class="form-cell empty"></span>
-      <span class="form-cell total">{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}</span>
+      <span class="form-cell empty"></span>
     </div>
   </div>
 
@@ -129,11 +134,20 @@
   {% endif %}
 
   <div class="app-aside" data-tag="📊 Imposable">
+    <p style="margin-top: 0; font-size: 0.85rem; color: var(--c-muted); font-style: italic;">
+      Note&nbsp;: la colonne H reste vide dans cette sous-rubrique (sans
+      abattement / droit commun). L'IR appliquera l'abattement via les cases
+      3VG / 3SG du 2042 elles-mêmes — il n'y a pas de "plus-value imposable"
+      pré-calculée à reporter ici. La colonne H n'apparaît remplie que dans
+      les sous-rubriques <em>éligibles à l'abattement renforcé</em>
+      (report 3UA / 3SL), non applicables à votre cas.
+    </p>
     <p>
       <strong>Si vous cochez 2OP</strong> (barème progressif)&nbsp;:
       l'impôt sur le revenu s'applique à la plus-value <em>après</em>
-      abattement (col. H) =
-      <strong>{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}&nbsp;EUR</strong>.
+      abattement, soit
+      <strong>{{ (bloc1133.total_gain_eur - bloc1133.total_abattement_eur) | fmt_int }}&nbsp;EUR</strong>
+      (= 3VG − 3SG, calculé par l'IR à partir des deux cases).
     </p>
     <p>
       <strong>Si vous laissez 2OP décoché</strong> (PFU 12,8 % par
