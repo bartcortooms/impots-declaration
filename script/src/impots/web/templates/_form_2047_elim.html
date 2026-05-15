@@ -1,0 +1,101 @@
+<section class="form-section form-2047" id="form-2047-elim">
+  <h2>2047 — page 4</h2>
+
+  <h3 class="form-subsection">ÉLIMINATION DE LA DOUBLE IMPOSITION</h3>
+  <p class="form-intro">
+    Lorsqu'une convention fiscale a été signée entre la France et le pays de
+    provenance de vos revenus, la convention prévoit des modalités d'élimination
+    de la double imposition. Selon la modalité prévue, remplissez l'une des
+    rubriques 6, 7 ou 8 (pour les dividendes US, c'est la <strong>rubrique 7</strong>).
+  </p>
+
+  <p class="form-subsubsection"><strong>7. REVENUS IMPOSABLES OUVRANT DROIT À UN CRÉDIT D'IMPÔT ÉGAL À L'IMPÔT ÉTRANGER</strong></p>
+
+  <p class="form-rule" style="font-style: normal; color: var(--c-text-soft);">
+    <em>Les montants déterminés en ligne 207 (dividendes, jetons de présence)
+    sont reportés automatiquement dans le cadre ci-dessous. La ligne 8PL n'est
+    pas auto-remplie&nbsp;: saisissez-y vous-même la valeur indiquée.</em>
+  </p>
+
+  <table class="elimination-table">
+    <colgroup>
+      <col class="col-nature">
+      <col class="col-pays">
+      <col class="col-revenu">
+      <col class="col-impot">
+      <col class="col-code">
+    </colgroup>
+    <thead>
+      <tr class="hint-row">
+        <td colspan="4"></td>
+        <td class="hint">Reportez sur<br>déclaration<br>principale</td>
+      </tr>
+      <tr>
+        <th>NATURE DU REVENU</th>
+        <th>PAYS D'ORIGINE OU D'ENCAISSEMENT</th>
+        <th>REVENU AVANT DÉDUCTION DE L'IMPÔT ÉTRANGER</th>
+        <th>IMPÔT ÉTRANGER</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="nature">Dividendes, jetons de présence</td>
+        <td></td>
+        <td></td>
+        <td class="value"><span class="form-cell formula">{{ form_2047.field_207 | fmt_int }}</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="nature">Intérêts</td>
+        <td></td>
+        <td></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="nature">Revenus des impatriés</td>
+        <td></td>
+        <td></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="nature">Plus-values et gains</td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td class="value"><span class="form-cell empty"></span></td>
+        <td></td>
+      </tr>
+      <tr class="totaux">
+        <td colspan="3" class="totaux-label">Montant total =</td>
+        <td class="value"><span class="form-cell formula">{{ form_2047.field_207 | fmt_int }}</span></td>
+        <td class="code"><span class="report-to">8VL</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="totaux-label">
+          Revenus nets imposables étrangers
+          <strong>après abattement</strong> éventuel
+          <strong>mais sans déduction</strong> de l'impôt étranger
+        </td>
+        <td class="value"><span class="form-cell computed">{{ form_2047.field_208 | fmt_int }}</span></td>
+        <td class="code"><span class="report-to">8PL</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="app-aside" data-tag="ℹ️ Note">
+    <p style="margin: 0;">
+      Le <strong>{{ form_2047.field_207 | fmt_int }}</strong> (ligne Dividendes
+      / Impôt étranger) est <strong>auto-rempli</strong> depuis votre F207.
+      La case <strong>8PL</strong> ne l'est pas&nbsp;: saisissez-y
+      <strong>{{ form_2047.field_208 | fmt_int }}</strong> (= F208).
+      Les autres lignes (Intérêts, Impatriés, Plus-values) ne s'appliquent
+      pas — les plus-values sur titres américains sont, par l'article 13 de
+      la convention franco-américaine, imposables exclusivement en France et
+      n'ouvrent pas droit à crédit d'impôt étranger. Le second tableau
+      (Déclarant 1/2/Pers. à charge → 8VM, 8WM, 8UM, 8PM) concerne des
+      revenus salariaux/pensions étrangers et n'est pas applicable ici.
+    </p>
+  </div>
+</section>

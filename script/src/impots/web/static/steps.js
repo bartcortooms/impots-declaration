@@ -23,6 +23,7 @@
     { id: "annexes",                  short: "Annexes",     label: "Sélection des annexes (2047 / 2074 / ABT)",     phase: "Préparation" },
     { id: "form-2047-gateway",        short: "2047 prép.",  label: "2047 — Préparation (Votre déclaration concerne)", phase: "2047" },
     { id: "form-2047",                short: "2047 §200",   label: "2047 — Dividendes (section 200)",               phase: "2047" },
+    { id: "form-2047-elim",           short: "2047 §7",     label: "2047 — Élimination de la double imposition (§7)", phase: "2047" },
     { id: "form-2074-gateway",        short: "2074 prép.",  label: "2074 — Préparation (Cas suivants)",             phase: "2074" },
     { id: "form-2074",                short: "2074 §510",   label: "2074 — Cessions (cadre 5 § 510)", subSelector: ".titre-page", phase: "2074" },
     { id: "fiche-2074-abt-gateway",   short: "ABT prép.",   label: "2074-ABT — Préparation (Nombre d'opérations)",  phase: "ABT" },
